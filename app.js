@@ -4,6 +4,7 @@
    ========================================================================== */
 
 document.addEventListener('DOMContentLoaded', () => {
+  initThemeToggle();
   initMathRendering();
   initNavigation();
   initRegressionLab();
@@ -16,6 +17,7 @@ document.addEventListener('DOMContentLoaded', () => {
   initScalingLab();
   initClusterHierarchyLab();
   initAgentLoopSimulator();
+  initAgentCaseStudy();
   initQuizEngine();
   initGlossary();
   initReferencesArchive();
@@ -24,6 +26,33 @@ document.addEventListener('DOMContentLoaded', () => {
   initFloatingDock();
   initKinematicsLab();
 });
+
+/* ==========================================================================
+   THEME TOGGLE — Light / Dark Mode
+   ========================================================================== */
+function initThemeToggle() {
+  const btn = document.getElementById('themeToggleBtn');
+  const label = document.getElementById('themeToggleLabel');
+  const icon = btn ? btn.querySelector('.theme-toggle-icon') : null;
+
+  // Restore saved preference
+  const saved = localStorage.getItem('ai-edu-theme');
+  if (saved === 'light') {
+    document.body.classList.add('light-mode');
+    if (icon) icon.textContent = '🌙';
+    if (label) label.textContent = 'Dark';
+  }
+
+  if (!btn) return;
+
+  btn.addEventListener('click', () => {
+    const isLight = document.body.classList.toggle('light-mode');
+    if (icon) icon.textContent = isLight ? '🌙' : '☀️';
+    if (label) label.textContent = isLight ? 'Dark' : 'Light';
+    localStorage.setItem('ai-edu-theme', isLight ? 'light' : 'dark');
+  });
+}
+
 
 /* ==========================================================================
    1. NAVIGATION & SCROLL TRACKING
@@ -1010,44 +1039,44 @@ function initClusterHierarchyLab() {
 
   const hierarchyData = [
     {
-      name: 'Level 1: Single NVIDIA H100 SXM5 GPU',
-      desc: 'The atomic engine of modern deep learning. Contains 80 billion transistors built on TSMC 4N process, 132 Streaming Multiprocessors (SMs), 4th-Gen Tensor Cores with FP8 Transformer Engine, and 80GB HBM3 memory.',
-      specs: '• Internal Memory Bandwidth: 3,352 GB/s\n• Power Envelope (TDP): 700 Watts\n• Tensor Throughput: ~2,000 TFLOPs (FP8)\n• Interconnect: 900 GB/s NVLink 4.0 ports',
-      bandwidth: 3352,
-      maxBw: 3352,
-      displayBw: '3,352 GB/s (HBM3)'
+      name: 'Level 1: Single NVIDIA H200 SXM5 GPU',
+      desc: 'The atomic engine of modern deep learning. Contains 80 billion transistors built on TSMC 4N process, 132 Streaming Multiprocessors (SMs), 4th-Gen Tensor Cores with FP8 Transformer Engine, and 141GB ultra-fast HBM3e memory.',
+      specs: '• Internal Memory Bandwidth: 4,800 GB/s (4.8 TB/s)\n• Memory Capacity: 141GB HBM3e (1.76x of H100)\n• Power Envelope (TDP): 700 Watts\n• Tensor Throughput: ~2,000 TFLOPs (FP8)\n• Interconnect: 900 GB/s NVLink 4.0 ports',
+      bandwidth: 4800,
+      maxBw: 4800,
+      displayBw: '4,800 GB/s (HBM3e)'
     },
     {
-      name: 'Level 2: 8-GPU Server (HGX H100 Baseboard)',
-      desc: 'Aggregates 8 H100 GPUs into an all-to-all NVLink mesh via 4 NVSwitches on the baseboard. Any GPU can communicate with any other GPU in the server at blazing wire speed.',
-      specs: '• Inter-GPU Bandwidth: 900 GB/s (Bidirectional NVLink 4)\n• Aggregate NVLink Throughput: 6.4 TB/s\n• Host Connectivity: Dual Intel Xeon/AMD EPYC CPUs + PCIe Gen 5\n• Power: ~10.2 Kilowatts per server',
+      name: 'Level 2: 8-GPU Server (HGX H200 Baseboard)',
+      desc: 'Aggregates 8 H200 GPUs into an all-to-all NVLink mesh via 4 NVSwitches on the baseboard. Provides 1.1TB aggregate HBM3e memory at wire speed.',
+      specs: '• Inter-GPU Bandwidth: 900 GB/s (Bidirectional NVLink 4)\n• Aggregate NVLink Throughput: 7.2 TB/s\n• Total Memory: 1,128 GB HBM3e\n• Host Connectivity: Dual Intel Xeon/AMD EPYC CPUs + PCIe Gen 5\n• Power: ~10.2 Kilowatts per server',
       bandwidth: 900,
-      maxBw: 3352,
+      maxBw: 4800,
       displayBw: '900 GB/s (NVLink 4)'
     },
     {
       name: 'Level 3: GPU Rack (2 Servers = 16 GPUs)',
       desc: 'Combines two 8-GPU servers with dedicated top-of-rack InfiniBand switches, power distribution units (PDUs), and liquid-cooling manifolds. Standard 42U rack format.',
-      specs: '• Total GPUs: 16 H100 GPUs\n• Total Memory: 1,280 GB HBM3\n• Network: 8x 400 Gb/s Quantum-2 InfiniBand CX7 NICs per server\n• Power: ~20.4 Kilowatts',
+      specs: '• Total GPUs: 16 H200 GPUs\n• Total Memory: 2,256 GB HBM3e\n• Network: 8x 400 Gb/s Quantum-2 InfiniBand CX7 NICs per server\n• Power: ~20.4 Kilowatts',
       bandwidth: 400,
-      maxBw: 3352,
+      maxBw: 4800,
       displayBw: '400 GB/s (InfiniBand intra-rack)'
     },
     {
       name: 'Level 4: Full GPU Pod (192 Racks = 3,072 GPUs)',
       desc: 'The architectural SuperPOD boundary. 192 racks organized into a non-blocking fat-tree InfiniBand network fabric. As signals travel across optical transceivers and switches, inter-GPU bandwidth drops to roughly 50 GB/s.',
-      specs: '• Total GPUs: 3,072 H100s\n• Pod Interconnect: ~50 GB/s per GPU across boundary\n• Aggregate Pod Memory: 245.7 Terabytes HBM3\n• Power: ~4 Megawatts',
+      specs: '• Total GPUs: 3,072 H200s\n• Pod Interconnect: ~50 GB/s per GPU across boundary\n• Aggregate Pod Memory: 433.1 Terabytes HBM3e\n• Power: ~4 Megawatts',
       bandwidth: 50,
-      maxBw: 3352,
+      maxBw: 4800,
       displayBw: '50 GB/s (Fat-Tree Fabric)'
     },
     {
       name: 'Level 5: Hyperscale GPU Cluster (8 Pods = 24,576 GPUs)',
-      desc: 'The complete frontier-training cluster described in the  report. Acts as "one giant compute engine" capable of training 18-trillion token foundation models at 24.3 ExaFLOPs throughput.',
-      specs: '• Total GPUs: 24,576 H100s\n• FP32 Cores: 415 Million\n• Tensor Cores: 13 Million\n• Combined Throughput: 24.3 ExaFLOPs\n• Combined GPU Memory: 1,875 Petabytes (aggregate throughput / caching)\n• Cross-Cluster Bandwidth: < 50 GB/s',
-      bandwidth: 35,
-      maxBw: 3352,
-      displayBw: '< 50 GB/s (Cluster Outer)'
+      desc: 'The complete frontier-training cluster acting as "one giant compute engine" capable of training 18-trillion token foundation models at 24+ ExaFLOPs throughput with massive 3.46 Petabyte HBM3e pool.',
+      specs: '• Total GPUs: 24,576 H200s\n• FP32 Cores: 415 Million\n• Tensor Cores: 13 Million\n• Combined Throughput: 24+ ExaFLOPs (FP8)\n• Combined GPU Memory: 3.46 Petabytes HBM3e\n• Cross-Cluster Bandwidth: ~50 GB/s (~96x collapse from on-chip HBM3e)',
+      bandwidth: 50,
+      maxBw: 4800,
+      displayBw: '~50 GB/s (Cluster Outer)'
     }
   ];
 
@@ -1233,6 +1262,116 @@ function initAgentLoopSimulator() {
 }
 
 /* ==========================================================================
+   11b. PART VII: AGENTIC AI CASE STUDY (SECTION 7.2)
+   ========================================================================== */
+const casePhases = [
+  {
+    role: 'TRIAGE & ORCHESTRATOR AGENT',
+    roleColor: 'var(--accent-cyan)',
+    title: 'Phase 1: Production Incident Detection & Context Assembly',
+    timestamp: 'T+00:00:14 UTC',
+    desc: 'Prometheus alerts trigger after GPU cluster node memory consumption exceeds 94% threshold during high-concurrency LLM inference. The Orchestrator agent correlates distributed trace IDs, queries Grafana metrics, and dispatches an investigation plan to sub-agents.',
+    payload: `<span style="color:#64748b;">// Telemetry Signal &amp; Agent Goal Formulation</span><br>
+<span style="color:#f43f5e;">ALERT: HighMemoryPressure</span> [Severity: Critical, Cluster: us-west-4a-h200]<br>
+<span style="color:#38bdf8;">Goal:</span> Identify regression in KV-Cache eviction handler introduced within last 24h commits.<br>
+<span style="color:#34d399;">Action:</span> Spawning Investigator Agent with read-only repository sandbox and AST tools.<br>
+<span style="color:#fbbf24;">Tools Bound:</span> [prometheus_query, service_log_grep, git_repo_analyzer]`
+  },
+  {
+    role: 'INVESTIGATOR AGENT',
+    roleColor: 'var(--accent-purple)',
+    title: 'Phase 2: Codebase Navigation, AST Call-Graph &amp; Git Bisect',
+    timestamp: 'T+00:01:32 UTC',
+    desc: 'The Investigator agent performs AST-grep across the 1.2M-LOC distributed runtime repository. Running git bisect against automated unit tests isolates commit #8f2a1c ("Optimize KV block reuse in FlashAttention-3 integration") as the offending memory leak source.',
+    payload: `<span style="color:#64748b;">// Autonomous Tool Execution Trace</span><br>
+<span style="color:#a78bfa;">$ tool_call:</span> git bisect start HEAD v4.12.0<br>
+<span style="color:#38bdf8;">$ tool_call:</span> ast_grep --pattern 'class KVCacheManager { $$$ }'<br>
+<span style="color:#34d399;">MATCH FOUND:</span> src/runtime/kv_cache_allocator.cpp:L248<br>
+<span style="color:#f59e0b;">ROOT CAUSE:</span> Ref-count on PagedAttention memory arena not decremented on socket timeout exception.<br>
+<span style="color:#a78bfa;">Dispatching:</span> Handing off localized bug specification &amp; reproduction test to Synthesis Agent.`
+  },
+  {
+    role: 'SYNTHESIS &amp; PATCH AGENT',
+    roleColor: 'var(--accent-emerald)',
+    title: 'Phase 3: Sandboxed Code Modification &amp; Atomic Unified Diff',
+    timestamp: 'T+00:02:45 UTC',
+    desc: 'Operating in an isolated Docker container, the Synthesis Agent drafts an atomic hotfix patch implementing RAII-guarded lock release and exception-safe token buffer reclamation, adhering to C++20 memory order semantics.',
+    payload: `<span style="color:#64748b;">// Synthesized Patch Diff (sandbox: docker://agent-sandbox-cpp:latest)</span><br>
+<span style="color:#94a3b8;">--- a/src/runtime/kv_cache_allocator.cpp</span><br>
+<span style="color:#94a3b8;">+++ b/src/runtime/kv_cache_allocator.cpp</span><br>
+<span style="color:#f43f5e;">- void release_block(BlockId id) { if (!is_held(id)) return; ref_counts[id]--; }</span><br>
+<span style="color:#34d399;">+ void release_block(BlockId id) noexcept {</span><br>
+<span style="color:#34d399;">+   std::scoped_lock lock(arena_mutex_);</span><br>
+<span style="color:#34d399;">+   if (ref_counts[id].fetch_sub(1, std::memory_order_acq_rel) == 1) { free_list_.push(id); }</span><br>
+<span style="color:#34d399;">+ }</span><br>
+<span style="color:#38bdf8;">Result:</span> Code compiles cleanly with 0 clang-tidy warnings. Handing to QA Critic Agent.`
+  },
+  {
+    role: 'CRITIC / QA AUDITOR AGENT',
+    roleColor: 'var(--accent-amber)',
+    title: 'Phase 4: Automated CI Matrix Verification &amp; Canary Deployment',
+    timestamp: 'T+00:04:18 UTC',
+    desc: 'The Critic Agent generates a synthetic multi-threaded stress test simulating 10,000 socket drops. All 142 distributed cluster regression tests pass with zero memory leaks. A canary pull request is signed and staged for human-in-the-loop review.',
+    payload: `<span style="color:#64748b;">// Verification Receipts &amp; Test Harness Execution</span><br>
+<span style="color:#38bdf8;">$ tool_call:</span> pytest tests/distributed/test_kv_leak.py -v --workers=16<br>
+<span style="color:#34d399;">TEST SUITE:</span> 142 Passed, 0 Failed, 0 Skipped [Time: 38.4s]<br>
+<span style="color:#34d399;">VALGRIND / ASAN AUDIT:</span> 0 bytes lost in 0 allocations (Clean)<br>
+<span style="color:#a78bfa;">CANARY STATUS:</span> Deployed to Pod 1 (canary pool: 128x H200 GPUs). Memory usage flat at 41%.<br>
+<span style="color:#fbbf24;">PR #4182:</span> Created with full cryptographic audit trail &amp; regression receipts ready for approval.`
+  }
+];
+
+let currentCasePhase = 0;
+function showCasePhase(idx) {
+  currentCasePhase = idx;
+  const p = casePhases[idx];
+  if (!p) return;
+
+  for (let i = 0; i < 4; i++) {
+    const pill = document.getElementById(`casePill${i}`);
+    if (pill) pill.classList.toggle('active', i === idx);
+  }
+
+  const roleEl = document.getElementById('caseActiveRoleBadge');
+  const titleEl = document.getElementById('casePhaseTitle');
+  const timeEl = document.getElementById('caseTimestamp');
+  const descEl = document.getElementById('casePhaseDesc');
+  const payloadEl = document.getElementById('casePayloadBox');
+  const prevBtn = document.getElementById('casePrevBtn');
+  const nextBtn = document.getElementById('caseNextBtn');
+
+  if (roleEl) {
+    roleEl.textContent = p.role;
+    roleEl.style.color = p.roleColor;
+    roleEl.style.backgroundColor = idx === 0 ? 'rgba(56,189,248,0.15)' : (idx === 1 ? 'rgba(168,85,247,0.15)' : (idx === 2 ? 'rgba(16,185,129,0.15)' : 'rgba(245,158,11,0.15)'));
+  }
+  if (titleEl) titleEl.textContent = p.title;
+  if (timeEl) timeEl.textContent = p.timestamp;
+  if (descEl) descEl.textContent = p.desc;
+  if (payloadEl) payloadEl.innerHTML = p.payload;
+
+  if (prevBtn) prevBtn.disabled = idx === 0;
+  if (nextBtn) nextBtn.disabled = idx === casePhases.length - 1;
+}
+
+function initAgentCaseStudy() {
+  const prevBtn = document.getElementById('casePrevBtn');
+  const nextBtn = document.getElementById('caseNextBtn');
+
+  if (prevBtn) {
+    prevBtn.addEventListener('click', () => {
+      if (currentCasePhase > 0) showCasePhase(currentCasePhase - 1);
+    });
+  }
+  if (nextBtn) {
+    nextBtn.addEventListener('click', () => {
+      if (currentCasePhase < casePhases.length - 1) showCasePhase(currentCasePhase + 1);
+    });
+  }
+  showCasePhase(0);
+}
+
+/* ==========================================================================
    12. PART VII: CHECKPOINT QUIZ ENGINE
    ========================================================================== */
 function initQuizEngine() {
@@ -1244,7 +1383,7 @@ function initQuizEngine() {
   const prevBtn = document.getElementById('quizPrevBtn');
   const scoreCounter = document.getElementById('quizScoreCounter');
 
-  // 12 curated questions directly based on the Discussion Questions in the  document
+  // 20 comprehensive questions covering all 9 curriculum parts and recent frontiers
   const questions = [
     {
       part: 'Part I: Mathematical Foundations',
@@ -1295,6 +1434,30 @@ function initQuizEngine() {
       explanation: 'Backpropagation is a dynamic programming implementation of the multivariate Chain Rule: ∂L/∂W^[l] = (∂L/∂a^[l]) · (∂a^[l]/∂z^[l]) · (∂z^[l]/∂W^[l]).'
     },
     {
+      part: 'Part II: Modern Optimization',
+      text: 'How does the Adam optimizer improve upon standard Stochastic Gradient Descent (SGD) during deep network training?',
+      options: [
+        'By computing exact second-order Hessian matrices at each step',
+        'By combining exponentially decaying first-moment momentum with adaptive second-moment variance scaling',
+        'By eliminating the need for learning rates entirely',
+        'By restricting weight updates to integer values'
+      ],
+      correct: 1,
+      explanation: 'Adam (Kingma & Ba, 2014) maintains moving averages of both past gradients (momentum) and squared gradients (uncentered variance), providing adaptive per-parameter learning rates resilient to sparse or noisy gradients.'
+    },
+    {
+      part: 'Part III: Computer Vision (CNNs)',
+      text: 'What core inductive biases allow Convolutional Neural Networks (CNNs) to process high-resolution images far more efficiently than dense MLPs?',
+      options: [
+        'Recurrent temporal cycles and memory gates',
+        'Local receptive fields and spatial weight sharing, granting translation equivariance and preventing parameter explosion',
+        'Self-attention matrices computed across every pixel pair',
+        'Purely linear non-parametric filtering'
+      ],
+      correct: 1,
+      explanation: 'CNNs slide small parameter kernels across spatial dimensions (weight sharing) and restrict connections to local pixel neighborhoods, dramatically reducing parameters from O(H²W²) to small constant kernel sizes while preserving translation equivariance.'
+    },
+    {
       part: 'Part III: Sequential Architectures',
       text: 'What structural bottleneck in Recurrent Neural Networks (RNNs) does the Transformer\'s Attention mechanism eliminate?',
       options: [
@@ -1307,7 +1470,43 @@ function initQuizEngine() {
       explanation: 'RNNs require step-by-step computation (h_t depends on h_{t-1}), creating an O(N) sequential bottleneck that cannot be parallelized. Transformers process all tokens simultaneously in O(1) sequential steps.'
     },
     {
-      part: 'Part III: Attention Mechanism',
+      part: 'Part IV: Reinforcement Learning Fundamentals',
+      text: 'In Reinforcement Learning, what recursive relationship expresses the value of a state as the expected immediate reward plus the discounted future value of downstream states?',
+      options: [
+        'The Shannon Entropy Equation',
+        'The Bellman Optimality Equation',
+        'The Universal Approximation Theorem',
+        'The Backpropagation Chain Rule'
+      ],
+      correct: 1,
+      explanation: 'The Bellman Equation V(s) = E[r_t + γ V(s_{t+1}) | s_t = s] provides the foundational recursive framework for value function estimation and dynamic programming in Markov Decision Processes.'
+    },
+    {
+      part: 'Part IV: Supervised Learning vs. Reinforcement Learning',
+      text: 'What fundamental challenge distinguishes Reinforcement Learning from standard Supervised Learning?',
+      options: [
+        'RL models cannot use gradient descent',
+        'The Credit Assignment Problem: actions only yield delayed scalar rewards rather than immediate ground-truth target vectors',
+        'Supervised learning cannot be applied to classification',
+        'RL requires all data to be labeled manually by human annotators before training'
+      ],
+      correct: 1,
+      explanation: 'In supervised learning, each input has an immediate correct label. In RL, an agent must balance exploration vs. exploitation under delayed, sparse rewards where credit must be assigned across dozens of preceding sequential decisions.'
+    },
+    {
+      part: 'Part IV: Reinforcement Learning Frontiers',
+      text: 'How did AlphaGo Zero (Silver et al., 2017) achieve superhuman performance in the game of Go without human expert training games?',
+      options: [
+        'By brute-force lookup of all possible 10^170 board configurations',
+        'Through pure tabula-rasa self-play combining Monte Carlo Tree Search (MCTS) with deep neural policy/value guidance',
+        'By fine-tuning a pre-trained vision-language model',
+        'By utilizing rule-based handcrafted expert heuristics'
+      ],
+      correct: 1,
+      explanation: 'AlphaGo Zero learned entirely tabula rasa through self-play reinforcement learning, iteratively improving its policy and value networks using MCTS search probabilities without any human games or domain knowledge beyond the rules.'
+    },
+    {
+      part: 'Part V: Attention Mechanism',
       text: 'In the Scaled Dot-Product Attention formula Attention(Q, K, V) = Softmax(QK^T / √d_k)V, why is the division by √d_k essential?',
       options: [
         'To prevent dot products from growing excessively large, which pushes the softmax into regions with vanishing gradients',
@@ -1319,7 +1518,7 @@ function initQuizEngine() {
       explanation: 'As dimension d_k grows, dot products grow large in magnitude, driving softmax into regions with extremely small gradients. Dividing by √d_k stabilizes the variance to 1.'
     },
     {
-      part: 'Part IV: Generative AI & Scaling',
+      part: 'Part V: Generative AI & Scaling',
       text: 'According to the Chinchilla Scaling Laws (Hoffmann et al., 2022), what is the compute-optimal ratio between training tokens and model parameters?',
       options: [
         '1 token per parameter',
@@ -1331,7 +1530,7 @@ function initQuizEngine() {
       explanation: 'Chinchilla demonstrated that model parameters and training tokens should be scaled in equal proportion: approximately 20 tokens per parameter for compute-optimal training.'
     },
     {
-      part: 'Part IV: Post-Training & Alignment',
+      part: 'Part V: Post-Training & Alignment',
       text: 'What is the "Alignment Tax" frequently observed after Reinforcement Learning from Human Feedback (RLHF)?',
       options: [
         'The cloud billing cost of hiring human annotators',
@@ -1343,7 +1542,7 @@ function initQuizEngine() {
       explanation: 'The Alignment Tax describes the empirical phenomenon where models heavily aligned for conversational safety and deference sometimes show slight performance regressions in raw mathematics, coding, or diverse completions.'
     },
     {
-      part: 'Part V: Hardware & Clusters',
+      part: 'Part VI: Hardware & Clusters',
       text: 'Why do GPUs dramatically outperform CPUs for training large neural networks?',
       options: [
         'GPUs run at higher single-core clock frequencies (GHz)',
@@ -1355,19 +1554,19 @@ function initQuizEngine() {
       explanation: 'CPUs prioritize low latency for sequential code with complex branching; GPUs prioritize massive throughput for parallel data pipelines with thousands of ALUs executing identical operations simultaneously.'
     },
     {
-      part: 'Part V: Cluster Networking',
-      text: 'As an AI compute cluster scales from an 8-GPU server to an entire 3,072-GPU Pod, what happens to inter-GPU communication bandwidth?',
+      part: 'Part VI: Cluster Networking & NVIDIA H200',
+      text: 'As an AI compute cluster scales from an 8-GPU server to an entire 3,072-GPU Pod, what happens to inter-GPU communication bandwidth in an NVIDIA H200 cluster?',
       options: [
         'It increases exponentially due to distributed caching',
-        'It drops by roughly 18x to 70x (from 3,352 GB/s HBM / 900 GB/s NVLink down to ~50 GB/s over fabric switches)',
+        'It collapses by roughly 18x to ~96x (from 4,800 GB/s on-package HBM3e / 900 GB/s NVLink down to ~50 GB/s over fabric switches)',
         'It remains constant across all hierarchy boundaries',
         'Bandwidth becomes infinite using optical quantum entanglement'
       ],
       correct: 1,
-      explanation: 'Physical wiring distance and network layers create a steep hierarchy: on-chip memory runs at 3,352 GB/s, NVLink intra-server at 900 GB/s, and pod/cluster InfiniBand drops to ~50 GB/s.'
+      explanation: 'Physical wiring distance and network switch layers create a steep physical hierarchy: on-package HBM3e runs at 4,800 GB/s (4.8 TB/s), NVLink intra-server at 900 GB/s, and pod/cluster InfiniBand drops to ~50 GB/s — a ~96x total bandwidth collapse.'
     },
     {
-      part: 'Part VI: Agentic AI',
+      part: 'Part VII: Agentic AI Systems',
       text: 'What fundamental capability distinguishes an Agentic AI system from a standard conversational Large Language Model?',
       options: [
         'Agentic AI is always trained on more parameters',
@@ -1379,7 +1578,7 @@ function initQuizEngine() {
       explanation: 'Standard LLMs follow a passive input→output pattern; Agentic AI wraps the model in a closed loop (Plan-Execute-Evaluate-Reflect) equipped with external tools, state memory, and multi-step reasoning.'
     },
     {
-      part: 'Part VI: Russell & Norvig Agency',
+      part: 'Part VII: Russell & Norvig Agency',
       text: 'What does the classical AI acronym PEAS stand for when designing an autonomous agent?',
       options: [
         'Parallel Execution, Allocation, and Storage',
@@ -1389,6 +1588,42 @@ function initQuizEngine() {
       ],
       correct: 1,
       explanation: 'PEAS stands for Performance measure, Environment, Actuators, and Sensors — the foundational framework formulated by Russell & Norvig for rational agent specification.'
+    },
+    {
+      part: 'Part VII: Production Multi-Agent Swarms',
+      text: 'In an autonomous enterprise software engineering swarm (such as incident SRE remediation), what role does the Critic / QA Auditor agent perform?',
+      options: [
+        'It writes the original production application code',
+        'It triages customer support tickets and manages cloud billing',
+        'It generates reproduction test matrices, runs regression suites and memory profilers, and signs off on pull requests before deployment',
+        'It deploys unreviewed patches directly to production without testing'
+      ],
+      correct: 2,
+      explanation: 'Role specialization separates patch synthesis from rigorous validation: the Critic/QA agent generates adversarial reproduction tests and runs ASAN/Valgrind profiling in sandboxed containers to ensure patches introduce zero regressions.'
+    },
+    {
+      part: 'Part VIII: Physical AI & Humanoid Robotics',
+      text: 'What dynamic balance criterion must a whole-body bipedal humanoid robot satisfy during dynamic locomotion?',
+      options: [
+        'The center of mass must remain statically positioned between both feet at all times',
+        'The Zero Moment Point (ZMP) — where horizontal tipping moments vanish — must remain strictly within the convex hull of the support foot polygon',
+        'The robot must keep its knees locked to maximize mechanical advantage',
+        'Joint torque commands only need to be computed at 1 Hz'
+      ],
+      correct: 1,
+      explanation: 'In dynamic bipedal walking, balance requires that the Zero Moment Point (ZMP) remains inside the foot support polygon. Mid-level Model Predictive Control (MPC) plans Center-of-Mass trajectories to enforce this condition at 50–100Hz while 1,000Hz motor controllers track joint torques.'
+    },
+    {
+      part: 'Part IX: The AI Value Paradigm Shift',
+      text: 'Why does the curriculum argue that treating generative AI as a "1-to-1 search lookup engine" is an economic mistake?',
+      options: [
+        'Because search engines require no electricity',
+        'Because single-turn query lookups are commoditized and ephemeral, whereas compounding enterprise value resides in multi-agent workflows, multimodal creation, persistent memory, and reusable systems',
+        'Because AI models cannot index web pages',
+        'Because traditional databases have higher compute latency'
+      ],
+      correct: 1,
+      explanation: 'Single-turn prompt lookup provides zero competitive moat and static knowledge cutoffs. Transformative enterprise value compounds when AI acts as an autonomous orchestration engine with domain RAG, multi-agent workflows, and persistent memory assets.'
     }
   ];
 
@@ -1485,7 +1720,7 @@ function initQuizEngine() {
 }
 
 /* ==========================================================================
-   13. PART VII: SEARCHABLE GLOSSARY (APPENDIX A)
+   13. PART IX / APPENDIX A: SEARCHABLE GLOSSARY
    ========================================================================== */
 function initGlossary() {
   const input = document.getElementById('glossarySearchInput');
@@ -1493,24 +1728,41 @@ function initGlossary() {
   if (!input || !grid) return;
 
   const glossaryData = [
-    { term: 'Perceptron', def: 'The fundamental atomic artificial neuron model that computes a weighted sum of inputs plus a bias term, passed through an activation function.' },
-    { term: 'Backpropagation', def: 'The foundational algorithm for computing partial derivatives of the loss function with respect to all network weights using the multivariate chain rule.' },
-    { term: 'Cross-Entropy Loss', def: 'An information-theoretic loss function quantifying the divergence between the true probability distribution and the model\'s predicted probability distribution.' },
+    { term: 'Perceptron', def: 'The fundamental atomic artificial neuron model that computes a weighted sum of inputs plus a bias term, passed through an activation function: y = f(w^T x + b).' },
+    { term: 'Universal Approximation Theorem', def: 'Mathematical theorem proving that a feedforward network with a single hidden layer and non-linear activation can approximate any continuous function on compact subsets.' },
+    { term: 'Backpropagation', def: 'The foundational algorithm for computing partial derivatives of the loss function with respect to all network weights using the multivariate chain rule in reverse mode.' },
+    { term: 'Cross-Entropy Loss', def: 'An information-theoretic loss function quantifying the divergence between the true probability distribution and the model\'s predicted probability distribution, equivalent to minimizing KL divergence.' },
+    { term: 'Adam Optimizer', def: 'Adaptive moment estimation optimizer combining exponentially decaying first-moment momentum with second-moment uncentered variance scaling for robust per-parameter learning rates.' },
+    { term: 'Vanishing Gradient Problem', def: 'Exponential decay of gradient magnitudes as backpropagation flows backward through deep recurrent or feedforward layers, mitigated by ReLU activations and residual skip connections.' },
+    { term: 'Convolutional Kernel', def: 'A localized spatial matrix with tied/shared weights slid across multidimensional inputs to extract translation-equivariant features while drastically preventing parameter explosion.' },
+    { term: 'LSTM Cell', def: 'Long Short-Term Memory recurrent unit using Constant Error Carousels governed by multiplicative Forget, Input, and Output gates to preserve gradients across long temporal horizons.' },
     { term: 'Self-Attention', def: 'A mechanism enabling tokens in a sequence to dynamically attend to and weight relationships with all other tokens using Query, Key, and Value projections.' },
-    { term: 'Transformer', def: 'The dominant neural network architecture based entirely on self-attention mechanisms and feed-forward layers, eliminating recurrent sequential constraints.' },
-    { term: 'Scaling Laws', def: 'Empirical mathematical power laws (e.g., Kaplan, Chinchilla) describing predictable improvements in loss as compute, parameters, and tokens increase.' },
-    { term: 'RLHF', def: 'Reinforcement Learning from Human Feedback: alignment pipeline using human preference ratings to train a reward model, which guides policy optimization via PPO or DPO.' },
-    { term: 'HBM3 (High Bandwidth Memory)', def: '3D-stacked memory architecture providing ultra-high bandwidth (~3.35 TB/s on NVIDIA H100) by placing DRAM dice adjacent to the GPU compute die.' },
-    { term: 'NVLink', def: 'NVIDIA\'s proprietary high-speed interconnect protocol enabling direct, high-bandwidth GPU-to-GPU communications (900 GB/s bidirectional on H100).' },
-    { term: 'GPU Pod / SuperPOD', def: 'A cluster building block aggregating hundreds of GPU racks (e.g., 3,072 H100s) through non-blocking fat-tree InfiniBand network switches.' },
-    { term: 'Agentic AI', def: 'Autonomous systems capable of perception, multi-step planning, tool use, environment interaction, and self-reflection in pursuit of high-level goals.' },
+    { term: 'Scaled Dot-Product Attention', def: 'Attention formulation Attention(Q,K,V) = Softmax(QK^T / √d_k)V; dividing by √d_k stabilizes variance to 1 and prevents softmax gradients from vanishing.' },
+    { term: 'Transformer', def: 'The dominant neural network architecture based entirely on self-attention mechanisms and feed-forward layers, eliminating recurrent sequential constraints for O(1) sequential depth.' },
+    { term: 'Markov Decision Process (MDP)', def: 'The formal mathematical 5-tuple (S, A, P, R, γ) modeling sequential decision-making where state transitions satisfy the Markov property.' },
+    { term: 'Bellman Equation', def: 'Recursive optimality equation decomposing a state\'s value into the expected immediate reward plus the discounted expected downstream value: V(s) = E[r + γ V(s\')].' },
+    { term: 'Exploration vs. Exploitation', def: 'The fundamental reinforcement learning trade-off between trying novel actions to discover better rewards and executing the current best known policy.' },
+    { term: 'Deep Q-Network (DQN)', def: 'Deep reinforcement learning algorithm approximating the optimal state-action value function Q*(s, a) using deep neural networks stabilized by experience replay and target networks.' },
+    { term: 'Policy Gradient & PPO', def: 'Algorithms that optimize policy network parameters directly via gradient ascent; Proximal Policy Optimization (PPO) uses clipped surrogate objectives to prevent destructive updates.' },
+    { term: 'Scaling Laws (Chinchilla)', def: 'Empirical power laws (Hoffmann et al., 2022) proving that model parameters and training dataset tokens should scale in equal proportion (~20 tokens per parameter) for compute optimality.' },
+    { term: 'RLHF', def: 'Reinforcement Learning from Human Feedback: post-training alignment pipeline using human preference ratings to train a reward model, which guides policy optimization via PPO.' },
+    { term: 'Direct Preference Optimization (DPO)', def: 'Closed-form alignment algorithm optimizing language model weights directly on paired human preference completions without needing an explicit reward model.' },
+    { term: 'Alignment Tax', def: 'The empirical trade-off where safety-alignment and deference constraints slightly degrade raw performance on challenging technical, mathematical, or creative benchmarks.' },
+    { term: 'Tensor Core', def: 'Specialized hardware execution units designed specifically to perform mixed-precision matrix multiply-accumulate operations (e.g. FP8, FP16) in a single clock cycle.' },
+    { term: 'HBM3e (High Bandwidth Memory)', def: '3D-stacked memory architecture providing ultra-high capacity and bandwidth (141GB capacity at 4,800 GB/s on NVIDIA H200) directly over a silicon interposer.' },
+    { term: 'NVLink 4.0', def: 'NVIDIA\'s proprietary high-speed interconnect protocol enabling direct, high-bandwidth GPU-to-GPU communications (900 GB/s bidirectional per GPU).' },
+    { term: 'CoWoS-S Silicon Interposer', def: 'Chip-on-Wafer-on-Substrate packaging technology providing dense microscopic wiring connecting the GPU compute die directly to adjacent 3D HBM stacks.' },
+    { term: 'GPU SuperPOD / Hyperscale AI Factory', def: 'Cluster computing architecture aggregating thousands of GPUs (e.g., 3,072 to 24,576 H200s delivering 24+ ExaFLOPs) through non-blocking optical InfiniBand fabric networks.' },
+    { term: 'Agentic AI', def: 'Autonomous cognitive systems capable of active perception, multi-step planning, tool use, environment interaction, and self-reflection in pursuit of high-level goals.' },
     { term: 'PEAS Framework', def: 'Russell and Norvig\'s standard specification for rational agents: Performance measure, Environment, Actuators, and Sensors.' },
-    { term: 'ReAct Pattern', def: 'Synergizing Reasoning and Acting in LLMs by interleaving internal thought generation with external tool execution.' },
-    { term: 'Bayes\' Theorem', def: 'The mathematical rule for updating the probability of a hypothesis as new evidence arrives: P(A|B) = [P(B|A)P(A)] / P(B).' },
-    { term: 'Shannon Entropy', def: 'The expected amount of information, surprise, or uncertainty inherent in a random variable\'s possible outcomes, measured in bits.' },
-    { term: 'KL Divergence', def: 'A non-symmetric measure of the difference between two probability distributions P and Q.' },
-    { term: 'Tensor Core', def: 'Specialized hardware execution units designed specifically to perform mixed-precision matrix multiply-accumulate operations in a single cycle.' },
-    { term: 'Alignment Tax', def: 'The observed trade-off where safety-alignment and deference constraints slightly degrade raw performance on challenging technical or creative benchmarks.' }
+    { term: 'ReAct Pattern', def: 'Synergizing Reasoning and Acting in LLMs by interleaving internal chain-of-thought generation with external sandbox tool execution.' },
+    { term: 'Multi-Agent Swarm', def: 'A collective of specialized autonomous agents (e.g. Orchestrator, Investigator, Patch Synthesizer, QA Auditor) collaborating via asynchronous DAG workflows to solve enterprise engineering tasks.' },
+    { term: 'Tool Calling & Reflection', def: 'The mechanism allowing LLMs to emit structured API invocations, inspect return values, and verbally critique their own intermediate outputs to correct errors.' },
+    { term: 'Vision-Language-Action (VLA)', def: 'Multimodal foundation models (e.g. RT-2, OpenVLA) co-trained on web-scale images, text, and robot demonstrations that directly output continuous motor control actions.' },
+    { term: 'Model Predictive Control (MPC)', def: 'Dynamic online control optimization solving finite-horizon trajectory problems at 50–100Hz to calculate optimal center-of-mass positions and footstep placements.' },
+    { term: 'Zero Moment Point (ZMP)', def: 'The dynamic balance criterion for bipedal humanoid walking: the ground point where horizontal inertial and gravitational moments sum to zero, which must lie within the foot support polygon.' },
+    { term: 'Sim-to-Real Transfer', def: 'The process of training reinforcement learning policies inside massive parallel GPU physics simulators (Isaac Sim) with domain randomization, then zero-shot deploying them to physical hardware.' },
+    { term: 'High-Order Value Creation', def: 'The strategic shift from commoditized, ephemeral 1-to-1 prompt lookups to compounding enterprise assets: autonomous workflows, multimodal synthesis, and proprietary cognitive systems.' }
   ];
 
   function render(query = '') {
@@ -1545,7 +1797,7 @@ function initGlossary() {
 
 
 /* ==========================================================================
-   14. PART VIII: ACADEMIC REFERENCES ARCHIVE FILTER
+   14. PART X: ACADEMIC REFERENCES ARCHIVE FILTER
    ========================================================================== */
 function initReferencesArchive() {
   const filterBtns = document.querySelectorAll('.ref-filter-btn');
@@ -1582,31 +1834,33 @@ function initSpotlightSearch() {
   if (!modal || !input || !resultsContainer) return;
 
   const searchableIndex = [
-    { title: 'Multi-Layer Perceptron (MLP) Architecture', badge: 'Part II', target: '#part2-mlp', desc: 'Matrix forward prop z^[l] = W^[l]a^[l-1]+b^[l], Universal Approximation Theorem' },
-    { title: 'Sequential Memory: RNNs & LSTMs', badge: 'Part III', target: '#part3-rnn-lstm', desc: 'BPTT vanishing gradients, Constant Error Carousel, Forget/Input/Output gates' },
-    { title: 'Attention Mechanism & Transformer Model', badge: 'Part III', target: '#part3-attention', desc: 'Query-Key-Value routing, sqrt(d_k) variance scaling, Multi-Head Attention, RoPE' },
-    { title: 'Physical AI & Embodied Intelligence', badge: 'Part VII', target: '#part7', desc: 'Embodied robotics, multimodal sensory grounding, VLA models, sub-10ms control' },
-    { title: 'Vision-Language-Action (VLA) Models', badge: 'Part VII', target: '#part7', desc: 'RT-1, RT-2, OpenVLA, Octo: bridging language intent to discrete motor tokens' },
-    { title: 'Robotic Kinematics & Sim-to-Real Lab', badge: 'Part VII', target: '#part7-lab', desc: 'Forward kinematics, 2x2 Jacobian matrix, Isaac Sim physics transfer' },
     { title: 'Bayes Theorem & Base-Rate Fallacy', badge: 'Part I', target: '#part1', desc: 'Prior prevalence P(C)=1%, test sensitivity 90%, posterior updating P(C|+)=9.17%' },
     { title: 'Linear & Logistic Regression Lab', badge: 'Part I', target: '#part1', desc: 'Continuous prediction y = wx + b, Sigmoid activation, MSE loss calculation' },
     { title: 'Shannon Information Theory & Entropy', badge: 'Part I', target: '#part1', desc: 'Entropy H(X) = -sum p log2(p), Cross-Entropy loss, KL Divergence' },
     { title: 'Perceptron & XOR Non-Linear Boundary', badge: 'Part II', target: '#part2', desc: 'Single neuron linear limitation, Minsky & Papert proof, 2-layer MLP solution' },
+    { title: 'Multi-Layer Perceptron (MLP) Architecture', badge: 'Part II', target: '#part2-mlp', desc: 'Matrix forward prop z^[l] = W^[l]a^[l-1]+b^[l], Universal Approximation Theorem' },
     { title: 'Activation Functions: GELU, ReLU, Sigmoid', badge: 'Part II', target: '#part2', desc: 'Non-linear transformations, derivative curves, vanishing gradient mitigation' },
     { title: 'The 5-Step Neural Network Learning Loop', badge: 'Part II', target: '#part2', desc: 'Forward prop, Loss, Backpropagation chain rule, Gradient descent, Epochs' },
-    { title: 'Recurrent Memory: RNN vs LSTM Gates', badge: 'Part III', target: '#part3', desc: 'Cell state carousel C_t, Forget gate, Input gate, Output gate' },
-    { title: 'DeepMind Reinforcement Learning Milestones', badge: 'Part III', target: '#part3', desc: 'AlphaGo (2016), AlphaZero (2017), MuZero (2019), AlphaFold (2020s)' },
-    { title: 'Transformer Multi-Head Self-Attention', badge: 'Part III', target: '#part3', desc: 'Query, Key, Value dot-products, Softmax(QK^T / sqrt(d_k))V, parallel O(1) path' },
-    { title: 'Chinchilla Empirical Scaling Laws', badge: 'Part IV', target: '#part4', desc: 'Compute-optimal tokens D ≈ 20*N, 6ND FLOPs, frontier 18T tokens scale' },
-    { title: 'The 3 Pillars of Modern LLMs & RLHF', badge: 'Part IV', target: '#part4', desc: 'Architecture, self-supervised next-token pre-training, SFT/RLHF/DPO alignment' },
-    { title: 'NVIDIA H100 GPU Microarchitecture', badge: 'Part V', target: '#part5', desc: 'Streaming Multiprocessors, 4th-Gen FP8 Tensor Cores, 80GB HBM3 @ 3,352 GB/s' },
-    { title: 'AI Supercluster Scale: Chip to Data Center', badge: 'Part V', target: '#part5', desc: '5-tier hierarchy, 24,576 GPUs, 24.3 ExaFLOPs, bandwidth drop waterfall' },
-    { title: 'Autonomous Agentic AI & The Agent Loop', badge: 'Part VI', target: '#part6', desc: 'Plan -> Execute -> Evaluate -> Reflect feedback engine, tool sandbox' },
-    { title: 'PEAS Rational Agency Framework', badge: 'Part VI', target: '#part6', desc: 'Performance measure, Environment, Actuators, Sensors (Russell & Norvig)' },
-    { title: 'Synthesis: High-Order Value vs Mere Search', badge: 'Part VII', target: '#part7', desc: 'Strategic asset paradigm, automated workflows, custom multi-agent systems' },
-    { title: 'Curriculum Self-Assessment Quiz', badge: 'Quiz', target: '#quizSection', desc: '12 academic checkpoint review questions with instant score tracking' },
+    { title: 'Convolutional Networks (CNN) for Vision', badge: 'Part III', target: '#part3-cnn', desc: 'Local receptive fields, weight sharing, feature maps, AlexNet to ResNet' },
+    { title: 'Sequential Memory: RNNs & LSTMs', badge: 'Part III', target: '#part3-rnn-lstm', desc: 'BPTT vanishing gradients, Constant Error Carousel, Forget/Input/Output gates' },
+    { title: 'Principles of Reinforcement Learning', badge: 'Part IV', target: '#part4-rl-principles', desc: 'Markov Decision Processes (MDP), Bellman equations, exploration vs exploitation' },
+    { title: 'Supervised Learning vs. Reinforcement Learning', badge: 'Part IV', target: '#part4-sl-vs-rl', desc: 'Direct labels vs delayed scalar rewards, static data vs online interaction' },
+    { title: 'Applications of Reinforcement Learning', badge: 'Part IV', target: '#part4-rl-applications', desc: 'AlphaZero, robot dexterity, RLHF alignment, real-time bidding, data center cooling' },
+    { title: 'Attention Mechanism & Transformer Model', badge: 'Part V', target: '#part5-attention', desc: 'Query-Key-Value routing, sqrt(d_k) variance scaling, Multi-Head Attention, RoPE' },
+    { title: 'Chinchilla Empirical Scaling Laws', badge: 'Part V', target: '#part5-scaling', desc: 'Compute-optimal tokens D ≈ 20*N, 6ND FLOPs, frontier 18T tokens scale' },
+    { title: 'NVIDIA H200 GPU Microarchitecture', badge: 'Part VI', target: '#part6', desc: 'Streaming Multiprocessors, 4th-Gen FP8 Tensor Cores, 141GB HBM3e @ 4,800 GB/s' },
+    { title: 'H200 AI Supercluster Scale: Chip to Data Center', badge: 'Part VI', target: '#part6', desc: '5-tier hierarchy, 24,576 H200 GPUs, 24+ ExaFLOPs, ~96x bandwidth drop waterfall' },
+    { title: 'Autonomous Agentic AI & The Agent Loop', badge: 'Part VII', target: '#part7', desc: 'Plan -> Execute -> Evaluate -> Reflect feedback engine, tool sandbox' },
+    { title: 'Agentic AI Production Case Study: Enterprise SRE', badge: 'Part VII', target: '#agentCaseStudyContainer', desc: 'Multi-agent software engineering & incident remediation: Orchestrator, Investigator, Synthesizer, QA Critic' },
+    { title: 'PEAS Rational Agency Framework', badge: 'Part VII', target: '#part7', desc: 'Performance measure, Environment, Actuators, Sensors (Russell & Norvig)' },
+    { title: 'Physical AI & Embodied Intelligence', badge: 'Part VIII', target: '#part8', desc: 'Embodied robotics, multimodal sensory grounding, VLA models, sub-10ms control' },
+    { title: 'Physical AI for Humanoid Robotics & Whole-Body Control', badge: 'Part VIII', target: '#part8', desc: '28–50+ DoF, Zero Moment Point (ZMP), 1,000Hz torque control, Sim-to-Real RL in Isaac Gym' },
+    { title: 'Vision-Language-Action (VLA) Models', badge: 'Part VIII', target: '#part8', desc: 'RT-1, RT-2, OpenVLA, Octo: bridging language intent to discrete motor tokens' },
+    { title: 'Robotic Kinematics & Sim-to-Real Lab', badge: 'Part VIII', target: '#part8', desc: 'Forward kinematics, 2x2 Jacobian matrix, Isaac Sim physics transfer' },
+    { title: 'Synthesis: High-Order Value Creation', badge: 'Part IX', target: '#part9', desc: 'Strategic asset paradigm, automated workflows, custom multi-agent systems' },
+    { title: 'Curriculum Self-Assessment Quiz', badge: 'Quiz', target: '#quizSection', desc: '20 academic checkpoint review questions with instant score tracking' },
     { title: 'Authoritative Key Terms Glossary', badge: 'Glossary', target: '#glossarySection', desc: 'Searchable definitions: Backprop, Attention, RLHF, NVLink, PEAS, etc.' },
-    { title: 'Academic Reference Archive & Bibliography', badge: 'Part VIII', target: '#referencesSection', desc: '24 landmark papers: Shannon 1948, Vaswani 2017, Chinchilla 2022, etc.' }
+    { title: 'Academic Reference Archive & Bibliography', badge: 'Part X', target: '#referencesSection', desc: '32 landmark papers: Shannon 1948, Vaswani 2017, Chinchilla 2022, etc.' }
   ];
 
   function openSpotlight() {
