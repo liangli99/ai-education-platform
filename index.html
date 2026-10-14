@@ -203,7 +203,7 @@
               <div class="arc-step-num">10</div>
               <div class="arc-step-text">
                 <strong>Part X • Academic Archive</strong>
-                <span>28 Landmark Papers, Whitepapers &amp; Literature</span>
+                <span>32 Landmark Papers, Whitepapers &amp; Literature</span>
               </div>
             </a>
           </div>
@@ -347,13 +347,13 @@
       </div>
 
       <!-- Interactive Lab 2: Bayes' Theorem & Base-Rate Fallacy -->
-      <div class="lab-container">
+      <div class="lab-container" id="bayesCalculatorLab">
         <div class="lab-header">
           <div class="lab-title-group">
             <div class="lab-icon">🎲</div>
             <div>
               <h3 class="lab-title">Bayes' Theorem & The Base-Rate Fallacy</h3>
-              <p class="lab-subtitle">The cancer screening problem cited in : Why high test accuracy does NOT mean high disease certainty</p>
+              <p class="lab-subtitle">The medical diagnosis problem: Why high test accuracy does NOT mean high disease certainty under rare priors</p>
             </div>
           </div>
         </div>
@@ -669,24 +669,34 @@
         </div>
       </div>
 
-      <!-- 5-Step Learning Loop Stepper -->
-      <div class="card" style="margin-top: 2rem;">
-        <h3 class="card-title">How Networks Learn: The 5-Step Universal Cycle</h3>
-        <p>From a 2-node perceptron to a 70B parameter frontier model, every gradient-based AI system trains on this exact sequence:</p>
-
-        <div class="stepper-nav">
-          <button class="step-btn training-step-btn active">1. Forward Prop</button>
-          <button class="step-btn training-step-btn">2. Loss Calculation</button>
-          <button class="step-btn training-step-btn">3. Backpropagation</button>
-          <button class="step-btn training-step-btn">4. Gradient Descent</button>
-          <button class="step-btn training-step-btn">5. Iteration (Epochs)</button>
+      <!-- Section 2.4: How Deep Networks Learn & Upgrade Weights -->
+      <div id="part2-learning-cycle" style="margin-top: 3.5rem;">
+        <div class="part-sub-header">
+          <h3 class="part-sub-title">
+            <span>How Deep Networks Learn and Upgrade Weights</span>
+          </h3>
+          <span class="sub-badge">Optimization &amp; Weight Updates</span>
         </div>
 
-        <div class="step-content-card">
-          <h4 id="stepCardTitle" style="color:var(--accent-purple); margin-bottom:0.75rem;">Step 1 — Forward Propagation</h4>
-          <p id="stepCardDesc" style="color:#cbd5e1; font-size:0.95rem; line-height:1.6;"></p>
-          <div class="math-banner" id="stepCardMath"></div>
-          <pre style="background:#060a12; border:1px solid var(--border-subtle); padding:1rem; border-radius:6px; font-size:0.8rem; overflow-x:auto; color:#a5f3fc;"><code id="stepCardCode"></code></pre>
+        <!-- 5-Step Learning Loop Stepper -->
+        <div class="card" style="margin-top: 1.5rem;">
+          <h3 class="card-title">The 5-Step Universal Cycle Example: Supervised Learning</h3>
+          <p>From a 2-node perceptron to a 70B parameter frontier model, every gradient-based AI system trains on this exact sequence:</p>
+
+          <div class="stepper-nav">
+            <button class="step-btn training-step-btn active">1. Forward Prop</button>
+            <button class="step-btn training-step-btn">2. Loss Calculation</button>
+            <button class="step-btn training-step-btn">3. Backpropagation</button>
+            <button class="step-btn training-step-btn">4. Gradient Descent</button>
+            <button class="step-btn training-step-btn">5. Iteration (Epochs)</button>
+          </div>
+
+          <div class="step-content-card">
+            <h4 id="stepCardTitle" style="color:var(--accent-purple); margin-bottom:0.75rem;">Step 1 — Forward Propagation</h4>
+            <p id="stepCardDesc" style="color:#cbd5e1; font-size:0.95rem; line-height:1.6;"></p>
+            <div class="math-banner" id="stepCardMath"></div>
+            <pre style="background:#060a12; border:1px solid var(--border-subtle); padding:1rem; border-radius:6px; font-size:0.8rem; overflow-x:auto; color:#a5f3fc;"><code id="stepCardCode"></code></pre>
+          </div>
         </div>
       </div>
       <div class="section-nav-footer">
@@ -731,6 +741,16 @@
         <p class="reading-measure" style="margin-bottom:1.5rem;">
           Before language models, the deep learning revolution was ignited by <strong>Convolutional Neural Networks (CNNs)</strong>. Unlike fully-connected layers that process every pixel independently, CNNs exploit the spatial structure of images through <strong>local receptive fields</strong>, <strong>weight sharing</strong>, and <strong>hierarchical feature abstraction</strong> — learning everything from edges to complex semantic objects.
         </p>
+
+        <!-- Figure 3.1: CNN Vision Processing & Convolution Operation -->
+        <div class="figure-container">
+          <div class="figure-image-wrap">
+            <img src="assets/cnn_vision_processing_modern.jpg" alt="Figure 3.1 • CNN Vision Processing Concept: Convolution Operation & Feature Map Extraction" style="max-height: 440px;">
+          </div>
+          <div class="figure-caption">
+            <strong>Figure 3.1 • CNN Vision Processing &amp; Feature Map Convolution:</strong> A convolutional layer applies learnable kernel filters $W \in \mathbb{R}^{k \times k}$ across the input 2D image $I$, computing spatial cross-correlations $(I * W)[i, j] = \sum_{m=0}^{k-1} \sum_{n=0}^{k-1} I[i+m, j+n] \cdot W[m, n]$ across local receptive fields. Through spatial weight sharing and translation invariance, each filter extracts a specialized 2D <em>feature map</em>, stacking $F$ distinct filters into hierarchical visual primitives that scale from low-level edges to complex semantic structures.
+          </div>
+        </div>
 
         <div class="grid-2" style="margin-bottom: 1.5rem;">
           <div class="card card-accent-top">
@@ -807,13 +827,23 @@
           Feed-forward networks assume input tokens are independent. In language and time-series data, meaning depends on temporal context. Recurrent Neural Networks (RNNs) introduce cyclic feedback connections, carrying hidden state $h_t$ forward through time.
         </p>
 
-        <!-- Figure 3.1: LSTM Architecture -->
+        <!-- Figure 3.2: Vanilla RNN Architecture -->
         <div class="figure-container">
           <div class="figure-image-wrap">
-            <img src="assets/lstm_architecture_modern.jpg" alt="Figure 3.1 • Long Short-Term Memory (LSTM) Architecture Diagram" style="max-height: 440px;">
+            <img src="assets/rnn_architecture_modern.jpg" alt="Figure 3.2 • Vanilla Recurrent Neural Network (RNN) Architecture Diagram" style="max-height: 440px;">
           </div>
           <div class="figure-caption">
-            <strong>Figure 3.1 • Long Short-Term Memory (LSTM) Architecture:</strong> The internal cell architecture preserving long-range gradient highways through the constant cell state carousel ($C_t$), dynamically modulated by the Forget Gate ($f_t$), Input Gate ($i_t$), Candidate State ($\tilde{C}_t$), and Output Gate ($o_t$).
+            <strong>Figure 3.2 • Vanilla Recurrent Neural Network (RNN) Architecture:</strong> The fundamental recurrent cell with cyclic temporal feedback. The prior hidden state $h_{t-1}$ and current input vector $x_t$ are combined through weight matrices $W_{hh}$ and $W_{xh}$, adding bias $b_h$, and mapped through a single non-linear $\tanh$ activation function to compute the next hidden state $h_t = \tanh(W_{hh} h_{t-1} + W_{xh} x_t + b_h)$ and output prediction $y_t$.
+          </div>
+        </div>
+
+        <!-- Figure 3.3: LSTM Architecture -->
+        <div class="figure-container">
+          <div class="figure-image-wrap">
+            <img src="assets/lstm_architecture_modern.jpg" alt="Figure 3.3 • Long Short-Term Memory (LSTM) Architecture Diagram" style="max-height: 440px;">
+          </div>
+          <div class="figure-caption">
+            <strong>Figure 3.3 • Long Short-Term Memory (LSTM) Architecture:</strong> The internal cell architecture preserving long-range gradient highways through the constant cell state carousel ($C_t$), dynamically modulated by the Forget Gate ($f_t$), Input Gate ($i_t$), Candidate State ($\tilde{C}_t$), and Output Gate ($o_t$).
           </div>
         </div>
 
@@ -901,13 +931,13 @@
           Reinforcement Learning (RL) trains agents to maximize cumulative reward through sequential decision-making. Unlike supervised learning, there are no labeled examples — the agent must <strong>explore</strong> the environment, <strong>evaluate</strong> outcomes via a reward signal $r_t$, and <strong>learn a policy</strong> $\pi(a|s)$ that maps states to actions to maximize long-term return $G_t = \sum_{k=0}^{\infty} \gamma^k r_{t+k}$.
         </p>
 
-        <!-- Figure 4.1: DeepMind RL Timeline -->
+        <!-- Figure 4.1: Reinforcement Learning MDP Interaction Loop -->
         <div class="figure-container">
           <div class="figure-image-wrap">
-            <img src="assets/rl_deepmind_timeline_modern.jpg" alt="Figure 4.1 • The DeepMind Reinforcement Learning Revolution Timeline" style="max-height: 440px;">
+            <img src="assets/rl_agent_environment_modern.jpg" alt="Figure 4.1 • Reinforcement Learning (RL) Agent-Environment MDP Interaction Loop" style="max-height: 440px;">
           </div>
           <div class="figure-caption">
-            <strong>Figure 4.1 • DeepMind Reinforcement Learning Revolution:</strong> The architectural trajectory from human-expert imitation in AlphaGo (2016) to zero-knowledge self-play in AlphaZero (2017), learned latent world models in MuZero (2019), and structural biology breakthroughs in AlphaFold (2020s) — all driven by the agent-environment MDP loop.
+            <strong>Figure 4.1 • The Reinforcement Learning (RL) Interaction Loop:</strong> Formalized as a Markov Decision Process (MDP) $(\mathcal{S}, \mathcal{A}, P, R, \gamma)$. The <strong>Agent</strong> executes action $A_t$ according to policy $\pi(a \mid s)$, while the <strong>Environment</strong> transitions state $S_t \to S_{t+1}$ with dynamics $P(s' \mid s,a)$ and returns scalar reward $R_t$. The agent optimizes policy parameters to maximize expected discounted cumulative return $G_t = \sum_{k=0}^{\infty} \gamma^k R_{t+k+1}$ governed by the recursive Bellman optimality equation.
           </div>
         </div>
 
@@ -965,6 +995,16 @@
               <strong style="color:var(--accent-amber); display:block; margin-bottom:0.4rem;">AlphaFold (2020–)</strong>
               <p style="font-size:0.83rem; color:#cbd5e1;">Applied deep network principles to protein structure prediction, solving a 50-year grand challenge in structural biology.</p>
             </div>
+          </div>
+        </div>
+
+        <!-- Figure 4.2: DeepMind RL Timeline -->
+        <div class="figure-container" style="margin-top: 1.5rem;">
+          <div class="figure-image-wrap">
+            <img src="assets/rl_deepmind_timeline_modern.jpg" alt="Figure 4.2 • The DeepMind Reinforcement Learning Revolution Timeline" style="max-height: 440px;">
+          </div>
+          <div class="figure-caption">
+            <strong>Figure 4.2 • DeepMind Reinforcement Learning Revolution:</strong> The architectural trajectory from human-expert imitation in AlphaGo (2016) to zero-knowledge self-play in AlphaZero (2017), learned latent world models in MuZero (2019), and structural biology breakthroughs in AlphaFold (2020s) — all driven by the agent-environment MDP loop.
           </div>
         </div>
       </div>
@@ -2095,7 +2135,7 @@
         <div style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 1rem; margin-bottom: 1.5rem;">
           <div>
             <h3 class="card-title">Searchable Key Terms Glossary</h3>
-            <p style="font-size: 0.88rem; margin: 0;">Authoritative definitions drawn from Appendix A of the  Companion Report</p>
+            <p style="font-size: 0.88rem; margin: 0;">Authoritative definitions drawn from Appendix A of the Companion Report</p>
           </div>
           <input type="text" id="glossarySearchInput" class="glossary-search-input" placeholder="Search terms (e.g. Backprop, Attention, NVLink, PEAS)...">
         </div>
@@ -2849,7 +2889,7 @@
         <div class="footer-brand">
           <h4>The Architecture of Intelligence</h4>
           <p>
-            Interactive Information Engineering Learning Platform. Developed as a companion to the  graduate course on Artificial Intelligence systems.
+            Interactive Information Engineering Learning Platform. Developed as a companion to the graduate course on Artificial Intelligence systems.
           </p>
         </div>
         <div class="footer-col">
@@ -2877,16 +2917,18 @@
           <ul class="footer-links">
             <li><a href="#quizSection">Checkpoint Quiz</a></li>
             <li><a href="#glossarySection">Glossary</a></li>
-            <li><a href="#part1">Bayes Calculator</a></li>
-            <li><a href="#part5">Attention Heatmap</a></li>
+            <li><a href="#bayesCalculatorLab">Bayes Calculator</a></li>
+            <li><a href="#part5-attention">Attention Heatmap</a></li>
           </ul>
         </div>
       </div>
 
       <div class="footer-bottom">
-        <div>Information Engineering — Educational Companion Hub © 2026.</div>
-        <div style="font-family: var(--font-mono); font-size: 0.8rem;">
-          HTML5 • CSS3 Modern Architecture • Vanilla JS • Zero External Dependencies
+        <div>
+          <span>AI Academic Education Instructor: <strong style="color: #ffffff;">Prof. Liang Li</strong></span>
+        </div>
+        <div>
+          <span style="font-weight: 600; letter-spacing: 0.05em;">CONTACT: </span><a href="mailto:liangli@westcliff.edu">liangli@westcliff.edu</a>
         </div>
       </div>
     </div>

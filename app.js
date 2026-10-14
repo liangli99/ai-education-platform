@@ -1834,16 +1834,17 @@ function initSpotlightSearch() {
   if (!modal || !input || !resultsContainer) return;
 
   const searchableIndex = [
-    { title: 'Bayes Theorem & Base-Rate Fallacy', badge: 'Part I', target: '#part1', desc: 'Prior prevalence P(C)=1%, test sensitivity 90%, posterior updating P(C|+)=9.17%' },
+    { title: 'Bayes Theorem & Base-Rate Fallacy Calculator', badge: 'Part I', target: '#bayesCalculatorLab', desc: 'Prior prevalence P(C)=1%, test sensitivity 90%, posterior updating P(C|+)=9.17%' },
     { title: 'Linear & Logistic Regression Lab', badge: 'Part I', target: '#part1', desc: 'Continuous prediction y = wx + b, Sigmoid activation, MSE loss calculation' },
     { title: 'Shannon Information Theory & Entropy', badge: 'Part I', target: '#part1', desc: 'Entropy H(X) = -sum p log2(p), Cross-Entropy loss, KL Divergence' },
     { title: 'Perceptron & XOR Non-Linear Boundary', badge: 'Part II', target: '#part2', desc: 'Single neuron linear limitation, Minsky & Papert proof, 2-layer MLP solution' },
     { title: 'Multi-Layer Perceptron (MLP) Architecture', badge: 'Part II', target: '#part2-mlp', desc: 'Matrix forward prop z^[l] = W^[l]a^[l-1]+b^[l], Universal Approximation Theorem' },
     { title: 'Activation Functions: GELU, ReLU, Sigmoid', badge: 'Part II', target: '#part2', desc: 'Non-linear transformations, derivative curves, vanishing gradient mitigation' },
-    { title: 'The 5-Step Neural Network Learning Loop', badge: 'Part II', target: '#part2', desc: 'Forward prop, Loss, Backpropagation chain rule, Gradient descent, Epochs' },
-    { title: 'Convolutional Networks (CNN) for Vision', badge: 'Part III', target: '#part3-cnn', desc: 'Local receptive fields, weight sharing, feature maps, AlexNet to ResNet' },
-    { title: 'Sequential Memory: RNNs & LSTMs', badge: 'Part III', target: '#part3-rnn-lstm', desc: 'BPTT vanishing gradients, Constant Error Carousel, Forget/Input/Output gates' },
-    { title: 'Principles of Reinforcement Learning', badge: 'Part IV', target: '#part4-rl-principles', desc: 'Markov Decision Processes (MDP), Bellman equations, exploration vs exploitation' },
+    { title: 'How Deep Networks Learn: 5-Step Universal Cycle (Supervised Learning)', badge: 'Part II', target: '#part2-learning-cycle', desc: 'Forward prop, Loss, Backpropagation chain rule, Gradient descent, Epochs' },
+    { title: 'Convolutional Networks (CNN) & Feature Map Extraction', badge: 'Part III', target: '#part3-cnn', desc: 'Local receptive fields, 2D convolution (I * W), spatial weight sharing, feature maps, AlexNet to ResNet' },
+    { title: 'Sequential Memory: RNNs & LSTMs', badge: 'Part III', target: '#part3-rnn-lstm', desc: 'BPTT gradient decay, single-tanh RNN cell, Constant Error Carousel, Forget/Input/Output gates' },
+    { title: 'Reinforcement Learning: Agent-Environment Loop & MDP', badge: 'Part IV', target: '#part4-rl-principles', desc: 'State St, Action At, Reward Rt, Bellman recursive optimality, exploration vs exploitation' },
+    { title: 'DeepMind Landmark RL Revolution: AlphaGo to AlphaFold', badge: 'Part IV', target: '#part4-rl-principles', desc: 'AlphaGo (2016), AlphaZero (2017), MuZero (2019), and AlphaFold (2020s)' },
     { title: 'Supervised Learning vs. Reinforcement Learning', badge: 'Part IV', target: '#part4-sl-vs-rl', desc: 'Direct labels vs delayed scalar rewards, static data vs online interaction' },
     { title: 'Applications of Reinforcement Learning', badge: 'Part IV', target: '#part4-rl-applications', desc: 'AlphaZero, robot dexterity, RLHF alignment, real-time bidding, data center cooling' },
     { title: 'Attention Mechanism & Transformer Model', badge: 'Part V', target: '#part5-attention', desc: 'Query-Key-Value routing, sqrt(d_k) variance scaling, Multi-Head Attention, RoPE' },

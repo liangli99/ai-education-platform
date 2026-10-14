@@ -1370,7 +1370,7 @@ footer.site-footer {
   display: grid;
   grid-template-columns: 1.5fr repeat(3, 1fr);
   gap: 2.5rem;
-  margin-bottom: 3rem;
+  margin-bottom: 2.5rem;
 }
 
 .footer-brand h4 {
@@ -1414,15 +1414,27 @@ footer.site-footer {
 }
 
 .footer-bottom {
-  padding-top: 2rem;
+  padding-top: 1.5rem;
   border-top: 1px solid var(--border-subtle);
   display: flex;
   justify-content: space-between;
   align-items: center;
-  font-size: 0.82rem;
+  font-size: 0.85rem;
   color: #94a3b8;
   flex-wrap: wrap;
   gap: 1rem;
+}
+
+.footer-bottom a {
+  color: var(--accent-cyan);
+  text-decoration: none;
+  font-family: var(--font-mono);
+  transition: color var(--transition-fast);
+}
+
+.footer-bottom a:hover {
+  color: #ffffff;
+  text-decoration: underline;
 }
 
 /* Responsive Breakpoints */
@@ -3121,6 +3133,14 @@ body.light-mode .footer-bottom {
 
 body.light-mode .footer-bottom div {
   color: #475569 !important;
+}
+
+body.light-mode .footer-bottom a {
+  color: #0284c7 !important;
+}
+
+body.light-mode .footer-bottom a:hover {
+  color: #0369a1 !important;
 }
 
 /* Floating Review Dock — Light Mode */
