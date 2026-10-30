@@ -18,12 +18,10 @@ document.addEventListener('DOMContentLoaded', () => {
   initClusterHierarchyLab();
   initAgentLoopSimulator();
   initAgentCaseStudy();
-  initQuizEngine();
   initGlossary();
   initReferencesArchive();
   initSpotlightSearch();
   initLightbox();
-  initFloatingDock();
   initKinematicsLab();
 });
 
@@ -50,6 +48,7 @@ function initThemeToggle() {
     if (icon) icon.textContent = isLight ? '🌙' : '☀️';
     if (label) label.textContent = isLight ? 'Dark' : 'Light';
     localStorage.setItem('ai-edu-theme', isLight ? 'light' : 'dark');
+    window.dispatchEvent(new CustomEvent('themeChanged', { detail: { isLight } }));
   });
 }
 
@@ -90,7 +89,7 @@ function initNavigation() {
 }
 
 /* ==========================================================================
-   2. PART I: REGRESSION LAB (LINEAR & LOGISTIC)
+   2. PART 1: REGRESSION LAB (LINEAR & LOGISTIC)
    ========================================================================== */
 function initRegressionLab() {
   const canvas = document.getElementById('regressionCanvas');
@@ -325,7 +324,7 @@ function initRegressionLab() {
 }
 
 /* ==========================================================================
-   3. PART I: BAYES' THEOREM & BASE-RATE FALLACY SIMULATOR (SECTION 4)
+   3. PART 1: BAYES' THEOREM & BASE-RATE FALLACY SIMULATOR (SECTION 4)
    ========================================================================== */
 function initBayesLab() {
   const priorSlider = document.getElementById('bayesPrior');
@@ -394,7 +393,7 @@ function initBayesLab() {
 }
 
 /* ==========================================================================
-   4. PART I: INFORMATION THEORY EXPLORER (SECTION 5)
+   4. PART 1: INFORMATION THEORY EXPLORER (SECTION 5)
    ========================================================================== */
 function initInfoTheoryLab() {
   const pSlider = document.getElementById('infoProbSlider');
@@ -490,7 +489,7 @@ function initInfoTheoryLab() {
 }
 
 /* ==========================================================================
-   5. PART II: PERCEPTRON & THE XOR PROBLEM LAB (SECTION 7-8)
+   5. PART 2: PERCEPTRON & THE XOR PROBLEM LAB (SECTION 7-8)
    ========================================================================== */
 function initPerceptronXORLab() {
   const canvas = document.getElementById('xorCanvas');
@@ -683,7 +682,7 @@ function initPerceptronXORLab() {
 }
 
 /* ==========================================================================
-   6. PART II: ACTIVATION FUNCTION LAB (SECTION 8)
+   6. PART 2: ACTIVATION FUNCTION LAB (SECTION 8)
    ========================================================================== */
 function initActivationLab() {
   const canvas = document.getElementById('activationCanvas');
@@ -804,7 +803,7 @@ function initActivationLab() {
 }
 
 /* ==========================================================================
-   7. PART II: 5-STEP TRAINING LOOP STEPPER (SECTION 9)
+   7. PART 2: 5-STEP TRAINING LOOP STEPPER (SECTION 9)
    ========================================================================== */
 function initTrainingStepper() {
   const stepBtns = document.querySelectorAll('.training-step-btn');
@@ -873,7 +872,7 @@ function initTrainingStepper() {
 }
 
 /* ==========================================================================
-   8. PART III: ATTENTION REVOLUTION LAB (SECTION 12)
+   8. PART 3: ATTENTION REVOLUTION LAB (SECTION 12)
    ========================================================================== */
 function initAttentionLab() {
   const sentence = ["The", "animal", "didn't", "cross", "the", "street", "because", "it", "was", "too", "tired"];
@@ -909,7 +908,11 @@ function initAttentionLab() {
     [0.01, 0.38, 0.02, 0.02, 0.01, 0.02, 0.04, 0.22, 0.05, 0.15, 0.08]
   ];
 
+  let currentSelectedIdx = 7;
+
   function renderHeatmap(selectedIdx) {
+    if (selectedIdx !== undefined) currentSelectedIdx = selectedIdx;
+    const isLight = document.body.classList.contains('light-mode');
     heatmapGridEl.innerHTML = '';
     heatmapGridEl.style.gridTemplateColumns = `repeat(${sentence.length}, 1fr)`;
 
@@ -918,21 +921,102 @@ function initAttentionLab() {
         const val = attnMatrix[r][c];
         const cell = document.createElement('div');
         cell.className = 'attention-cell';
-        const isSelectedRow = (r === selectedIdx);
+        const isSelectedRow = (r === currentSelectedIdx);
+        const percent = Math.round(val * 100);
 
-        // Color intensity
-        if (isSelectedRow) {
-          const alpha = Math.max(0.1, val);
-          cell.style.backgroundColor = `rgba(56, 189, 248, ${alpha})`;
-          cell.style.color = val > 0.3 ? '#000' : '#fff';
-          cell.style.border = val > 0.4 ? '1px solid #38bdf8' : 'none';
+        if (isLight) {
+          // LIGHT MODE PALETTE - Crisp, high contrast, readable numbers
+          if (isSelectedRow) {
+            if (val >= 0.40) {
+              cell.style.backgroundColor = '#0284c7';
+              cell.style.color = '#ffffff';
+              cell.style.border = '2px solid #0369a1';
+              cell.style.fontWeight = '700';
+            } else if (val >= 0.20) {
+              cell.style.backgroundColor = '#38bdf8';
+              cell.style.color = '#082f49';
+              cell.style.border = '1px solid #0284c7';
+              cell.style.fontWeight = '700';
+            } else if (val >= 0.08) {
+              cell.style.backgroundColor = '#bae6fd';
+              cell.style.color = '#0369a1';
+              cell.style.border = '1px solid #7dd3fc';
+              cell.style.fontWeight = '600';
+            } else {
+              cell.style.backgroundColor = '#f0f9ff';
+              cell.style.color = '#0284c7';
+              cell.style.border = '1px solid #e0f2fe';
+            }
+          } else {
+            // Unselected row: Crisp Purple progression
+            if (val >= 0.40) {
+              cell.style.backgroundColor = '#7c3aed';
+              cell.style.color = '#ffffff';
+              cell.style.border = '2px solid #6d28d9';
+              cell.style.fontWeight = '700';
+            } else if (val >= 0.20) {
+              cell.style.backgroundColor = '#c084fc';
+              cell.style.color = '#3b0764';
+              cell.style.border = '1px solid #a855f7';
+              cell.style.fontWeight = '700';
+            } else if (val >= 0.08) {
+              cell.style.backgroundColor = '#e9d5ff';
+              cell.style.color = '#581c87';
+              cell.style.border = '1px solid #d8b4fe';
+              cell.style.fontWeight = '600';
+            } else {
+              cell.style.backgroundColor = '#ffffff';
+              cell.style.color = '#64748b';
+              cell.style.border = '1px solid #e2e8f0';
+            }
+          }
         } else {
-          const alpha = val * 0.7;
-          cell.style.backgroundColor = `rgba(168, 85, 247, ${alpha})`;
-          cell.style.color = '#fff';
+          // DARK MODE PALETTE - Glowing neon cyber aesthetics
+          if (isSelectedRow) {
+            if (val >= 0.40) {
+              cell.style.backgroundColor = '#0284c7';
+              cell.style.color = '#ffffff';
+              cell.style.border = '2px solid #38bdf8';
+              cell.style.fontWeight = '700';
+            } else if (val >= 0.20) {
+              cell.style.backgroundColor = 'rgba(56, 189, 248, 0.75)';
+              cell.style.color = '#ffffff';
+              cell.style.border = '1px solid #38bdf8';
+              cell.style.fontWeight = '600';
+            } else if (val >= 0.08) {
+              cell.style.backgroundColor = 'rgba(56, 189, 248, 0.35)';
+              cell.style.color = '#e0f2fe';
+              cell.style.border = '1px solid rgba(56, 189, 248, 0.5)';
+            } else {
+              cell.style.backgroundColor = 'rgba(14, 165, 233, 0.12)';
+              cell.style.color = '#7dd3fc';
+              cell.style.border = '1px solid rgba(56, 189, 248, 0.2)';
+            }
+          } else {
+            if (val >= 0.40) {
+              cell.style.backgroundColor = '#9333ea';
+              cell.style.color = '#ffffff';
+              cell.style.border = '2px solid #c084fc';
+              cell.style.fontWeight = '700';
+            } else if (val >= 0.20) {
+              cell.style.backgroundColor = 'rgba(168, 85, 247, 0.7)';
+              cell.style.color = '#ffffff';
+              cell.style.border = '1px solid #a855f7';
+              cell.style.fontWeight = '600';
+            } else if (val >= 0.08) {
+              cell.style.backgroundColor = 'rgba(168, 85, 247, 0.35)';
+              cell.style.color = '#f3e8ff';
+              cell.style.border = '1px solid rgba(168, 85, 247, 0.5)';
+            } else {
+              cell.style.backgroundColor = 'rgba(30, 41, 59, 0.6)';
+              cell.style.color = '#64748b';
+              cell.style.border = '1px solid rgba(255, 255, 255, 0.05)';
+            }
+          }
         }
-        cell.title = `Attn("${sentence[r]}" -> "${sentence[c]}") = ${(val * 100).toFixed(1)}%`;
-        cell.textContent = (val * 100).toFixed(0);
+
+        cell.title = `Query "${sentence[r]}" (row ${r}) attends to Key "${sentence[c]}" (col ${c}): ${percent}%`;
+        cell.textContent = percent;
 
         cell.addEventListener('click', () => {
           selectToken(r);
@@ -945,6 +1029,7 @@ function initAttentionLab() {
 
   function selectToken(idx) {
     const word = sentence[idx];
+    currentSelectedIdx = idx;
     // Update token list buttons
     document.querySelectorAll('.attn-token-pill').forEach((btn, i) => {
       btn.classList.toggle('active', i === idx);
@@ -959,7 +1044,7 @@ function initAttentionLab() {
       .sort((a, b) => b.weight - a.weight);
 
     let detailsHtml = `<strong>Query Token: "${word}"</strong> (Position ${idx})<br>`;
-    detailsHtml += `<span style="color:#94a3b8; font-size:0.85rem;">Highest attention weights computed via \\(\\text{Softmax}(q_{${idx}} K^T / \\sqrt{d_k})\\):</span><ul style="margin-top:0.5rem; padding-left:1.2rem; font-family:var(--font-mono); font-size:0.85rem;">`;
+    detailsHtml += `<span style="font-size:0.85rem; color:var(--text-muted);">Highest attention weights computed via \\(\\text{Softmax}(q_{${idx}} K^T / \\sqrt{d_k})\\):</span><ul style="margin-top:0.5rem; padding-left:1.2rem; font-family:var(--font-mono); font-size:0.85rem;">`;
     ranked.slice(0, 3).forEach(item => {
       detailsHtml += `<li><strong>"${item.tok}"</strong>: ${(item.weight * 100).toFixed(1)}%</li>`;
     });
@@ -985,12 +1070,17 @@ function initAttentionLab() {
     tokenListEl.appendChild(pill);
   });
 
+  // Re-render heatmap on theme toggle
+  window.addEventListener('themeChanged', () => {
+    renderHeatmap(currentSelectedIdx);
+  });
+
   // Default select "it" (index 7)
   selectToken(7);
 }
 
 /* ==========================================================================
-   9. PART IV: SCALING LAWS & CHINCHILLA FRONTIER LAB (SECTION 13)
+   9. PART 4: SCALING LAWS & CHINCHILLA FRONTIER LAB (SECTION 13)
    ========================================================================== */
 function initScalingLab() {
   const paramSlider = document.getElementById('scalingParams');
@@ -1027,7 +1117,7 @@ function initScalingLab() {
 }
 
 /* ==========================================================================
-   10. PART V: COMPUTE SCALE HIERARCHY & BANDWIDTH LAB (SECTION 15-16)
+   10. PART 5: COMPUTE SCALE HIERARCHY & BANDWIDTH LAB (SECTION 15-16)
    ========================================================================== */
 function initClusterHierarchyLab() {
   const pills = document.querySelectorAll('.scale-stage-pill');
@@ -1102,7 +1192,7 @@ function initClusterHierarchyLab() {
 }
 
 /* ==========================================================================
-   11. PART VI: AGENTIC AI LOOP SIMULATOR (SECTION 19)
+   11. PART 6: AGENTIC AI LOOP SIMULATOR (SECTION 19)
    ========================================================================== */
 function initAgentLoopSimulator() {
   const prevBtn = document.getElementById('agentPrevBtn');
@@ -1262,7 +1352,7 @@ function initAgentLoopSimulator() {
 }
 
 /* ==========================================================================
-   11b. PART VII: AGENTIC AI CASE STUDY (SECTION 7.2)
+   11b. PART 7: AGENTIC AI CASE STUDY (SECTION 7.2)
    ========================================================================== */
 const casePhases = [
   {
@@ -1372,7 +1462,7 @@ function initAgentCaseStudy() {
 }
 
 /* ==========================================================================
-   12. PART VII: CHECKPOINT QUIZ ENGINE
+   12. PART 7: CHECKPOINT QUIZ ENGINE
    ========================================================================== */
 function initQuizEngine() {
   const qNumEl = document.getElementById('quizQNum');
@@ -1382,11 +1472,12 @@ function initQuizEngine() {
   const nextBtn = document.getElementById('quizNextBtn');
   const prevBtn = document.getElementById('quizPrevBtn');
   const scoreCounter = document.getElementById('quizScoreCounter');
+  if (!qNumEl || !nextBtn) return;
 
   // 20 comprehensive questions covering all 9 curriculum parts and recent frontiers
   const questions = [
     {
-      part: 'Part I: Mathematical Foundations',
+      part: 'Part 1: Mathematical Foundations',
       text: 'In Bayes\' Theorem, if a disease has a 1% base rate, a test has a 90% sensitivity, and a 9% false positive rate, what is the posterior probability that a patient with a positive test actually has the disease?',
       options: [
         'Approximately 90% because test sensitivity is 90%',
@@ -1398,7 +1489,7 @@ function initQuizEngine() {
       explanation: 'Applying Bayes\' Theorem: P(D|+) = (0.90 * 0.01) / [(0.90 * 0.01) + (0.09 * 0.99)] = 0.009 / (0.009 + 0.0891) ≈ 9.17%. This demonstrates the classic base-rate fallacy where false alarms outnumber true cases.'
     },
     {
-      part: 'Part I: Information Theory',
+      part: 'Part 1: Information Theory',
       text: 'Why is Cross-Entropy Loss the standard training objective for Next-Token Prediction in Large Language Models?',
       options: [
         'It minimizes compute FLOPs on matrix hardware',
@@ -1410,7 +1501,7 @@ function initQuizEngine() {
       explanation: 'Minimizing cross-entropy H(P, Q) is equivalent to minimizing the Kullback-Leibler (KL) divergence D_KL(P || Q) from the model\'s distribution Q to the true empirical distribution P.'
     },
     {
-      part: 'Part II: Deep Neural Networks',
+      part: 'Part 2: Deep Neural Networks',
       text: 'What mathematical limitation of a single-layer perceptron did Minsky & Papert (1969) famously prove?',
       options: [
         'It cannot compute continuous real-valued functions',
@@ -1422,7 +1513,7 @@ function initQuizEngine() {
       explanation: 'A single perceptron forms a linear decision boundary (hyperplane). Because XOR outputs are 1 on opposite diagonals and 0 on the other, no single line can separate them without at least one hidden layer.'
     },
     {
-      part: 'Part II: Backpropagation',
+      part: 'Part 2: Backpropagation',
       text: 'What mathematical rule enables backpropagation to compute gradients through dozens of stacked neural network layers?',
       options: [
         'Taylor Series Expansion',
@@ -1434,7 +1525,7 @@ function initQuizEngine() {
       explanation: 'Backpropagation is a dynamic programming implementation of the multivariate Chain Rule: ∂L/∂W^[l] = (∂L/∂a^[l]) · (∂a^[l]/∂z^[l]) · (∂z^[l]/∂W^[l]).'
     },
     {
-      part: 'Part II: Modern Optimization',
+      part: 'Part 2: Modern Optimization',
       text: 'How does the Adam optimizer improve upon standard Stochastic Gradient Descent (SGD) during deep network training?',
       options: [
         'By computing exact second-order Hessian matrices at each step',
@@ -1446,7 +1537,7 @@ function initQuizEngine() {
       explanation: 'Adam (Kingma & Ba, 2014) maintains moving averages of both past gradients (momentum) and squared gradients (uncentered variance), providing adaptive per-parameter learning rates resilient to sparse or noisy gradients.'
     },
     {
-      part: 'Part III: Computer Vision (CNNs)',
+      part: 'Part 3: Computer Vision (CNNs)',
       text: 'What core inductive biases allow Convolutional Neural Networks (CNNs) to process high-resolution images far more efficiently than dense MLPs?',
       options: [
         'Recurrent temporal cycles and memory gates',
@@ -1458,7 +1549,7 @@ function initQuizEngine() {
       explanation: 'CNNs slide small parameter kernels across spatial dimensions (weight sharing) and restrict connections to local pixel neighborhoods, dramatically reducing parameters from O(H²W²) to small constant kernel sizes while preserving translation equivariance.'
     },
     {
-      part: 'Part III: Sequential Architectures',
+      part: 'Part 3: Sequential Architectures',
       text: 'What structural bottleneck in Recurrent Neural Networks (RNNs) does the Transformer\'s Attention mechanism eliminate?',
       options: [
         'Overfitting on training data',
@@ -1470,7 +1561,7 @@ function initQuizEngine() {
       explanation: 'RNNs require step-by-step computation (h_t depends on h_{t-1}), creating an O(N) sequential bottleneck that cannot be parallelized. Transformers process all tokens simultaneously in O(1) sequential steps.'
     },
     {
-      part: 'Part IV: Reinforcement Learning Fundamentals',
+      part: 'Part 4: Reinforcement Learning Fundamentals',
       text: 'In Reinforcement Learning, what recursive relationship expresses the value of a state as the expected immediate reward plus the discounted future value of downstream states?',
       options: [
         'The Shannon Entropy Equation',
@@ -1482,7 +1573,7 @@ function initQuizEngine() {
       explanation: 'The Bellman Equation V(s) = E[r_t + γ V(s_{t+1}) | s_t = s] provides the foundational recursive framework for value function estimation and dynamic programming in Markov Decision Processes.'
     },
     {
-      part: 'Part IV: Supervised Learning vs. Reinforcement Learning',
+      part: 'Part 4: Supervised Learning vs. Reinforcement Learning',
       text: 'What fundamental challenge distinguishes Reinforcement Learning from standard Supervised Learning?',
       options: [
         'RL models cannot use gradient descent',
@@ -1494,7 +1585,7 @@ function initQuizEngine() {
       explanation: 'In supervised learning, each input has an immediate correct label. In RL, an agent must balance exploration vs. exploitation under delayed, sparse rewards where credit must be assigned across dozens of preceding sequential decisions.'
     },
     {
-      part: 'Part IV: Reinforcement Learning Frontiers',
+      part: 'Part 4: Reinforcement Learning Frontiers',
       text: 'How did AlphaGo Zero (Silver et al., 2017) achieve superhuman performance in the game of Go without human expert training games?',
       options: [
         'By brute-force lookup of all possible 10^170 board configurations',
@@ -1506,7 +1597,7 @@ function initQuizEngine() {
       explanation: 'AlphaGo Zero learned entirely tabula rasa through self-play reinforcement learning, iteratively improving its policy and value networks using MCTS search probabilities without any human games or domain knowledge beyond the rules.'
     },
     {
-      part: 'Part V: Attention Mechanism',
+      part: 'Part 5: Attention Mechanism',
       text: 'In the Scaled Dot-Product Attention formula Attention(Q, K, V) = Softmax(QK^T / √d_k)V, why is the division by √d_k essential?',
       options: [
         'To prevent dot products from growing excessively large, which pushes the softmax into regions with vanishing gradients',
@@ -1518,7 +1609,7 @@ function initQuizEngine() {
       explanation: 'As dimension d_k grows, dot products grow large in magnitude, driving softmax into regions with extremely small gradients. Dividing by √d_k stabilizes the variance to 1.'
     },
     {
-      part: 'Part V: Generative AI & Scaling',
+      part: 'Part 5: Generative AI & Scaling',
       text: 'According to the Chinchilla Scaling Laws (Hoffmann et al., 2022), what is the compute-optimal ratio between training tokens and model parameters?',
       options: [
         '1 token per parameter',
@@ -1530,7 +1621,7 @@ function initQuizEngine() {
       explanation: 'Chinchilla demonstrated that model parameters and training tokens should be scaled in equal proportion: approximately 20 tokens per parameter for compute-optimal training.'
     },
     {
-      part: 'Part V: Post-Training & Alignment',
+      part: 'Part 5: Post-Training & Alignment',
       text: 'What is the "Alignment Tax" frequently observed after Reinforcement Learning from Human Feedback (RLHF)?',
       options: [
         'The cloud billing cost of hiring human annotators',
@@ -1542,7 +1633,7 @@ function initQuizEngine() {
       explanation: 'The Alignment Tax describes the empirical phenomenon where models heavily aligned for conversational safety and deference sometimes show slight performance regressions in raw mathematics, coding, or diverse completions.'
     },
     {
-      part: 'Part VI: Hardware & Clusters',
+      part: 'Part 6: Hardware & Clusters',
       text: 'Why do GPUs dramatically outperform CPUs for training large neural networks?',
       options: [
         'GPUs run at higher single-core clock frequencies (GHz)',
@@ -1554,7 +1645,7 @@ function initQuizEngine() {
       explanation: 'CPUs prioritize low latency for sequential code with complex branching; GPUs prioritize massive throughput for parallel data pipelines with thousands of ALUs executing identical operations simultaneously.'
     },
     {
-      part: 'Part VI: Cluster Networking & NVIDIA H200',
+      part: 'Part 6: Cluster Networking & NVIDIA H200',
       text: 'As an AI compute cluster scales from an 8-GPU server to an entire 3,072-GPU Pod, what happens to inter-GPU communication bandwidth in an NVIDIA H200 cluster?',
       options: [
         'It increases exponentially due to distributed caching',
@@ -1566,7 +1657,7 @@ function initQuizEngine() {
       explanation: 'Physical wiring distance and network switch layers create a steep physical hierarchy: on-package HBM3e runs at 4,800 GB/s (4.8 TB/s), NVLink intra-server at 900 GB/s, and pod/cluster InfiniBand drops to ~50 GB/s — a ~96x total bandwidth collapse.'
     },
     {
-      part: 'Part VII: Agentic AI Systems',
+      part: 'Part 7: Agentic AI Systems',
       text: 'What fundamental capability distinguishes an Agentic AI system from a standard conversational Large Language Model?',
       options: [
         'Agentic AI is always trained on more parameters',
@@ -1578,7 +1669,7 @@ function initQuizEngine() {
       explanation: 'Standard LLMs follow a passive input→output pattern; Agentic AI wraps the model in a closed loop (Plan-Execute-Evaluate-Reflect) equipped with external tools, state memory, and multi-step reasoning.'
     },
     {
-      part: 'Part VII: Russell & Norvig Agency',
+      part: 'Part 7: Russell & Norvig Agency',
       text: 'What does the classical AI acronym PEAS stand for when designing an autonomous agent?',
       options: [
         'Parallel Execution, Allocation, and Storage',
@@ -1590,7 +1681,7 @@ function initQuizEngine() {
       explanation: 'PEAS stands for Performance measure, Environment, Actuators, and Sensors — the foundational framework formulated by Russell & Norvig for rational agent specification.'
     },
     {
-      part: 'Part VII: Production Multi-Agent Swarms',
+      part: 'Part 7: Production Multi-Agent Swarms',
       text: 'In an autonomous enterprise software engineering swarm (such as incident SRE remediation), what role does the Critic / QA Auditor agent perform?',
       options: [
         'It writes the original production application code',
@@ -1602,7 +1693,7 @@ function initQuizEngine() {
       explanation: 'Role specialization separates patch synthesis from rigorous validation: the Critic/QA agent generates adversarial reproduction tests and runs ASAN/Valgrind profiling in sandboxed containers to ensure patches introduce zero regressions.'
     },
     {
-      part: 'Part VIII: Physical AI & Humanoid Robotics',
+      part: 'Part 8: Physical AI & Humanoid Robotics',
       text: 'What dynamic balance criterion must a whole-body bipedal humanoid robot satisfy during dynamic locomotion?',
       options: [
         'The center of mass must remain statically positioned between both feet at all times',
@@ -1614,7 +1705,7 @@ function initQuizEngine() {
       explanation: 'In dynamic bipedal walking, balance requires that the Zero Moment Point (ZMP) remains inside the foot support polygon. Mid-level Model Predictive Control (MPC) plans Center-of-Mass trajectories to enforce this condition at 50–100Hz while 1,000Hz motor controllers track joint torques.'
     },
     {
-      part: 'Part IX: The AI Value Paradigm Shift',
+      part: 'Part 9: The AI Value Paradigm Shift',
       text: 'Why does the curriculum argue that treating generative AI as a "1-to-1 search lookup engine" is an economic mistake?',
       options: [
         'Because search engines require no electricity',
@@ -1720,7 +1811,7 @@ function initQuizEngine() {
 }
 
 /* ==========================================================================
-   13. PART IX / APPENDIX A: SEARCHABLE GLOSSARY
+   13. PART 9 / APPENDIX A: SEARCHABLE GLOSSARY
    ========================================================================== */
 function initGlossary() {
   const input = document.getElementById('glossarySearchInput');
@@ -1761,6 +1852,14 @@ function initGlossary() {
     { term: 'Vision-Language-Action (VLA)', def: 'Multimodal foundation models (e.g. RT-2, OpenVLA) co-trained on web-scale images, text, and robot demonstrations that directly output continuous motor control actions.' },
     { term: 'Model Predictive Control (MPC)', def: 'Dynamic online control optimization solving finite-horizon trajectory problems at 50–100Hz to calculate optimal center-of-mass positions and footstep placements.' },
     { term: 'Zero Moment Point (ZMP)', def: 'The dynamic balance criterion for bipedal humanoid walking: the ground point where horizontal inertial and gravitational moments sum to zero, which must lie within the foot support polygon.' },
+    { term: 'Shannon Entropy', def: 'The foundational mathematical measure of information content and uncertainty H(X) = -∑ p(x) log2 p(x) introduced by Claude Shannon (1948), establishing the formal basis for modern cross-entropy loss.' },
+    { term: 'Bayesian Updating', def: 'The formal calculus of scientific belief revision computing posterior probabilities P(θ|D) ∝ P(D|θ) P(θ) from observed data and prior distributions, governing probabilistic inference.' },
+    { term: 'Polynomial Recurrent Neural Network (PRNN)', def: 'Non-linear recurrent architecture developed by Haykin & Li (1995) introducing polynomial Kronecker feedback with recursive internal states to capture complex non-linear temporal dynamics.' },
+    { term: 'Autonomous Coding Agent', def: 'An autonomous agentic system (e.g. Gemini Antigravity, Claude Code, Cursor) that executes continuous software engineering loops: inspecting filesystems, planning changes, editing code, running test suites, and handling git version control.' },
+    { term: 'SWE-bench Benchmark', def: 'The premier academic evaluation harness (Princeton University) measuring the capability of autonomous coding agents to resolve real-world GitHub issues by editing codebases and passing hidden unit test suites.' },
+    { term: 'Explore-Plan-Implement-Verify', def: 'The disciplined 4-stage engineering protocol for autonomous software development: read-only discovery, architectural planning, surgical implementation, and automated test-driven verification.' },
+    { term: 'Git Worktree Concurrency', def: 'An advanced multi-agent development pattern using isolated git linked worktrees, allowing parallel AI agents to develop, build, and test features concurrently without file locks or branch collisions.' },
+    { term: "Moravec's Paradox", def: 'The historic AI discovery that high-level abstract logic and game-playing require very little compute, whereas basic sensorimotor perception, physical balance, and robotic dexterity require vast compute.' },
     { term: 'Sim-to-Real Transfer', def: 'The process of training reinforcement learning policies inside massive parallel GPU physics simulators (Isaac Sim) with domain randomization, then zero-shot deploying them to physical hardware.' },
     { term: 'High-Order Value Creation', def: 'The strategic shift from commoditized, ephemeral 1-to-1 prompt lookups to compounding enterprise assets: autonomous workflows, multimodal synthesis, and proprietary cognitive systems.' }
   ];
@@ -1797,7 +1896,7 @@ function initGlossary() {
 
 
 /* ==========================================================================
-   14. PART X: ACADEMIC REFERENCES ARCHIVE FILTER
+   14. PART 10: ACADEMIC REFERENCES ARCHIVE FILTER
    ========================================================================== */
 function initReferencesArchive() {
   const filterBtns = document.querySelectorAll('.ref-filter-btn');
@@ -1811,8 +1910,8 @@ function initReferencesArchive() {
 
       const filter = btn.getAttribute('data-filter');
       cards.forEach(card => {
-        const cat = card.getAttribute('data-category');
-        if (filter === 'all' || cat === filter) {
+        const cat = card.getAttribute('data-category') || '';
+        if (filter === 'all' || cat === filter || cat.split(/\s+/).includes(filter)) {
           card.style.display = 'flex';
         } else {
           card.style.display = 'none';
@@ -1834,34 +1933,37 @@ function initSpotlightSearch() {
   if (!modal || !input || !resultsContainer) return;
 
   const searchableIndex = [
-    { title: 'Bayes Theorem & Base-Rate Fallacy Calculator', badge: 'Part I', target: '#bayesCalculatorLab', desc: 'Prior prevalence P(C)=1%, test sensitivity 90%, posterior updating P(C|+)=9.17%' },
-    { title: 'Linear & Logistic Regression Lab', badge: 'Part I', target: '#part1', desc: 'Continuous prediction y = wx + b, Sigmoid activation, MSE loss calculation' },
-    { title: 'Shannon Information Theory & Entropy', badge: 'Part I', target: '#part1', desc: 'Entropy H(X) = -sum p log2(p), Cross-Entropy loss, KL Divergence' },
-    { title: 'Perceptron & XOR Non-Linear Boundary', badge: 'Part II', target: '#part2', desc: 'Single neuron linear limitation, Minsky & Papert proof, 2-layer MLP solution' },
-    { title: 'Multi-Layer Perceptron (MLP) Architecture', badge: 'Part II', target: '#part2-mlp', desc: 'Matrix forward prop z^[l] = W^[l]a^[l-1]+b^[l], Universal Approximation Theorem' },
-    { title: 'Activation Functions: GELU, ReLU, Sigmoid', badge: 'Part II', target: '#part2', desc: 'Non-linear transformations, derivative curves, vanishing gradient mitigation' },
-    { title: 'How Deep Networks Learn: 5-Step Universal Cycle (Supervised Learning)', badge: 'Part II', target: '#part2-learning-cycle', desc: 'Forward prop, Loss, Backpropagation chain rule, Gradient descent, Epochs' },
-    { title: 'Convolutional Networks (CNN) & Feature Map Extraction', badge: 'Part III', target: '#part3-cnn', desc: 'Local receptive fields, 2D convolution (I * W), spatial weight sharing, feature maps, AlexNet to ResNet' },
-    { title: 'Sequential Memory: RNNs & LSTMs', badge: 'Part III', target: '#part3-rnn-lstm', desc: 'BPTT gradient decay, single-tanh RNN cell, Constant Error Carousel, Forget/Input/Output gates' },
-    { title: 'Reinforcement Learning: Agent-Environment Loop & MDP', badge: 'Part IV', target: '#part4-rl-principles', desc: 'State St, Action At, Reward Rt, Bellman recursive optimality, exploration vs exploitation' },
-    { title: 'DeepMind Landmark RL Revolution: AlphaGo to AlphaFold', badge: 'Part IV', target: '#part4-rl-principles', desc: 'AlphaGo (2016), AlphaZero (2017), MuZero (2019), and AlphaFold (2020s)' },
-    { title: 'Supervised Learning vs. Reinforcement Learning', badge: 'Part IV', target: '#part4-sl-vs-rl', desc: 'Direct labels vs delayed scalar rewards, static data vs online interaction' },
-    { title: 'Applications of Reinforcement Learning', badge: 'Part IV', target: '#part4-rl-applications', desc: 'AlphaZero, robot dexterity, RLHF alignment, real-time bidding, data center cooling' },
-    { title: 'Attention Mechanism & Transformer Model', badge: 'Part V', target: '#part5-attention', desc: 'Query-Key-Value routing, sqrt(d_k) variance scaling, Multi-Head Attention, RoPE' },
-    { title: 'Chinchilla Empirical Scaling Laws', badge: 'Part V', target: '#part5-scaling', desc: 'Compute-optimal tokens D ≈ 20*N, 6ND FLOPs, frontier 18T tokens scale' },
-    { title: 'NVIDIA H200 GPU Microarchitecture', badge: 'Part VI', target: '#part6', desc: 'Streaming Multiprocessors, 4th-Gen FP8 Tensor Cores, 141GB HBM3e @ 4,800 GB/s' },
-    { title: 'H200 AI Supercluster Scale: Chip to Data Center', badge: 'Part VI', target: '#part6', desc: '5-tier hierarchy, 24,576 H200 GPUs, 24+ ExaFLOPs, ~96x bandwidth drop waterfall' },
-    { title: 'Autonomous Agentic AI & The Agent Loop', badge: 'Part VII', target: '#part7', desc: 'Plan -> Execute -> Evaluate -> Reflect feedback engine, tool sandbox' },
-    { title: 'Agentic AI Production Case Study: Enterprise SRE', badge: 'Part VII', target: '#agentCaseStudyContainer', desc: 'Multi-agent software engineering & incident remediation: Orchestrator, Investigator, Synthesizer, QA Critic' },
-    { title: 'PEAS Rational Agency Framework', badge: 'Part VII', target: '#part7', desc: 'Performance measure, Environment, Actuators, Sensors (Russell & Norvig)' },
-    { title: 'Physical AI & Embodied Intelligence', badge: 'Part VIII', target: '#part8', desc: 'Embodied robotics, multimodal sensory grounding, VLA models, sub-10ms control' },
-    { title: 'Physical AI for Humanoid Robotics & Whole-Body Control', badge: 'Part VIII', target: '#part8', desc: '28–50+ DoF, Zero Moment Point (ZMP), 1,000Hz torque control, Sim-to-Real RL in Isaac Gym' },
-    { title: 'Vision-Language-Action (VLA) Models', badge: 'Part VIII', target: '#part8', desc: 'RT-1, RT-2, OpenVLA, Octo: bridging language intent to discrete motor tokens' },
-    { title: 'Robotic Kinematics & Sim-to-Real Lab', badge: 'Part VIII', target: '#part8', desc: 'Forward kinematics, 2x2 Jacobian matrix, Isaac Sim physics transfer' },
-    { title: 'Synthesis: High-Order Value Creation', badge: 'Part IX', target: '#part9', desc: 'Strategic asset paradigm, automated workflows, custom multi-agent systems' },
-    { title: 'Curriculum Self-Assessment Quiz', badge: 'Quiz', target: '#quizSection', desc: '20 academic checkpoint review questions with instant score tracking' },
+    { title: 'Bayes Theorem & Base-Rate Fallacy Calculator', badge: 'Part 1', target: '#bayesCalculatorLab', desc: 'Prior prevalence P(C)=1%, test sensitivity 90%, posterior updating P(C|+)=9.17%' },
+    { title: 'Linear & Logistic Regression Lab', badge: 'Part 1', target: '#part1', desc: 'Continuous prediction y = wx + b, Sigmoid activation, MSE loss calculation' },
+    { title: 'Shannon Information Theory & Entropy', badge: 'Part 1', target: '#part1', desc: 'Entropy H(X) = -sum p log2(p), Cross-Entropy loss, KL Divergence' },
+    { title: 'Perceptron & XOR Non-Linear Boundary', badge: 'Part 2', target: '#part2', desc: 'Single neuron linear limitation, Minsky & Papert proof, 2-layer MLP solution' },
+    { title: 'Multi-Layer Perceptron (MLP) Architecture', badge: 'Part 2', target: '#part2-mlp', desc: 'Matrix forward prop z^[l] = W^[l]a^[l-1]+b^[l], Universal Approximation Theorem' },
+    { title: 'Activation Functions: GELU, ReLU, Sigmoid', badge: 'Part 2', target: '#part2', desc: 'Non-linear transformations, derivative curves, vanishing gradient mitigation' },
+    { title: 'How Deep Networks Learn: 5-Step Universal Cycle (Supervised Learning)', badge: 'Part 2', target: '#part2-learning-cycle', desc: 'Forward prop, Loss, Backpropagation chain rule, Gradient descent, Epochs' },
+    { title: 'Convolutional Networks (CNN) & Feature Map Extraction', badge: 'Part 3', target: '#part3-cnn', desc: 'Local receptive fields, 2D convolution (I * W), spatial weight sharing, feature maps, AlexNet to ResNet' },
+    { title: 'Sequential Memory: RNNs & LSTMs', badge: 'Part 3', target: '#part3-rnn-lstm', desc: 'BPTT gradient decay, single-tanh RNN cell, Constant Error Carousel, Forget/Input/Output gates' },
+    { title: 'Reinforcement Learning: Agent-Environment Loop & MDP', badge: 'Part 4', target: '#part4-rl-principles', desc: 'State St, Action At, Reward Rt, Bellman recursive optimality, exploration vs exploitation' },
+    { title: 'DeepMind Landmark RL Revolution: AlphaGo to AlphaFold', badge: 'Part 4', target: '#part4-rl-principles', desc: 'AlphaGo (2016), AlphaZero (2017), MuZero (2019), and AlphaFold (2020s)' },
+    { title: 'Supervised Learning vs. Reinforcement Learning', badge: 'Part 4', target: '#part4-sl-vs-rl', desc: 'Direct labels vs delayed scalar rewards, static data vs online interaction' },
+    { title: 'Applications of Reinforcement Learning', badge: 'Part 4', target: '#part4-rl-applications', desc: 'AlphaZero, robot dexterity, RLHF alignment, real-time bidding, data center cooling' },
+    { title: 'Attention Mechanism & Transformer Model', badge: 'Part 5', target: '#part5-attention', desc: 'Query-Key-Value routing, sqrt(d_k) variance scaling, Multi-Head Attention, RoPE' },
+    { title: 'Chinchilla Empirical Scaling Laws', badge: 'Part 5', target: '#part5-scaling', desc: 'Compute-optimal tokens D ≈ 20*N, 6ND FLOPs, frontier 18T tokens scale' },
+    { title: 'NVIDIA H200 GPU Microarchitecture', badge: 'Part 6', target: '#part6', desc: 'Streaming Multiprocessors, 4th-Gen FP8 Tensor Cores, 141GB HBM3e @ 4,800 GB/s' },
+    { title: 'H200 AI Supercluster Scale: Chip to Data Center', badge: 'Part 6', target: '#part6', desc: '5-tier hierarchy, 24,576 H200 GPUs, 24+ ExaFLOPs, ~96x bandwidth drop waterfall' },
+    { title: 'Autonomous Agentic AI & The Agent Loop', badge: 'Part 7', target: '#part7', desc: 'Plan -> Execute -> Evaluate -> Reflect feedback engine, tool sandbox' },
+    { title: 'Agentic AI Production Case Study: Enterprise SRE', badge: 'Part 7', target: '#agentCaseStudyContainer', desc: 'Multi-agent software engineering & incident remediation: Orchestrator, Investigator, Synthesizer, QA Critic' },
+    { title: 'PEAS Rational Agency Framework', badge: 'Part 7', target: '#part7', desc: 'Performance measure, Environment, Actuators, Sensors (Russell & Norvig)' },
+    { title: 'Coding Agents & Autonomous Software Engineering', badge: 'Part 8', target: '#part8', desc: 'Four generations of AI programming, tool invocation loops, and background agents' },
+    { title: 'Gemini 2.5/3 Agentic Engine & Antigravity Tri-Surface Architecture', badge: 'Part 8', target: '#part8-gemini', desc: '1M+ token context, JSON Schema native tool calling, Editor-Terminal-Browser execution' },
+    { title: 'Disciplined 4-Stage Workflow: Explore, Plan, Implement, Verify', badge: 'Part 8', target: '#part8-workflow', desc: 'Risk minimization formula, TDD fail-first reproduction, zero placeholders, and automated quality gates' },
+    { title: 'Layered Safety Controls & Execution Sandboxing', badge: 'Part 8', target: '#part8-safety', desc: 'Approval gates, allow/deny lists, filesystem path confinement, snapshot rollbacks, git net' },
+    { title: 'Parallel Agents in Git Worktrees', badge: 'Part 8', target: '#part8-worktrees', desc: 'Multi-agent horizontal scaling without file lock conflicts or branch collisions' },
+    { title: 'Physical AI & Embodied Intelligence', badge: 'Part 9', target: '#part9', desc: 'Embodied robotics, multimodal sensory grounding, VLA models, sub-10ms control' },
+    { title: 'Physical AI for Humanoid Robotics & Whole-Body Control', badge: 'Part 9', target: '#part9', desc: '28–50+ DoF, Zero Moment Point (ZMP), 1,000Hz torque control, Sim-to-Real RL in Isaac Gym' },
+    { title: 'Vision-Language-Action (VLA) Models', badge: 'Part 9', target: '#part9', desc: 'RT-1, RT-2, OpenVLA, Octo: bridging language intent to discrete motor tokens' },
+    { title: 'Robotic Kinematics & Sim-to-Real Lab', badge: 'Part 9', target: '#part9', desc: 'Forward kinematics, 2x2 Jacobian matrix, Isaac Sim physics transfer' },
     { title: 'Authoritative Key Terms Glossary', badge: 'Glossary', target: '#glossarySection', desc: 'Searchable definitions: Backprop, Attention, RLHF, NVLink, PEAS, etc.' },
-    { title: 'Academic Reference Archive & Bibliography', badge: 'Part X', target: '#referencesSection', desc: '32 landmark papers: Shannon 1948, Vaswani 2017, Chinchilla 2022, etc.' }
+    { title: 'Academic Reference Archive & Bibliography', badge: 'Part 10', target: '#referencesSection', desc: '32 landmark papers: Shannon 1948, Vaswani 2017, Chinchilla 2022, etc.' }
   ];
 
   function openSpotlight() {
@@ -1975,43 +2077,10 @@ function initLightbox() {
   });
 }
 
-/* ==========================================================================
-   17. FLOATING QUICK-REVIEW DOCK
-   ========================================================================== */
-function initFloatingDock() {
-  const dock = document.getElementById('floatingReviewDock');
-  const jumpBtn = document.getElementById('dockJumpBtn');
-  const scrollTopBtn = document.getElementById('dockScrollTopBtn');
-  if (!dock) return;
-
-  if (jumpBtn) {
-    jumpBtn.addEventListener('click', () => {
-      const spotlightTrigger = document.getElementById('spotlightTriggerBtn');
-      if (spotlightTrigger) spotlightTrigger.click();
-    });
-  }
-
-  if (scrollTopBtn) {
-    scrollTopBtn.addEventListener('click', () => {
-      window.scrollTo({ top: 0, behavior: 'smooth' });
-    });
-  }
-
-  // Show dock smoothly on scroll
-  window.addEventListener('scroll', () => {
-    const scrolled = window.scrollY || document.documentElement.scrollTop;
-    if (scrolled > 300) {
-      dock.style.opacity = '1';
-      dock.style.pointerEvents = 'auto';
-    } else {
-      dock.style.opacity = '0.4';
-    }
-  });
-}
 
 
 /* ==========================================================================
-   18. PART VII: PHYSICAL AI ROBOTIC ARM KINEMATICS LAB
+   18. PART 7: PHYSICAL AI ROBOTIC ARM KINEMATICS LAB
    ========================================================================== */
 function initKinematicsLab() {
   const canvas = document.getElementById('kinematicsCanvas');
@@ -2020,6 +2089,8 @@ function initKinematicsLab() {
 
   const theta1Slider = document.getElementById('armTheta1');
   const theta2Slider = document.getElementById('armTheta2');
+  if (!theta1Slider || !theta2Slider) return;
+
   const theta1Val = document.getElementById('armTheta1Val');
   const theta2Val = document.getElementById('armTheta2Val');
   const endXVal = document.getElementById('armEndXVal');
@@ -2209,3 +2280,762 @@ function initMathRendering() {
   window.addEventListener('load', applyKatex);
 }
 
+
+/* ==========================================================================
+   20. SPOTLIGHT SEARCH, LIGHTBOX MODAL, FLOATING DOCK & SIMULATORS
+   ========================================================================== */
+
+const spotlightSearchDatabase = [
+  { title: "Five Disciplinary Pillars", category: "Part 1", target: "#part1", desc: "Computer Science, Mathematics, Neuroscience, Cognitive Psychology, Ethics." },
+  { title: "Three Logics of Reasoning", category: "Part 1", target: "#part1", desc: "First Principles (deduction), Deep Learning (induction), Analogy (embeddings)." },
+  { title: "Regression Analysis Lab", category: "Part 1", target: "#part1", desc: "Linear MSE optimization and Logistic Sigmoid probability mapping." },
+  { title: "Bayes' Theorem & Base-Rate Fallacy", category: "Part 1", target: "#bayesCalculatorLab", desc: "Medical diagnostic certainty under low disease prevalence." },
+  { title: "Shannon Information Entropy", category: "Part 1", target: "#part1", desc: "H(X) bits measurement, Cross-Entropy Loss, and KL Divergence." },
+  { title: "Modern Perceptron Architecture", category: "Part 2", target: "#part2", desc: "Inputs, weighted synapses, bias threshold, and activation function." },
+  { title: "XOR Linear Inseparability", category: "Part 2", target: "#part2", desc: "Minsky & Papert 1969 proof and hidden non-linear representations." },
+  { title: "Non-Linear Activation Functions", category: "Part 2", target: "#part2", desc: "GELU, ReLU, Sigmoid, Tanh; vanishing gradients in deep networks." },
+  { title: "Multi-Layer Perceptrons (MLPs)", category: "Part 2", target: "#part2-mlp", desc: "Matrix projection z = Wa + b and Cybenko Universal Approximation." },
+  { title: "5-Step Learning Loop Stepper", category: "Part 2", target: "#part2-learning-cycle", desc: "Forward Prop, Loss, Backpropagation, Gradient Descent, Epochs." },
+  { title: "CNN Vision Processing", category: "Part 3", target: "#part3-cnn", desc: "2D spatial convolution (I * W), local receptive fields, and weight sharing." },
+  { title: "Vanilla RNN & Sequential Memory", category: "Part 3", target: "#part3-rnn", desc: "Hidden recurrence state ht = tanh(Whh*h + Wxh*x) and BPTT decay." },
+  { title: "LSTM Gated Memory Highways", category: "Part 3", target: "#part3-lstm", desc: "Constant Error Carousel governed by Forget, Input, and Output gates." },
+  { title: "Reinforcement Learning & MDP", category: "Part 4", target: "#part4", desc: "States, actions, rewards, transition probabilities, and discount factor gamma." },
+  { title: "Bellman Optimality Equations", category: "Part 4", target: "#part4", desc: "Dynamic programming backup for state-value V*(s) and action-value Q*(s, a)." },
+  { title: "Interactive Q-Learning Gridworld", category: "Part 4", target: "#part4-qgrid", desc: "Live 4x4 simulation exploring exploitation vs. exploration (epsilon-greedy)." },
+  { title: "AlphaGo & RLHF Alignment", category: "Part 4", target: "#part4-alphago", desc: "Policy/value networks (Silver 2016) and 3-stage InstructGPT alignment." },
+  { title: "Self-Attention Mechanism", category: "Part 5", target: "#part5-attention", desc: "Query, Key, Value mapping and Scaled Dot-Product Attention Softmax(QK^T / sqrt(dk))V." },
+  { title: "Transformer Architecture", category: "Part 5", target: "#part5", desc: "Multi-Head Attention, Feed-Forward sublayers, and Layer Normalization." },
+  { title: "Chinchilla Scaling Laws", category: "Part 5", target: "#part5-chinchilla", desc: "Hoffmann et al. (2022) compute-optimal parameter-to-token ratio (N ~ D ~ C^0.50)." },
+  { title: "Memory Wall & HBM Latency Lab", category: "Part 5", target: "#part5-memwall", desc: "Memory bandwidth bottleneck during autoregressive token generation." },
+  { title: "LoRA Parameter-Efficient Fine-Tuning", category: "Part 5", target: "#part5-lora", desc: "Low-rank weight matrix decomposition W = W0 + (alpha/r)*B*A." },
+  { title: "NVIDIA H200 SM Architecture", category: "Part 6", target: "#part6", desc: "Streaming Multiprocessors, 4th-Gen Tensor Cores, FP8 acceleration." },
+  { title: "H200 AI Supercluster Hierarchy", category: "Part 6", target: "#part6", desc: "NVLink 900 GB/s to 1.8 TB/s, NVSwitch nodes, and 24k GPU scaling." },
+  { title: "Autonomous Agent Architecture", category: "Part 7", target: "#part7", desc: "Perception, working memory, reasoning engine, and external tool actuation." },
+  { title: "Model Context Protocol (MCP)", category: "Part 7", target: "#part7-mcp", desc: "Open standard for connecting LLMs to local files, databases, and enterprise APIs." },
+  { title: "Compounding Error Decay Calculator", category: "Part 7", target: "#part7-comperr", desc: "End-to-end task reliability degradation P = p^n across multi-step execution." },
+  { title: "Explore-Plan-Implement-Verify Workflow", category: "Part 7", target: "#part7-coding", desc: "Production coding agent methodology using Claude Code, Cursor, and Antigravity." },
+  { title: "Production Prompt Pattern Library", category: "Part 7", target: "#part7-prompts", desc: "Copy-paste production system prompts for senior engineering tasks." },
+  { title: "Coding Agents & Developer Tools", category: "Part 8", target: "#part8", desc: "Autonomous coding loops, tool primitives, and background software agents." },
+  { title: "Google Gemini & Antigravity Tri-Surface Engine", category: "Part 8", target: "#part8-gemini", desc: "1M+ context window, native tool calling, and Editor-Terminal-Browser execution." },
+  { title: "Disciplined Workflow Simulator (Lab 13)", category: "Part 8", target: "#lab-coding-workflow", desc: "Interactive 4-stage engineering lifecycle: Explore, Plan, Implement, Verify." },
+  { title: "Coding Agents Comparison Matrix (Lab 14)", category: "Part 8", target: "#lab-tools-matrix", desc: "Compare Gemini, Claude Code, Cursor, Copilot, and Codex side-by-side." },
+  { title: "Production Prompt Pattern Library", category: "Part 8", target: "#part8-prompts", desc: "One-click copyable prompts for architecture discovery, TDD, and surgical bug fixing." },
+  { title: "Physical AI & Embodiment", category: "Part 9", target: "#part9", desc: "Sensory grounding, actuator dynamics, and material world constraints." },
+  { title: "Two-Link Kinematics & Safety Lab", category: "Part 9", target: "#part9", desc: "Forward kinematics equations, Jacobian matrix, and workspace reachability." },
+  { title: "PID Closed-Loop Feedback Controller", category: "Part 9", target: "#part9", desc: "Proportional, Integral, and Derivative control simulator for robotic joints." },
+  { title: "Vision-Language-Action (VLA) Models", category: "Part 9", target: "#part9", desc: "RT-2, OpenVLA, and multimodal policies predicting robot action tokens." },
+  { title: "Comprehensive Academic Glossary", category: "Glossary", target: "#glossarySection", desc: "Searchable dictionary of technical terms across all 9 curriculum parts." },
+  { title: "Academic Reference Archive", category: "Part 10", target: "#referencesSection", desc: "32 landmark papers and literature from Shannon (1948) to modern physical AI." }
+];
+
+
+function initSpotlightSearch() {
+  const modal = document.getElementById('spotlightModal');
+  const input = document.getElementById('spotlightSearchInput');
+  const results = document.getElementById('spotlightResultsContainer');
+  const trigger = document.getElementById('spotlightTriggerBtn');
+  if (!modal || !input) return;
+
+  function openSpotlight() {
+    modal.classList.add('active');
+    input.value = '';
+    renderResults(spotlightSearchDatabase.slice(0, 10));
+    setTimeout(() => input.focus(), 60);
+  }
+
+  function closeSpotlight() {
+    modal.classList.remove('active');
+  }
+
+  if (trigger) trigger.addEventListener('click', openSpotlight);
+
+  modal.addEventListener('click', (e) => {
+    if (e.target.id === 'spotlightModal') closeSpotlight();
+  });
+
+  const kbdClose = modal.querySelector('.spotlight-kbd');
+  if (kbdClose) kbdClose.addEventListener('click', closeSpotlight);
+
+  document.addEventListener('keydown', (e) => {
+    if ((e.ctrlKey || e.metaKey) && e.key.toLowerCase() === 'k') {
+      e.preventDefault();
+      if (modal.classList.contains('active')) closeSpotlight();
+      else openSpotlight();
+    } else if (e.key === 'Escape' && modal.classList.contains('active')) {
+      closeSpotlight();
+    }
+  });
+
+  input.addEventListener('input', () => {
+    const q = input.value.trim().toLowerCase();
+    if (!q) {
+      renderResults(spotlightSearchDatabase.slice(0, 10));
+      return;
+    }
+    const matches = spotlightSearchDatabase.filter(item => 
+      item.title.toLowerCase().includes(q) ||
+      item.desc.toLowerCase().includes(q) ||
+      item.category.toLowerCase().includes(q)
+    );
+    renderResults(matches.slice(0, 12));
+  });
+
+  function renderResults(items) {
+    if (!results) return;
+    if (items.length === 0) {
+      results.innerHTML = '<div style="padding:1.5rem; text-align:center; color:var(--text-muted); font-size:0.9rem;">No matching curriculum modules, formulas, or figures found.</div>';
+      return;
+    }
+    results.innerHTML = items.map(item => `
+      <div class="spotlight-item" onclick="jumpToSpotlightTarget('${item.target}')">
+        <div style="display:flex; justify-content:space-between; align-items:center;">
+          <span style="font-weight:600; color:#fff; font-size:0.95rem;">${item.title}</span>
+          <span class="spotlight-cat-badge">${item.category}</span>
+        </div>
+        <p style="font-size:0.82rem; color:#94a3b8; margin:0.3rem 0 0 0; line-height:1.4;">${item.desc}</p>
+      </div>
+    `).join('');
+  }
+
+  window.jumpToSpotlightTarget = function(target) {
+    closeSpotlight();
+    const el = document.querySelector(target);
+    if (el) {
+      el.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      el.classList.add('highlight-flash');
+      setTimeout(() => el.classList.remove('highlight-flash'), 2500);
+    }
+  };
+}
+
+function initLightbox() {
+  const modal = document.getElementById('lightboxModal');
+  const img = document.getElementById('lightboxImg');
+  const cap = document.getElementById('lightboxCaption');
+  const closeBtn = document.getElementById('lightboxCloseBtn');
+  if (!modal || !img) return;
+
+  function openModal(src, captionHtml) {
+    img.src = src;
+    img.alt = captionHtml ? captionHtml.replace(/<[^>]*>/g, '') : 'Diagram';
+    if (cap) cap.innerHTML = captionHtml || '';
+    modal.classList.add('active');
+    document.body.style.overflow = 'hidden';
+  }
+
+  function closeModal() {
+    modal.classList.remove('active');
+    document.body.style.overflow = '';
+  }
+
+  document.querySelectorAll('.figure-container').forEach(fig => {
+    fig.style.cursor = 'zoom-in';
+    fig.addEventListener('click', (e) => {
+      if (e.target.tagName === 'A') return;
+      const figImg = fig.querySelector('img');
+      const figCap = fig.querySelector('.figure-caption');
+      if (figImg) {
+        openModal(figImg.src, figCap ? figCap.innerHTML : '');
+      }
+    });
+  });
+
+  window.openLightbox = function(src, caption) {
+    openModal(src, caption);
+  };
+
+  window.closeLightbox = closeModal;
+
+  if (closeBtn) closeBtn.addEventListener('click', closeModal);
+  modal.addEventListener('click', (e) => {
+    if (e.target.id === 'lightboxModal' || e.target.classList.contains('lightbox-content') || e.target.id === 'lightboxCloseBtn') {
+      closeModal();
+    }
+  });
+
+  document.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape' && modal.classList.contains('active')) {
+      closeModal();
+    }
+  });
+}
+
+
+window.copyPrompt = function(btn) {
+  const card = btn.closest('.prompt-card') || btn.parentElement;
+  const code = card ? card.querySelector('.prompt-code') : null;
+  if (!code) return;
+  const text = code.innerText.trim();
+
+  navigator.clipboard.writeText(text).then(() => {
+    const orig = btn.innerText;
+    btn.innerText = '✓ Copied!';
+    btn.style.borderColor = '#34d399';
+    btn.style.color = '#34d399';
+    setTimeout(() => {
+      btn.innerText = orig;
+      btn.style.borderColor = '';
+      btn.style.color = '';
+    }, 2000);
+  }).catch(() => {
+    const ta = document.createElement('textarea');
+    ta.value = text;
+    document.body.appendChild(ta);
+    ta.select();
+    document.execCommand('copy');
+    document.body.removeChild(ta);
+    btn.innerText = '✓ Copied!';
+    setTimeout(() => { btn.innerText = 'Copy Clean Prompt'; }, 2000);
+  });
+};
+
+/* Q-Learning Gridworld Simulation (Part 4 Upgrade) */
+function initQLearningGridworld() {
+  const canvas = document.getElementById('gridworldCanvas');
+  if (!canvas) return;
+  const ctx = canvas.getContext('2d');
+
+  const stepBtn = document.getElementById('qStepBtn');
+  const runBtn = document.getElementById('qRunBtn');
+  const resetBtn = document.getElementById('qResetBtn');
+  const epEl = document.getElementById('qEpisodeVal');
+  const rewEl = document.getElementById('qRewardVal');
+
+  const gridSize = 4;
+  const cellSize = canvas.width / gridSize;
+  const goal = { x: 3, y: 3 };
+  const obstacles = [{ x: 1, y: 1 }, { x: 2, y: 1 }, { x: 1, y: 2 }];
+
+  let agent = { x: 0, y: 0 };
+  let episode = 1;
+  let totalReward = 0;
+  let isRunning = false;
+  let runInterval = null;
+
+  // Initialize Q-table: state (x, y) -> 4 actions [Up, Right, Down, Left]
+  const Q = {};
+  for (let x = 0; x < gridSize; x++) {
+    for (let y = 0; y < gridSize; y++) {
+      Q[`${x},${y}`] = [0, 0, 0, 0];
+    }
+  }
+
+  function isObstacle(x, y) {
+    return obstacles.some(o => o.x === x && o.y === y);
+  }
+
+  function step() {
+    const stateKey = `${agent.x},${agent.y}`;
+    const qValues = Q[stateKey];
+
+    // Epsilon-greedy action selection
+    let action;
+    const eps = Math.max(0.05, 0.5 - episode * 0.01);
+    if (Math.random() < eps) {
+      action = Math.floor(Math.random() * 4);
+    } else {
+      let maxQ = -Infinity;
+      let best = 0;
+      for (let a = 0; a < 4; a++) {
+        if (qValues[a] > maxQ) { maxQ = qValues[a]; best = a; }
+      }
+      action = best;
+    }
+
+    // Dynamics: 0=Up, 1=Right, 2=Down, 3=Left
+    let nx = agent.x;
+    let ny = agent.y;
+    if (action === 0) ny = Math.max(0, ny - 1);
+    else if (action === 1) nx = Math.min(gridSize - 1, nx + 1);
+    else if (action === 2) ny = Math.min(gridSize - 1, ny + 1);
+    else if (action === 3) nx = Math.max(0, nx - 1);
+
+    let reward = -0.1;
+    let terminal = false;
+
+    if (nx === goal.x && ny === goal.y) {
+      reward = 10.0;
+      terminal = true;
+    } else if (isObstacle(nx, ny)) {
+      reward = -5.0;
+      nx = agent.x;
+      ny = agent.y;
+    }
+
+    // Bellman update: Q(s, a) <- Q(s, a) + alpha * [r + gamma * max Q(s', a') - Q(s, a)]
+    const nextStateKey = `${nx},${ny}`;
+    const nextMaxQ = Math.max(...Q[nextStateKey]);
+    const alpha = 0.2;
+    const gamma = 0.9;
+    Q[stateKey][action] += alpha * (reward + gamma * nextMaxQ - Q[stateKey][action]);
+
+    agent.x = nx;
+    agent.y = ny;
+    totalReward += reward;
+
+    if (terminal) {
+      episode++;
+      agent = { x: 0, y: 0 };
+    }
+
+    if (epEl) epEl.textContent = episode;
+    if (rewEl) rewEl.textContent = totalReward.toFixed(1);
+    renderGrid();
+  }
+
+  function renderGrid() {
+    ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+    for (let x = 0; x < gridSize; x++) {
+      for (let y = 0; y < gridSize; y++) {
+        const px = x * cellSize;
+        const py = y * cellSize;
+
+        if (x === goal.x && y === goal.y) {
+          ctx.fillStyle = 'rgba(52, 211, 153, 0.35)';
+        } else if (isObstacle(x, y)) {
+          ctx.fillStyle = 'rgba(239, 68, 68, 0.35)';
+        } else {
+          ctx.fillStyle = (x + y) % 2 === 0 ? '#0f172a' : '#131b2e';
+        }
+        ctx.fillRect(px, py, cellSize, cellSize);
+
+        ctx.strokeStyle = 'rgba(255, 255, 255, 0.08)';
+        ctx.lineWidth = 1;
+        ctx.strokeRect(px, py, cellSize, cellSize);
+
+        // Draw Q-value indicator
+        const maxQ = Math.max(...Q[`${x},${y}`]);
+        if (maxQ !== 0 && !isObstacle(x, y) && !(x === goal.x && y === goal.y)) {
+          ctx.fillStyle = maxQ > 0 ? '#38bdf8' : '#fb7185';
+          ctx.font = '10px monospace';
+          ctx.fillText(maxQ.toFixed(1), px + 8, py + cellSize - 8);
+        }
+      }
+    }
+
+    // Draw Goal Flag
+    ctx.fillStyle = '#34d399';
+    ctx.font = 'bold 16px sans-serif';
+    ctx.fillText('GOAL', goal.x * cellSize + 15, goal.y * cellSize + cellSize / 2 + 6);
+
+    // Draw Agent
+    ctx.fillStyle = '#38bdf8';
+    ctx.beginPath();
+    ctx.arc(agent.x * cellSize + cellSize / 2, agent.y * cellSize + cellSize / 2, cellSize / 3, 0, Math.PI * 2);
+    ctx.fill();
+    ctx.strokeStyle = '#fff';
+    ctx.lineWidth = 2;
+    ctx.stroke();
+  }
+
+  if (stepBtn) stepBtn.addEventListener('click', step);
+  if (runBtn) {
+    runBtn.addEventListener('click', () => {
+      if (!isRunning) {
+        isRunning = true;
+        runBtn.textContent = 'Pause Training';
+        runInterval = setInterval(step, 80);
+      } else {
+        isRunning = false;
+        runBtn.textContent = 'Auto Train Agent';
+        clearInterval(runInterval);
+      }
+    });
+  }
+  if (resetBtn) {
+    resetBtn.addEventListener('click', () => {
+      isRunning = false;
+      if (runInterval) clearInterval(runInterval);
+      if (runBtn) runBtn.textContent = 'Auto Train Agent';
+      episode = 1;
+      totalReward = 0;
+      agent = { x: 0, y: 0 };
+      for (const k in Q) Q[k] = [0, 0, 0, 0];
+      if (epEl) epEl.textContent = '1';
+      if (rewEl) rewEl.textContent = '0.0';
+      renderGrid();
+    });
+  }
+
+  renderGrid();
+}
+
+/* Memory Wall Lab (Part 5 Upgrade) */
+function initMemoryWallLab() {
+  const precSelect = document.getElementById('quantPrecisionSelect');
+  const bwSlider = document.getElementById('hbmBw');
+  if (!bwSlider || !precSelect) return;
+
+  function update() {
+    const bytesPerParam = parseInt(precSelect.value, 10) / 8;
+    const bw = parseFloat(bwSlider.value);
+    const bwVal = document.getElementById('hbmBwVal');
+    if (bwVal) bwVal.textContent = `${bw} GB/s`;
+
+    const params = 70; // 70B Model
+    const footprintGB = params * bytesPerParam;
+    const latencySec = footprintGB / bw;
+    const tokensPerSec = 1 / latencySec;
+
+    const memFootprint = document.getElementById('memFootprintVal');
+    const singleUserLat = document.getElementById('singleUserLatVal');
+    const maxTokens = document.getElementById('maxTokensPerSecVal');
+
+    if (memFootprint) memFootprint.textContent = `${footprintGB.toFixed(1)} GB`;
+    if (singleUserLat) singleUserLat.textContent = `${(latencySec * 1000).toFixed(1)} ms/token`;
+    if (maxTokens) maxTokens.textContent = `${tokensPerSec.toFixed(1)} tokens/sec`;
+  }
+
+  precSelect.addEventListener('change', update);
+  bwSlider.addEventListener('input', update);
+  update();
+}
+
+/* PID Controller Simulator (Part 8 Upgrade) */
+function initPIDControllerLab() {
+  const canvas = document.getElementById('pidCanvas');
+  if (!canvas) return;
+  const ctx = canvas.getContext('2d');
+
+  const kpSlider = document.getElementById('pidKp');
+  const kiSlider = document.getElementById('pidKi');
+  const kdSlider = document.getElementById('pidKd');
+  const stepBtn = document.getElementById('pidStepBtn');
+  if (!kpSlider || !kiSlider || !kdSlider) return;
+
+  function render() {
+    const Kp = parseFloat(kpSlider.value);
+    const Ki = parseFloat(kiSlider.value);
+    const Kd = parseFloat(kdSlider.value);
+
+    const kpVal = document.getElementById('pidKpVal');
+    const kiVal = document.getElementById('pidKiVal');
+    const kdVal = document.getElementById('pidKdVal');
+    if (kpVal) kpVal.textContent = Kp.toFixed(1);
+    if (kiVal) kiVal.textContent = Ki.toFixed(2);
+    if (kdVal) kdVal.textContent = Kd.toFixed(1);
+
+    const target = 1.0;
+    const dt = 0.02;
+    const steps = 300;
+    const response = [];
+
+    let pos = 0;
+    let vel = 0;
+    let integral = 0;
+    let prevError = target - pos;
+
+    for (let t = 0; t < steps; t++) {
+      const error = target - pos;
+      integral += error * dt;
+      const derivative = (error - prevError) / dt;
+      const u = Kp * error + Ki * integral + Kd * derivative;
+      prevError = error;
+
+      // System Physics: Mass = 1kg, Damping = 0.5
+      const accel = u - 0.5 * vel;
+      vel += accel * dt;
+      pos += vel * dt;
+
+      response.push(pos);
+    }
+
+    // Draw on Canvas
+    const w = canvas.width;
+    const h = canvas.height;
+    ctx.clearRect(0, 0, w, h);
+
+    // Target Line (Setpoint)
+    const targetY = h - (target / 2.0) * (h - 40) - 20;
+    ctx.strokeStyle = '#34d399';
+    ctx.lineWidth = 1.5;
+    ctx.setLineDash([6, 4]);
+    ctx.beginPath();
+    ctx.moveTo(40, targetY);
+    ctx.lineTo(w - 20, targetY);
+    ctx.stroke();
+    ctx.setLineDash([]);
+
+    ctx.fillStyle = '#34d399';
+    ctx.font = '10px monospace';
+    ctx.fillText('Setpoint (Target)', 45, targetY - 6);
+
+    // Grid lines
+    ctx.strokeStyle = 'rgba(255, 255, 255, 0.05)';
+    ctx.lineWidth = 1;
+    for (let y = 0; y <= 2.0; y += 0.5) {
+      const py = h - (y / 2.0) * (h - 40) - 20;
+      ctx.beginPath();
+      ctx.moveTo(40, py);
+      ctx.lineTo(w - 20, py);
+      ctx.stroke();
+      ctx.fillStyle = '#64748b';
+      ctx.fillText(y.toFixed(1), 15, py + 4);
+    }
+
+    // Step Response Curve
+    ctx.strokeStyle = '#38bdf8';
+    ctx.lineWidth = 2.5;
+    ctx.beginPath();
+    for (let i = 0; i < response.length; i++) {
+      const px = 40 + (i / steps) * (w - 60);
+      const py = h - (response[i] / 2.0) * (h - 40) - 20;
+      if (i === 0) ctx.moveTo(px, py);
+      else ctx.lineTo(px, py);
+    }
+    ctx.stroke();
+
+    // Calculate overshoot and settling time
+    const maxVal = Math.max(...response);
+    const overshootPct = Math.max(0, ((maxVal - target) / target) * 100);
+    const osEl = document.getElementById('pidOvershootVal');
+    if (osEl) osEl.textContent = `${overshootPct.toFixed(1)}%`;
+  }
+
+  kpSlider.addEventListener('input', render);
+  kiSlider.addEventListener('input', render);
+  kdSlider.addEventListener('input', render);
+  if (stepBtn) stepBtn.addEventListener('click', render);
+  render();
+}
+
+/* Compounding Error Lab (Part 7 Upgrade) */
+function initCompoundingErrorLab() {
+  const accSlider = document.getElementById('singleStepAcc');
+  const stepsSlider = document.getElementById('taskSteps');
+  if (!accSlider || !stepsSlider) return;
+
+  function update() {
+    const p = parseFloat(accSlider.value) / 100;
+    const n = parseInt(stepsSlider.value, 10);
+
+    const accVal = document.getElementById('singleStepAccVal');
+    const stepsVal = document.getElementById('taskStepsVal');
+    if (accVal) accVal.textContent = `${(p * 100).toFixed(1)}%`;
+    if (stepsVal) stepsVal.textContent = n;
+
+    const overall = Math.pow(p, n);
+    const fail = 1 - overall;
+    const req = Math.pow(0.90, 1 / n);
+
+    const overallVal = document.getElementById('overallSuccessVal');
+    const failVal = document.getElementById('failureProbVal');
+    const reqVal = document.getElementById('requiredAccVal');
+
+    if (overallVal) overallVal.textContent = `${(overall * 100).toFixed(1)}%`;
+    if (failVal) failVal.textContent = `${(fail * 100).toFixed(1)}%`;
+    if (reqVal) reqVal.textContent = `${(req * 100).toFixed(2)}%`;
+  }
+
+  accSlider.addEventListener('input', update);
+  stepsSlider.addEventListener('input', update);
+  update();
+}
+
+// Ensure newly added labs are called if present
+document.addEventListener('DOMContentLoaded', () => {
+  initQLearningGridworld();
+  initMemoryWallLab();
+  initPIDControllerLab();
+  initCompoundingErrorLab();
+});
+
+
+// ====================================================================
+// INTERACTIVE LAB 13: DISCIPLINED CODING AGENT WORKFLOW SIMULATOR
+// ====================================================================
+const cwPhasesData = [
+  {
+    num: 1,
+    title: "1. Explore (Read-Only Exploration)",
+    color: "#38bdf8",
+    prompt: "Explore the codebase first. Find where the telemetry WebSocket server and authentication handshake are implemented.\nDo not write or modify any code yet.\nReturn:\n1. Affected files, classes, and exported functions.\n2. Architecture design plan with data flow.\n3. Edge cases and test strategy.",
+    action: "Agent invokes list_dir and ripgrep grep_search across server/ and auth/. Discovers server/stream.py, auth/jwt_verifier.py, and models/telemetry.py. Maps active socket connection pools and error codes. Zero files mutated.",
+    checklist: "✓ Verify zero file modifications or git dirty state.\n✓ Check completeness of file discovery list against known repository architecture.\n✓ Confirm model grasped existing types and abstractions before approving plan phase."
+  },
+  {
+    num: 2,
+    title: "2. Plan (Architectural Specification Artifact)",
+    color: "#c084fc",
+    prompt: "Formulate an architectural implementation plan. Propose:\n1. Exponential backoff equation with jitter: t_k = min(t_max, t_0 * 2^k) ± δ.\n2. Token refresh hook interface.\n3. Blast-radius assessment and regression risk matrix.",
+    action: "Agent generates structured markdown artifact implementation_plan.md containing mermaid state diagrams, schema definitions, and unit test plan. Waits for explicit developer approval in Antigravity review panel.",
+    checklist: "✓ Inspect edge case handling (network timeout, cluster failover, token expiration).\n✓ Confirm proposed changes strictly localize blast radius.\n✓ Approve plan before authorizing code modification."
+  },
+  {
+    num: 3,
+    title: "3. Implement (Surgical Diffs & Test-Driven Development)",
+    color: "#34d399",
+    prompt: "Approved plan. Write failing unit test test_reconnect_backoff_jitter() in tests/test_telemetry.py first.\nRun pytest to verify failure.\nOnly then implement minimal localized fix in server/telemetry.py with zero placeholders.",
+    action: "Agent invokes write_to_file to create tests/test_telemetry.py. Runs pytest in terminal: test fails red as expected. Applies surgical replace_file_content chunk to server/telemetry.py adding jittered backoff. Reruns tests: 14/14 tests pass green.",
+    checklist: "✓ Review unified diff chunk-by-chunk.\n✓ Verify zero comments omitting code blocks (// TODO or placeholders).\n✓ Confirm automated unit tests assert real business logic rather than tautologies."
+  },
+  {
+    num: 4,
+    title: "4. Verify (Daemon Launch & Visual Browser Subagent)",
+    color: "#fbbf24",
+    prompt: "Start dev server in background and verify end-to-end telemetry streaming in browser.\nEnsure 0 console errors and capture verification recording.",
+    action: "Agent starts dev server daemon on port 8080. Spawns browser_subagent to navigate to client UI, simulate connection drop, verify automatic reconnection within 1.2s, confirm 0 console errors, and record WebP verification artifact.",
+    checklist: "✓ Inspect browser verification recording artifact.\n✓ Confirm zero runtime console warnings or errors.\n✓ Approve git commit and pull request merge."
+  }
+];
+
+let cwCurrentPhase = 0;
+
+window.renderCwPhase = function() {
+  const p = cwPhasesData[cwCurrentPhase];
+  const numEl = document.getElementById('cwPhaseNumber');
+  const titleEl = document.getElementById('cwPhaseTitle');
+  const boxEl = document.getElementById('cwPhaseBox');
+  const prevBtn = document.getElementById('cwPrevBtn');
+  const nextBtn = document.getElementById('cwNextBtn');
+
+  if (numEl) numEl.innerText = p.num;
+  if (titleEl) {
+    titleEl.innerText = p.title;
+    titleEl.style.color = p.color;
+  }
+  if (prevBtn) prevBtn.disabled = (cwCurrentPhase === 0);
+  if (nextBtn) nextBtn.disabled = (cwCurrentPhase === cwPhasesData.length - 1);
+
+  if (boxEl) {
+    boxEl.innerHTML = `
+      <div style="display:flex; flex-direction:column; gap:1.2rem;">
+        <div>
+          <span class="part-box-tag" style="color:${p.color};">OPTIMAL DEVELOPER PROMPT</span>
+          <pre class="cw-prompt-box">${p.prompt}</pre>
+        </div>
+        <div>
+          <span class="part-box-tag tag-cyan">AUTONOMOUS AGENT ACTIONS &amp; TOOLS</span>
+          <div class="cw-action-box">
+            ${p.action}
+          </div>
+        </div>
+        <div>
+          <span class="part-box-tag tag-emerald">DEVELOPER QUALITY GATE CHECKLIST</span>
+          <pre class="cw-checklist-box">${p.checklist}</pre>
+        </div>
+      </div>
+    `;
+  }
+};
+
+window.cwChangePhase = function(delta) {
+  cwCurrentPhase = Math.max(0, Math.min(cwPhasesData.length - 1, cwCurrentPhase + delta));
+  window.renderCwPhase();
+};
+
+// ====================================================================
+// INTERACTIVE LAB 14: LEADING CODING AGENTS COMPARISON MATRIX
+// ====================================================================
+const toolsMatrixData = [
+  {
+    id: "gemini",
+    name: "Google Antigravity & Gemini",
+    vendor: "Google",
+    form: "Agent-First IDE & Cloud Platform",
+    models: "Gemini 2.5 Pro / Flash & Gemini 3",
+    context: "1,000,000+ Tokens",
+    surfaces: "Editor, Shell Daemon, Visual Browser Subagent",
+    instructions: ".gemini/rules/ & AGENTS.md",
+    strengths: "Tri-surface execution, multi-agent manager, visual browser verification recordings, background process daemons"
+  },
+  {
+    id: "claude",
+    name: "Claude Code",
+    vendor: "Anthropic",
+    form: "Terminal CLI Agent",
+    models: "Claude 3.7 Sonnet (Hybrid Reasoning)",
+    context: "200,000 Tokens (Prompt Caching)",
+    surfaces: "Shell / Terminal, Filesystem, Git Worktrees",
+    instructions: "CLAUDE.md & AGENTS.md",
+    strengths: "High-speed terminal scriptability, unix pipeline integration, deep reasoning on architectural tradeoffs"
+  },
+  {
+    id: "cursor",
+    name: "Cursor",
+    vendor: "Anysphere",
+    form: "Agentic IDE (VS Code Fork)",
+    models: "Multi-vendor (Claude, GPT-4o, Custom)",
+    context: "128,000 - 200,000 Tokens",
+    surfaces: "Editor (Multi-file Composer), Inline Diffs, Terminal",
+    instructions: ".cursorrules & AGENTS.md",
+    strengths: "Instant inline multi-file diffing, semantic vector code search index, familiar VS Code ecosystem"
+  },
+  {
+    id: "copilot",
+    name: "GitHub Copilot",
+    vendor: "GitHub / Microsoft",
+    form: "In-Editor Extension & Cloud Agent",
+    models: "Multi-vendor (OpenAI, Anthropic)",
+    context: "64,000 - 128,000 Tokens",
+    surfaces: "Editor Sidebar, Inline Tab Autocomplete",
+    instructions: ".github/copilot-instructions.md",
+    strengths: "Zero-friction enterprise compliance, frictionless inline code completion, ubiquitous IDE support"
+  },
+  {
+    id: "codex",
+    name: "OpenAI Codex",
+    vendor: "OpenAI",
+    form: "Terminal Agent & Web Platform",
+    models: "GPT-4o, o3-mini",
+    context: "128,000 - 200,000 Tokens",
+    surfaces: "Shell / Terminal, Sandbox Containers",
+    instructions: "AGENTS.md",
+    strengths: "Open-source CLI harness, sandboxed container evaluation, deep mathematical reasoning"
+  }
+];
+
+window.switchToolsTab = function(filterId, btn) {
+  const container = document.getElementById('toolsMatrixWrap');
+  const buttons = document.querySelectorAll('.matrix-tab-btn');
+  buttons.forEach(b => b.classList.remove('active'));
+  if (btn) btn.classList.add('active');
+
+  const filtered = (filterId === 'all') ? toolsMatrixData : toolsMatrixData.filter(t => t.id === filterId);
+
+  if (container) {
+    let rowsHtml = filtered.map(t => `
+      <tr>
+        <td>
+          <strong style="color:#f8fafc; font-size:0.95rem;">${t.name}</strong><br>
+          <span style="font-size:0.76rem; color:#94a3b8;">${t.vendor}</span>
+        </td>
+        <td><span style="font-size:0.84rem; color:#cbd5e1;">${t.form}</span></td>
+        <td><strong style="color:#38bdf8; font-size:0.84rem;">${t.models}</strong></td>
+        <td><span style="font-family:var(--font-mono); font-size:0.82rem; color:#34d399;">${t.context}</span></td>
+        <td><span style="font-size:0.82rem; color:#cbd5e1;">${t.surfaces}</span></td>
+        <td><code style="font-size:0.78rem; background:rgba(255,255,255,0.06); padding:0.15rem 0.4rem; border-radius:4px;">${t.instructions}</code></td>
+        <td style="font-size:0.82rem; color:#94a3b8; line-height:1.45;">${t.strengths}</td>
+      </tr>
+    `).join('');
+
+    container.innerHTML = `
+      <table class="tools-matrix-table">
+        <thead>
+          <tr>
+            <th>Tool &amp; Vendor</th>
+            <th>Primary Form Factor</th>
+            <th>Foundation Models</th>
+            <th>Context Window</th>
+            <th>Execution Surfaces</th>
+            <th>Instruction File</th>
+            <th>Distinctive Strengths</th>
+          </tr>
+        </thead>
+        <tbody>
+          ${rowsHtml}
+        </tbody>
+      </table>
+    `;
+  }
+};
+
+// Auto-initialize Part 8 labs on DOMContentLoaded
+document.addEventListener('DOMContentLoaded', () => {
+  if (typeof window.renderCwPhase === 'function') window.renderCwPhase();
+  if (typeof window.switchToolsTab === 'function') {
+    const defaultBtn = document.querySelector('.matrix-tab-btn.active');
+    window.switchToolsTab('all', defaultBtn);
+  }
+});

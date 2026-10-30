@@ -14,69 +14,65 @@
   <div id="readingProgress" class="reading-progress-bar"></div>
 
   <!-- Header Navigation -->
-  <header class="header-nav">
-    <div class="brand-group">
-      <div class="brand-logo-wrap" title="Artificial Intelligence Systems Hub">
-        <svg class="ai-logo-svg" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
-          <!-- Central Nucleus -->
-          <circle cx="16" cy="16" r="4.5" fill="url(#aiGrad)" />
-          <!-- Orbiting Neural Nodes -->
-          <circle cx="8" cy="8" r="2.5" fill="#38bdf8" />
-          <circle cx="24" cy="8" r="2.5" fill="#a855f7" />
-          <circle cx="6" cy="22" r="2.5" fill="#10b981" />
-          <circle cx="26" cy="22" r="2.5" fill="#38bdf8" />
-          <circle cx="16" cy="27" r="2.5" fill="#f59e0b" />
-          <!-- Synaptic Connections -->
-          <line x1="8" y1="8" x2="16" y2="16" stroke="#38bdf8" stroke-width="1.6" stroke-opacity="0.85" />
-          <line x1="24" y1="8" x2="16" y2="16" stroke="#a855f7" stroke-width="1.6" stroke-opacity="0.85" />
-          <line x1="6" y1="22" x2="16" y2="16" stroke="#10b981" stroke-width="1.6" stroke-opacity="0.85" />
-          <line x1="26" y1="22" x2="16" y2="16" stroke="#38bdf8" stroke-width="1.6" stroke-opacity="0.85" />
-          <line x1="16" y1="27" x2="16" y2="16" stroke="#f59e0b" stroke-width="1.6" stroke-opacity="0.85" />
-          <line x1="8" y1="8" x2="24" y2="8" stroke="rgba(255,255,255,0.2)" stroke-dasharray="2 2" stroke-width="1" />
-          <line x1="6" y1="22" x2="16" y2="27" stroke="rgba(255,255,255,0.2)" stroke-dasharray="2 2" stroke-width="1" />
-          <line x1="26" y1="22" x2="16" y2="27" stroke="rgba(255,255,255,0.2)" stroke-dasharray="2 2" stroke-width="1" />
-          <defs>
-            <radialGradient id="aiGrad" cx="0.5" cy="0.5" r="0.5" fx="0.3" fy="0.3">
-              <stop offset="0%" stop-color="#ffffff" />
-              <stop offset="50%" stop-color="#38bdf8" />
-              <stop offset="100%" stop-color="#6366f1" />
-            </radialGradient>
-          </defs>
-        </svg>
-      </div>
-      <div class="brand-text-block">
-        <span class="brand-title">Architecture of Intelligence</span>
-        <span class="brand-instructor-pill">Instructor: <strong>Prof. Liang Li</strong></span>
+    <header class="header-nav">
+    <div class="header-top-row">
+      <a href="#overview" class="brand-group" style="text-decoration:none;">
+        <div class="brand-logo-wrap" title="Architecture of Intelligence">
+          <svg class="ai-logo-svg" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <circle cx="16" cy="16" r="4.5" fill="url(#aiGrad)" />
+            <circle cx="8" cy="8" r="2.5" fill="#38bdf8" />
+            <circle cx="24" cy="8" r="2.5" fill="#a855f7" />
+            <circle cx="6" cy="22" r="2.5" fill="#10b981" />
+            <circle cx="26" cy="22" r="2.5" fill="#38bdf8" />
+            <circle cx="16" cy="27" r="2.5" fill="#f59e0b" />
+            <line x1="8" y1="8" x2="16" y2="16" stroke="#38bdf8" stroke-width="1.6" stroke-opacity="0.85" />
+            <line x1="24" y1="8" x2="16" y2="16" stroke="#a855f7" stroke-width="1.6" stroke-opacity="0.85" />
+            <line x1="6" y1="22" x2="16" y2="16" stroke="#10b981" stroke-width="1.6" stroke-opacity="0.85" />
+            <line x1="26" y1="22" x2="16" y2="16" stroke="#38bdf8" stroke-width="1.6" stroke-opacity="0.85" />
+            <line x1="16" y1="27" x2="16" y2="16" stroke="#f59e0b" stroke-width="1.6" stroke-opacity="0.85" />
+            <defs>
+              <radialGradient id="aiGrad" cx="0.5" cy="0.5" r="0.5" fx="0.3" fy="0.3">
+                <stop offset="0%" stop-color="#ffffff" />
+                <stop offset="50%" stop-color="#38bdf8" />
+                <stop offset="100%" stop-color="#6366f1" />
+              </radialGradient>
+            </defs>
+          </svg>
+        </div>
+        <div class="brand-text-block">
+          <span class="brand-title">Architecture of Intelligence</span>
+          <span class="brand-instructor-pill">Instructor: <strong>Prof. Liang Li</strong></span>
+        </div>
+      </a>
+
+      <div class="nav-actions">
+        <button id="themeToggleBtn" title="Toggle light/dark theme" aria-label="Toggle theme">
+          <span class="theme-toggle-icon">☀️</span>
+          <span id="themeToggleLabel">Light</span>
+        </button>
+        <button id="spotlightTriggerBtn" class="btn btn-secondary btn-sm" title="Quick Search (Ctrl + K)">
+          <span>🔍 Search</span>
+          <span class="spotlight-kbd" style="font-size:0.68rem; margin-left:0.25rem;">⌘K</span>
+        </button>
+        <a href="#glossarySection" class="btn btn-accent btn-sm">📖 Glossary &amp; Index</a>
       </div>
     </div>
 
-    <nav class="main-nav">
+    <!-- Executive Topic Navigation Ribbon -->
+    <nav class="header-ribbon" aria-label="Curriculum Navigation">
       <ul class="nav-links">
-        <li><a href="#part1" class="nav-link">I. Foundations</a></li>
-        <li><a href="#part2" class="nav-link">II. Neural Networks</a></li>
-        <li><a href="#part3" class="nav-link">III. CNN &amp; RNN / LSTM</a></li>
-        <li><a href="#part4" class="nav-link">IV. Reinforcement Learning</a></li>
-        <li><a href="#part5" class="nav-link">V. Generative AI</a></li>
-        <li><a href="#part6" class="nav-link">VI. Physical Substrate</a></li>
-        <li><a href="#part7" class="nav-link">VII. Autonomous Agency</a></li>
-        <li><a href="#part8" class="nav-link">VIII. Physical AI</a></li>
-        <li><a href="#part9" class="nav-link">IX. Synthesis</a></li>
-        <li><a href="#referencesSection" class="nav-link">X. Academic Archive</a></li>
+        <li><a href="#part1" class="nav-link" title="Part 1: Mathematical &amp; Disciplinary Foundations">1. Foundations</a></li>
+        <li><a href="#part2" class="nav-link" title="Part 2: Deep Neural Networks">2. Neural Networks</a></li>
+        <li><a href="#part3" class="nav-link" title="Part 3: Vision &amp; Sequences">3. CNN &amp; RNN / LSTM</a></li>
+        <li><a href="#part4" class="nav-link" title="Part 4: Reinforcement Learning">4. Reinforcement Learning</a></li>
+        <li><a href="#part5" class="nav-link" title="Part 5: Generative AI &amp; Transformers">5. Generative AI</a></li>
+        <li><a href="#part6" class="nav-link" title="Part 6: Physical Substrate &amp; Distributed Scale">6. Physical Substrate</a></li>
+        <li><a href="#part7" class="nav-link" title="Part 7: Autonomous Agency &amp; MCP">7. Autonomous Agency</a></li>
+        <li><a href="#part8" class="nav-link" title="Part 8: Coding Agents &amp; Tools">8. Coding Agents</a></li>
+        <li><a href="#part9" class="nav-link" title="Part 9: Physical AI &amp; Robotics">9. Physical AI</a></li>
+        <li><a href="#referencesSection" class="nav-link" title="Part 10: Academic Reference Archive">10. Academic Archive</a></li>
       </ul>
     </nav>
-
-    <div class="nav-actions">
-      <button id="themeToggleBtn" title="Toggle light/dark theme" aria-label="Toggle theme">
-        <span class="theme-toggle-icon">☀️</span>
-        <span id="themeToggleLabel">Light</span>
-      </button>
-      <button id="spotlightTriggerBtn" class="btn btn-secondary btn-sm" title="Quick Search (Ctrl + K)">
-        <span>🔍 Search</span>
-        <span class="spotlight-kbd" style="font-size:0.68rem; margin-left:0.25rem;">⌘K</span>
-      </button>
-      <a href="#quizSection" class="btn btn-accent btn-sm">Knowledge Check</a>
-      <a href="#glossarySection" class="btn btn-secondary btn-sm">Glossary</a>
-    </div>
   </header>
 
   <!-- Hero Section -->
@@ -84,42 +80,36 @@
     <div class="container">
       <div class="hero-content">
         <div>
-          <div class="hero-tag">
-            <span>⚡ Comprehensive Academic Curriculum • Artificial Intelligence Systems</span>
-          </div>
           <h1 class="hero-title">The Architecture of Intelligence</h1>
           <p class="lead">
             From Mathematical Foundations to Agentic AI Systems. A comprehensive, interactive companion platform deconstructing how perceptrons, attention, GPU clusters, and autonomous loops converge into modern artificial intelligence.
           </p>
 
-          <!-- PROMINENT WEB AUTHOR SECTION -->
+          <!-- REDESIGNED ACADEMIC INSTRUCTOR PROFILE -->
           <div class="author-hero-card">
-            <div class="author-avatar-badge">
-              <span>LL</span>
+            <div class="author-avatar-wrap">
+              <div class="author-avatar-circle" aria-label="Prof. Liang Li">
+                <span>LL</span>
+              </div>
             </div>
-            <div class="author-meta">
-              <div class="author-role-tag">Course Instructor & Lead Curriculum Designer</div>
+            <div class="author-meta-block">
               <h3 class="author-name-title">Instructor: Prof. Liang Li</h3>
-              <p class="author-bio-line">Information Engineering & Advanced Artificial Intelligence Systems Architecture</p>
-            </div>
-            <div class="author-stats-pills">
-              <span class="author-pill">Academic Director</span>
-              <span class="author-pill">9 Core Parts</span>
-              <span class="author-pill">32 Landmark References</span>
+              <p class="author-bio-line">Information Engineering &bull; Advanced AI Systems Architecture &bull; Graduate Faculty</p>
             </div>
           </div>
-          <div class="nav-actions" style="margin-top: 1.5rem;">
+          <div class="nav-actions" style="margin-top: 1.5rem; flex-wrap: wrap;">
             <a href="#part1" class="btn btn-primary">Begin Curriculum</a>
             <a href="#agenticSimulator" class="btn btn-secondary">Jump to Agent Simulator</a>
+            <a href="https://github.com/liangli99/ai-education-platform/blob/main/textbook/Architecture_of_Intelligence.pdf" target="_blank" rel="noopener noreferrer" class="btn btn-secondary">📘 Textbook (PDF)</a>
           </div>
 
           <div class="hero-stats-grid">
             <div class="stat-card">
-              <div class="stat-value">9 Parts</div>
+              <div class="stat-value">10 Parts</div>
               <div class="stat-label">Full Conceptual Arc</div>
             </div>
             <div class="stat-card">
-              <div class="stat-value">12+ Labs</div>
+              <div class="stat-value">14+ Labs</div>
               <div class="stat-label">Live Math Simulators</div>
             </div>
             <div class="stat-card">
@@ -131,79 +121,69 @@
 
         <!-- The Intellectual Arc -->
         <div class="hero-visual">
-          <h4 style="margin-bottom: 0.8rem; color: #fff; display: flex; align-items: center; justify-content: space-between;">
+          <h4 style="margin-bottom: 0.8rem; display: flex; align-items: center; justify-content: space-between;">
             <span>Curriculum Architecture</span>
             <span style="font-size: 0.75rem; color: var(--accent-cyan); font-family: var(--font-mono);">Click to Explore</span>
           </h4>
           <div class="arc-diagram">
             <a href="#part1" class="arc-step">
-              <div class="arc-step-num">1</div>
               <div class="arc-step-text">
-                <strong>Part I • Foundations</strong>
+                <strong>Part 1 • Foundations</strong>
                 <span>Pillars, Logics, Bayes &amp; Shannon Entropy</span>
               </div>
             </a>
             <a href="#part2" class="arc-step">
-              <div class="arc-step-num">2</div>
               <div class="arc-step-text">
-                <strong>Part II • Neural Networks</strong>
+                <strong>Part 2 • Neural Networks</strong>
                 <span>Perceptron, XOR, Backprop &amp; Gradient Descent</span>
               </div>
             </a>
             <a href="#part3" class="arc-step">
-              <div class="arc-step-num">3</div>
               <div class="arc-step-text">
-                <strong>Part III • CNN &amp; RNN / LSTM</strong>
+                <strong>Part 3 • CNN &amp; RNN / LSTM</strong>
                 <span>Vision by CNN &amp; Sequential Memory</span>
               </div>
             </a>
             <a href="#part4" class="arc-step">
-              <div class="arc-step-num">4</div>
               <div class="arc-step-text">
-                <strong>Part IV • Reinforcement Learning</strong>
+                <strong>Part 4 • Reinforcement Learning</strong>
                 <span>MDP, Bellman, SL vs RL &amp; Real-World Applications</span>
               </div>
             </a>
             <a href="#part5" class="arc-step">
-              <div class="arc-step-num">5</div>
               <div class="arc-step-text">
-                <strong>Part V • Generative AI</strong>
+                <strong>Part 5 • Generative AI</strong>
                 <span>Attention &amp; Transformers, Scaling Laws &amp; RLHF Alignment</span>
               </div>
             </a>
             <a href="#part6" class="arc-step">
-              <div class="arc-step-num">6</div>
               <div class="arc-step-text">
-                <strong>Part VI • Physical Substrate</strong>
+                <strong>Part 6 • Physical Substrate</strong>
                 <span>H200 Silicon, NVLink &amp; 24k GPU Clusters</span>
               </div>
             </a>
             <a href="#part7" class="arc-step">
-              <div class="arc-step-num">7</div>
               <div class="arc-step-text">
-                <strong>Part VII • Autonomous Agency</strong>
-                <span>Plan-Execute-Reflect, PEAS &amp; Tool Use</span>
+                <strong>Part 7 • Autonomous Agency</strong>
+                <span>Plan-Execute-Reflect, PEAS &amp; Multi-Agent Swarms</span>
               </div>
             </a>
             <a href="#part8" class="arc-step">
-              <div class="arc-step-num">8</div>
               <div class="arc-step-text">
-                <strong>Part VIII • Physical AI</strong>
-                <span>Sensory Grounding, Kinematics, Sim-to-Real &amp; VLAs</span>
+                <strong>Part 8 • Coding Agents &amp; Tools</strong>
+                <span>Gemini Tri-Surface, Explore-Plan-Implement-Verify &amp; Worktrees</span>
               </div>
             </a>
             <a href="#part9" class="arc-step">
-              <div class="arc-step-num">9</div>
               <div class="arc-step-text">
-                <strong>Part IX • Synthesis</strong>
-                <span>High-Order Value, Checkpoint Quiz &amp; Glossary</span>
+                <strong>Part 9 • Physical AI</strong>
+                <span>Sensory Grounding, Kinematics, Sim-to-Real &amp; VLAs</span>
               </div>
             </a>
             <a href="#referencesSection" class="arc-step">
-              <div class="arc-step-num">10</div>
               <div class="arc-step-text">
-                <strong>Part X • Academic Archive</strong>
-                <span>32 Landmark Papers, Whitepapers &amp; Literature</span>
+                <strong>Part 10 • Academic Archive</strong>
+                <span>32 Landmark Papers, Course Deck Sources &amp; Master Glossary</span>
               </div>
             </a>
           </div>
@@ -216,11 +196,11 @@
   <main class="container">
 
     <!-- ====================================================================
-         PART I: FOUNDATIONS OF INTELLIGENCE
+         PART 1: FOUNDATIONS OF INTELLIGENCE
          ================================================================ -->
     <section class="course-part" id="part1">
       <div class="part-header">
-        <span class="part-badge badge-p1">Part I • Foundations</span>
+        <span class="part-badge badge-p1">Part 1 • Foundations</span>
         <h2 class="part-title">The Mathematical & Disciplinary Bedrock</h2>
         <p class="part-lead">
           Before algorithms compute or silicon burns kilowatts, artificial intelligence rests on five disciplinary pillars, three distinct logics of scientific reasoning, regression analysis, Bayesian belief-updating, and Claude Shannon's information theory.
@@ -229,7 +209,7 @@
 
       <!-- Quick Review Takeaway Card -->
       <div class="review-takeaway-box">
-        <div class="review-takeaway-header">✦ Part I Quick Review • Core Academic Takeaways</div>
+        <div class="review-takeaway-header">✦ Part 1 Quick Review • Core Academic Takeaways</div>
         <ul class="review-takeaway-list">
           <li><strong>5 Pillars &amp; 3 Logics:</strong> AI engineering synthesizes Computer Science, Mathematics, Neuroscience, Cognitive Psychology, and Ethics, operating across First Principles (deduction), Deep Learning (induction), and Embeddings (analogy).</li>
           <li><strong>Regression &amp; Optimization:</strong> Maps continuous inputs to predictions via linear formulation ($y = wx + b$) minimized by MSE Loss, or bounded classification probabilities via the non-linear Sigmoid activation ($\sigma(z)$).</li>
@@ -241,7 +221,10 @@
       <!-- 5 Disciplinary Pillars & 3 Logics -->
       <div class="grid-2" style="margin-bottom: 2rem;">
         <div class="card card-accent-top">
-          <h3 class="card-title">The Five Disciplinary Pillars</h3>
+          <div class="card-header-row">
+            <h3 class="card-title">The Five Disciplinary Pillars</h3>
+            <span class="sub-badge">Section 1.1 • Disciplinary Foundations</span>
+          </div>
           <p>A resilient AI system requires literacy across five intersecting disciplines:</p>
           <ul style="padding-left: 1.25rem; margin-bottom: 1rem; color: #cbd5e1; font-size: 0.92rem; display: flex; flex-direction: column; gap: 0.4rem;">
             <li><strong style="color:var(--accent-cyan)">Computer Science:</strong> Algorithms, data structures, and computational complexity.</li>
@@ -253,7 +236,10 @@
         </div>
 
         <div class="card card-accent-top">
-          <h3 class="card-title">Three Logics of Reasoning</h3>
+          <div class="card-header-row">
+            <h3 class="card-title">Three Logics of Reasoning</h3>
+            <span class="sub-badge">Section 1.2 • Epistemological Reasoning</span>
+          </div>
           <p>Every engineering methodology is anchored in an epistemological direction:</p>
           <table class="confusion-table" style="font-size: 0.82rem;">
             <thead>
@@ -474,19 +460,18 @@
             </div>
           </div>
         </div>
-      </div>
-      <div class="section-nav-footer">
-        <span style="font-size:0.85rem; color:var(--text-muted);">Completed Part I: Mathematical Foundations</span>
-        <a href="#part2" class="section-nav-btn btn-next">Continue to Part II: Neural Networks →</a>
+      </div><div class="section-nav-footer">
+        <span style="font-size:0.85rem; color:var(--text-muted);">Completed Part 1: Mathematical Foundations</span>
+        <a href="#part2" class="section-nav-btn btn-next">Continue to Part 2: Neural Networks →</a>
       </div>
     </section>
 
     <!-- ====================================================================
-         PART II: DEEP NEURAL NETWORKS
+         PART 2: DEEP NEURAL NETWORKS
          ================================================================ -->
     <section class="course-part" id="part2">
       <div class="part-header">
-        <span class="part-badge badge-p2">Part II • Neural Networks</span>
+        <span class="part-badge badge-p2">Part 2 • Neural Networks</span>
         <h2 class="part-title">From Biological Receptors to Deep Networks</h2>
         <p class="part-lead">
           Tracing the atomic artificial neuron (the Perceptron), the historic XOR linear separability crisis, multi-layer matrix representations, and the universal 5-step learning engine: Forward Prop, Loss, Backpropagation, and Gradient Descent.
@@ -495,7 +480,7 @@
 
       <!-- Quick Review Takeaway Card -->
       <div class="review-takeaway-box">
-        <div class="review-takeaway-header">✦ Part II Quick Review • Core Academic Takeaways</div>
+        <div class="review-takeaway-header">✦ Part 2 Quick Review • Core Academic Takeaways</div>
         <ul class="review-takeaway-list">
           <li><strong>Single Perceptron Limit &amp; The XOR Crisis:</strong> A single neuron creates only a linear decision boundary ($w_1 x_1 + w_2 x_2 + b = 0$) and cannot classify non-linear XOR; overcoming this required multi-layer networks with non-linear hidden representations.</li>
           <li><strong>Non-Linear Activations &amp; Gradient Flow:</strong> Stacking purely linear layers collapses mathematically into a single matrix product $W_2 W_1 x = W_{\text{net}} x$; non-linear activations like GELU and ReLU prevent deep layer saturation, avoiding Sigmoid's severe vanishing gradient ($f'(z) \le 0.25$).</li>
@@ -617,14 +602,14 @@
       </div>
 
       <!-- ================================================================
-           PART II, SECTION 2.3: MULTI-LAYER NEURAL NETWORKS (MLPs)
+           SECTION 2.1: MULTI-LAYER NEURAL NETWORKS (MLPs)
            ================================================================ -->
       <div id="part2-mlp" style="margin-top: 3.5rem;">
         <div class="part-sub-header">
+          <span class="sub-badge">Section 2.1 • Deep Feed-Forward Architecture</span>
           <h3 class="part-sub-title">
             <span>From One Neuron to Deep Networks: Mathematical Representation of MLPs</span>
           </h3>
-          <span class="sub-badge">Deep Feed-Forward Architecture</span>
         </div>
 
         <!-- Figure 2.2: Deep MLP Architecture Diagram -->
@@ -669,13 +654,13 @@
         </div>
       </div>
 
-      <!-- Section 2.4: How Deep Networks Learn & Upgrade Weights -->
+      <!-- Section 2.2: How Deep Networks Learn & Upgrade Weights -->
       <div id="part2-learning-cycle" style="margin-top: 3.5rem;">
         <div class="part-sub-header">
+          <span class="sub-badge">Section 2.2 • Optimization &amp; Weight Updates</span>
           <h3 class="part-sub-title">
             <span>How Deep Networks Learn and Upgrade Weights</span>
           </h3>
-          <span class="sub-badge">Optimization &amp; Weight Updates</span>
         </div>
 
         <!-- 5-Step Learning Loop Stepper -->
@@ -698,19 +683,18 @@
             <pre style="background:#060a12; border:1px solid var(--border-subtle); padding:1rem; border-radius:6px; font-size:0.8rem; overflow-x:auto; color:#a5f3fc;"><code id="stepCardCode"></code></pre>
           </div>
         </div>
-      </div>
-      <div class="section-nav-footer">
-        <a href="#part1" class="section-nav-btn">← Previous: Part I</a>
-        <a href="#part3" class="section-nav-btn btn-next">Continue to Part III: CNN &amp; RNN/LSTM →</a>
+      </div><div class="section-nav-footer">
+        <a href="#part1" class="section-nav-btn">← Previous: Part 1</a>
+        <a href="#part3" class="section-nav-btn btn-next">Continue to Part 3: CNN &amp; RNN/LSTM →</a>
       </div>
     </section>
 
     <!-- ====================================================================
-         PART III: CNN AND RNN / LSTM
+         PART 3: CNN AND RNN / LSTM
          ================================================================ -->
     <section class="course-part" id="part3">
       <div class="part-header">
-        <span class="part-badge badge-p3">Part III • CNN &amp; RNN / LSTM</span>
+        <span class="part-badge badge-p3">Part 3 • CNN &amp; RNN / LSTM</span>
         <h2 class="part-title">Convolutional Neural Networks &amp; Recurrent Neural Networks for Sequential Memory</h2>
         <p class="part-lead">
           From pixels to sequences: Convolutional Neural Networks (CNNs) extract hierarchical visual features through local receptive fields and spatial weight sharing, while Recurrent Neural Networks (RNNs/LSTMs) capture temporal dependencies in sequential data through gated memory mechanisms.
@@ -719,7 +703,7 @@
 
       <!-- Quick Review Takeaway Card -->
       <div class="review-takeaway-box">
-        <div class="review-takeaway-header">✦ Part III Quick Review • Core Academic Takeaways</div>
+        <div class="review-takeaway-header">✦ Part 3 Quick Review • Core Academic Takeaways</div>
         <ul class="review-takeaway-list">
           <li><strong>CNN Hierarchical Vision &amp; ResNets:</strong> 2D Convolution $(I * W)$ enforces local receptive fields and spatial weight sharing; ResNet identity skip connections ($y = F(x) + x$) eliminate vanishing gradients, enabling ultra-deep visual representation learning.</li>
           <li><strong>Sequential Recurrence &amp; BPTT Limits:</strong> Vanilla RNNs model temporal state transitions ($h_t = \tanh(W_{hh} h_{t-1} + W_{xh} x_t)$), but Backpropagation Through Time (BPTT) suffers from exponential gradient decay across long temporal horizons ($\mathcal{O}(N)$ sequential dependency).</li>
@@ -732,10 +716,10 @@
            ================================================================ -->
       <div id="part3-cnn" style="margin-top: 1rem;">
         <div class="part-sub-header">
+          <span class="sub-badge">Section 3.1 • Convolutional Neural Networks</span>
           <h3 class="part-sub-title">
-            <span>Section 3.1 • Vision Processing by CNN</span>
+            <span>Vision Processing by CNN</span>
           </h3>
-          <span class="sub-badge">Convolutional Neural Networks</span>
         </div>
 
         <p class="reading-measure" style="margin-bottom:1.5rem;">
@@ -817,10 +801,10 @@
            ================================================================ -->
       <div id="part3-rnn-lstm" style="margin-top: 3.5rem;">
         <div class="part-sub-header">
+          <span class="sub-badge">Section 3.2 • Temporal Representation</span>
           <h3 class="part-sub-title">
-            <span>Section 3.2 • Sequential Memory: Recurrent Networks (RNNs) &amp; LSTMs</span>
+            <span>Sequential Memory: Recurrent Networks (RNNs) &amp; LSTMs</span>
           </h3>
-          <span class="sub-badge">Temporal Representation</span>
         </div>
 
         <p class="reading-measure" style="margin-bottom:1.5rem;">
@@ -889,16 +873,16 @@
       </div>
 
       <div class="section-nav-footer">
-        <a href="#part2" class="section-nav-btn">← Previous: Part II</a>
-        <a href="#part4" class="section-nav-btn btn-next">Continue to Part IV: Reinforcement Learning →</a>
+        <a href="#part2" class="section-nav-btn">← Previous: Part 2</a>
+        <a href="#part4" class="section-nav-btn btn-next">Continue to Part 4: Reinforcement Learning →</a>
       </div>
     </section>
     <!-- ====================================================================
-         PART IV: REINFORCEMENT LEARNING
+         PART 4: REINFORCEMENT LEARNING
          ==================================================================== -->
     <section class="course-part" id="part4">
       <div class="part-header">
-        <span class="part-badge badge-p4">Part IV • Reinforcement Learning</span>
+        <span class="part-badge badge-p4">Part 4 • Reinforcement Learning</span>
         <h2 class="part-title">Reinforcement Learning: Agents, Decisions, and Optimal Policy</h2>
         <p class="part-lead">
           Reinforcement Learning trains autonomous agents to maximize cumulative reward through sequential decision-making and environment interaction — without labeled data. From the mathematical foundations of Markov Decision Processes to landmark milestones like AlphaZero and RLHF, RL is the engine behind many of the most transformative AI breakthroughs.
@@ -907,7 +891,7 @@
 
       <!-- Quick Review Takeaway Card -->
       <div class="review-takeaway-box">
-        <div class="review-takeaway-header">✦ Part IV Quick Review • Core Academic Takeaways</div>
+        <div class="review-takeaway-header">✦ Part 4 Quick Review • Core Academic Takeaways</div>
         <ul class="review-takeaway-list">
           <li><strong>MDP Framework &amp; Bellman Optimality:</strong> RL is formalized as a Markov Decision Process $(\mathcal{S}, \mathcal{A}, P, R, \gamma)$. The Bellman Equation $V^\pi(s) = \mathbb{E}[r_t + \gamma V^\pi(s_{t+1})]$ provides the recursive foundation for value function estimation and policy optimization.</li>
           <li><strong>Exploration vs. Exploitation Trade-off:</strong> Agents must balance exploiting known high-reward actions with exploring unknown states. The $\epsilon$-greedy strategy, Upper Confidence Bound (UCB), and Thompson Sampling are standard mechanisms for managing this fundamental dilemma.</li>
@@ -921,10 +905,10 @@
            ================================================================ -->
       <div id="part4-rl-principles" style="margin-top: 1rem;">
         <div class="part-sub-header">
+          <span class="sub-badge">Section 4.1 • MDP, Policy &amp; Value Functions</span>
           <h3 class="part-sub-title">
-            <span>Section 4.1 • Principles of Reinforcement Learning</span>
+            <span>Principles of Reinforcement Learning</span>
           </h3>
-          <span class="sub-badge">MDP, Policy &amp; Value Functions</span>
         </div>
 
         <p class="reading-measure" style="margin-bottom:1.5rem;">
@@ -1014,10 +998,10 @@
            ================================================================ -->
       <div id="part4-sl-vs-rl" style="margin-top: 3.5rem;">
         <div class="part-sub-header">
+          <span class="sub-badge">Section 4.2 • Paradigm Comparison</span>
           <h3 class="part-sub-title">
-            <span>Section 4.2 • Supervised Learning vs. Reinforcement Learning</span>
+            <span>Supervised Learning vs. Reinforcement Learning</span>
           </h3>
-          <span class="sub-badge">Paradigm Comparison</span>
         </div>
 
         <p class="reading-measure" style="margin-bottom:1.5rem;">
@@ -1131,10 +1115,10 @@
            ================================================================ -->
       <div id="part4-rl-applications" style="margin-top: 3.5rem;">
         <div class="part-sub-header">
+          <span class="sub-badge">Section 4.3 • Real-World Impact</span>
           <h3 class="part-sub-title">
-            <span>Section 4.3 • Applications of Reinforcement Learning</span>
+            <span>Applications of Reinforcement Learning</span>
           </h3>
-          <span class="sub-badge">Real-World Impact</span>
         </div>
 
         <p class="reading-measure" style="margin-bottom:1.5rem;">
@@ -1197,18 +1181,95 @@
         </div>
       </div>
 
+
+      <!-- Section 4.4: Interactive Q-Learning Gridworld Simulation (2026 Textbook Lab) -->
+      <div id="part4-qgrid" style="margin-top: 3.5rem;">
+        <div class="part-sub-header">
+          <span class="sub-badge">Section 4.4 • Interactive Q-Learning Simulation</span>
+          <h3 class="part-sub-title">
+            <span>Q-Learning 4x4 Gridworld Simulation</span>
+          </h3>
+        </div>
+
+        <p class="reading-measure" style="margin-bottom:1.5rem;">
+          Experience how an autonomous RL agent explores an unknown 4x4 gridworld, balances exploitation vs. exploration via $\epsilon$-greedy action selection, and updates state-action values via the temporal-difference Bellman equation:
+        </p>
+
+        <div class="math-banner" style="font-size:0.92rem; margin-bottom:1.5rem;">
+          $$Q(s, a) \leftarrow Q(s, a) + \alpha \left[ r + \gamma \max_{a'} Q(s', a') - Q(s, a) \right]$$
+        </div>
+
+        <div class="lab-container">
+          <div class="lab-header">
+            <div class="lab-title-group">
+              <div class="lab-icon">🎮</div>
+              <div>
+                <h3 class="lab-title">Interactive Q-Learning 4x4 Gridworld Simulation</h3>
+                <p class="lab-subtitle">Cyan dot = Agent; Green cell = Goal (+10 reward); Red cells = Obstacles (-5 penalty)</p>
+              </div>
+            </div>
+            <div style="display: flex; gap: 0.75rem; align-items: center;">
+              <span class="badge-pill">Episode: <strong id="qEpisodeVal" style="color:var(--accent-cyan);">1</strong></span>
+              <span class="badge-pill">Cumulative Reward: <strong id="qRewardVal" style="color:var(--accent-emerald);">0.0</strong></span>
+            </div>
+          </div>
+
+          <div class="lab-grid">
+            <div class="controls-panel">
+              <p style="font-size:0.88rem; color:#cbd5e1; line-height:1.6;">
+                The agent begins with zero prior knowledge. Through trial and error, it receives negative step penalties ($-0.1$) encouraging shortest-path discovery, avoids hazardous obstacles, and reinforces optimal paths to the target.
+              </p>
+              <div style="display:flex; flex-direction:column; gap:0.6rem; margin-top:1rem;">
+                <button id="qStepBtn" class="btn btn-secondary btn-sm">Single Step Action</button>
+                <button id="qRunBtn" class="btn btn-accent btn-sm">Auto Train Agent</button>
+                <button id="qResetBtn" class="btn btn-secondary btn-sm" style="opacity:0.8;">Reset Q-Table</button>
+              </div>
+            </div>
+
+            <div class="visualizer-stage" style="display:flex; justify-content:center;">
+              <canvas id="gridworldCanvas" width="340" height="340" style="background:#070b14; border:1px solid rgba(255,255,255,0.1); border-radius:10px;"></canvas>
+            </div>
+          </div>
+        </div>
+
+        <div class="grid-2" style="margin-top: 1.5rem;" id="part4-alphago">
+          <div class="card card-accent-top">
+            <h4 style="color:var(--accent-cyan); margin-bottom:0.75rem;">AlphaGo: Policy &amp; Value Network Synthesis</h4>
+            <p style="font-size:0.9rem; line-height:1.65;">
+              In 2016, DeepMind's AlphaGo shattered the $10^{170}$ Go state-space barrier by synthesizing deep neural representation with Monte Carlo Tree Search (MCTS):
+            </p>
+            <ul style="padding-left:1.25rem; font-size:0.85rem; color:#cbd5e1; display:flex; flex-direction:column; gap:0.4rem; margin-top:0.5rem;">
+              <li><strong style="color:var(--accent-cyan)">Policy Network $p_\sigma(a \mid s)$:</strong> Reduces tree search breadth by sampling promising candidate moves.</li>
+              <li><strong style="color:var(--accent-cyan)">Value Network $v_\theta(s)$:</strong> Eliminates brute-force depth traversal by evaluating terminal board win probabilities.</li>
+            </ul>
+          </div>
+
+          <div class="card card-accent-purple">
+            <h4 style="color:var(--accent-purple); margin-bottom:0.75rem;">RLHF: Alignment for Foundation Models</h4>
+            <p style="font-size:0.9rem; line-height:1.65;">
+              Modern LLM alignment uses Reinforcement Learning from Human Feedback (RLHF):
+            </p>
+            <ul style="padding-left:1.25rem; font-size:0.85rem; color:#cbd5e1; display:flex; flex-direction:column; gap:0.4rem; margin-top:0.5rem;">
+              <li><strong>Phase 1 (SFT):</strong> Supervised instruction fine-tuning on high-quality demonstration prompts.</li>
+              <li><strong>Phase 2 (RM):</strong> Reward Model training on pairwise human preference rankings ($y_w \succ y_l$).</li>
+              <li><strong>Phase 3 (PPO):</strong> Optimizing the generative policy via PPO with KL regularization penalty: $\max_\theta \mathbb{E}[r(x, y) - \beta D_{KL}(\pi_\theta \parallel \pi_{\text{ref}})]$.</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+
       <div class="section-nav-footer">
-        <a href="#part3" class="section-nav-btn">← Previous: Part III</a>
-        <a href="#part5" class="section-nav-btn btn-next">Continue to Part V: Generative AI →</a>
+        <a href="#part3" class="section-nav-btn">← Previous: Part 3</a>
+        <a href="#part5" class="section-nav-btn btn-next">Continue to Part 5: Generative AI →</a>
       </div>
     </section>
 
     <!-- ====================================================================
-         PART V: GENERATIVE AI AND FOUNDATION MODELS
+         PART 5: GENERATIVE AI AND FOUNDATION MODELS
          ==================================================================== -->
     <section class="course-part" id="part5">
       <div class="part-header">
-        <span class="part-badge badge-p5">Part V • Generative AI</span>
+        <span class="part-badge badge-p5">Part 5 • Generative AI</span>
         <h2 class="part-title">Attention, Scale, and Foundation Models</h2>
         <p class="part-lead">
           The Transformer Attention mechanism unlocked parallelizable sequence modeling. Combined with empirical scaling laws and multi-stage alignment pipelines (SFT, RLHF, and DPO), this convergence produced today's frontier foundation models.
@@ -1217,7 +1278,7 @@
 
       <!-- Quick Review Takeaway Card -->
       <div class="review-takeaway-box">
-        <div class="review-takeaway-header">✦ Part V Quick Review • Core Academic Takeaways</div>
+        <div class="review-takeaway-header">✦ Part 5 Quick Review • Core Academic Takeaways</div>
         <ul class="review-takeaway-list">
           <li><strong>Attention Eliminates Recurrence:</strong> Scaled Dot-Product Self-Attention $\text{Softmax}\left(\frac{QK^T}{\sqrt{d_k}}\right)V$ collapses sequential $\mathcal{O}(N)$ recurrence into direct $\mathcal{O}(1)$ pairwise token routing, enabling massively parallel GPU pre-training.</li>
           <li><strong>Multi-Head Subspace Projections:</strong> Parallel attention heads project queries, keys, and values into $h$ distinct representation subspaces, captured collectively via output projection $W^O$ to model rich syntactic, semantic, and positional relationships.</li>
@@ -1232,10 +1293,10 @@
            ================================================================ -->
       <div id="part5-attention" style="margin-top: 1rem;">
         <div class="part-sub-header">
+          <span class="sub-badge">Section 5.1 • Vaswani et al., 2017</span>
           <h3 class="part-sub-title">
-            <span>Section 5.1 • The Attention Concept &amp; The Transformer Model</span>
+            <span>The Attention Concept &amp; The Transformer Model</span>
           </h3>
-          <span class="sub-badge">Vaswani et al., 2017</span>
         </div>
 
         <p class="reading-measure" style="margin-bottom:1.5rem;">
@@ -1322,7 +1383,7 @@
 
             <div>
               <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 0.5rem;">
-                <span style="font-size: 0.85rem; font-weight: 600; color: #fff;">11×11 Attention Weight Heatmap (%)</span>
+                <span style="font-size: 0.85rem; font-weight: 600; color: var(--text-bright);">11×11 Attention Weight Heatmap (%)</span>
                 <span style="font-size: 0.75rem; color: var(--accent-cyan); font-family: var(--font-mono);">Hover / Click Cell</span>
               </div>
               <div id="attnHeatmapGrid" class="attention-matrix-grid"></div>
@@ -1336,7 +1397,7 @@
             <h4 class="part-sub-title" style="font-size: 1.05rem;">
               <span>The Transformer Model — Multi-Head Attention &amp; Architectural Family</span>
             </h4>
-            <span class="sub-badge">Building on Attention</span>
+            <span class="sub-badge">Section 5.1 • Transformer Architecture</span>
           </div>
 
           <p class="reading-measure" style="margin-bottom:1.25rem;">
@@ -1387,10 +1448,10 @@
            ================================================================ -->
       <div id="part5-scaling" style="margin-top: 3.5rem;">
         <div class="part-sub-header">
+          <span class="sub-badge">Section 5.2 • Chinchilla &amp; Scaling Laws</span>
           <h3 class="part-sub-title">
-            <span>Section 5.2 • Scaling Laws &amp; Pre-Training at Frontier Scale</span>
+            <span>Scaling Laws &amp; Pre-Training at Frontier Scale</span>
           </h3>
-          <span class="sub-badge">Chinchilla &amp; Compute-Optimal Training</span>
         </div>
 
       <!-- Frontier Scale Profile -->
@@ -1464,10 +1525,10 @@
            ================================================================ -->
       <div id="part5-alignment" style="margin-top: 3.5rem;">
         <div class="part-sub-header">
+          <span class="sub-badge">Section 5.3 • The 3 Pillars of Modern LLMs</span>
           <h3 class="part-sub-title">
-            <span>Section 5.3 • Pre-Training, Supervised Fine-Tuning &amp; RLHF Alignment</span>
+            <span>Pre-Training, Supervised Fine-Tuning &amp; RLHF Alignment</span>
           </h3>
-          <span class="sub-badge">The 3 Pillars of Modern LLMs</span>
         </div>
 
         <!-- The 3 Pillars of Modern LLMs -->
@@ -1490,17 +1551,17 @@
         </div>
       </div>
       <div class="section-nav-footer">
-        <a href="#part4" class="section-nav-btn">← Previous: Part IV (Reinforcement Learning)</a>
-        <a href="#part6" class="section-nav-btn btn-next">Continue to Part VI: Physical Substrate →</a>
+        <a href="#part4" class="section-nav-btn">← Previous: Part 4 (Reinforcement Learning)</a>
+        <a href="#part6" class="section-nav-btn btn-next">Continue to Part 6: Physical Substrate →</a>
       </div>
     </section>
 
     <!-- ====================================================================
-         PART VI: SILICON, SYSTEMS, AND DATA CENTERS
+         PART 6: SILICON, SYSTEMS, AND DATA CENTERS
          ==================================================================== -->
     <section class="course-part" id="part6">
       <div class="part-header">
-        <span class="part-badge badge-p6">Part VI • Physical Substrate</span>
+        <span class="part-badge badge-p6">Part 6 • Physical Substrate</span>
         <h2 class="part-title">The Physical Substrate: Silicon to Data Centers</h2>
         <p class="part-lead">
           Every mathematical backpropagation gradient and attention matrix multiply must run on physical silicon. Understanding the physical hierarchy — from NVIDIA H200 Streaming Multiprocessors and 141GB HBM3e memory to HGX servers, racks, SuperPODs, and megawatt data centers — is vital for modern information engineers.
@@ -1509,13 +1570,19 @@
 
       <!-- Quick Review Takeaway Card -->
       <div class="review-takeaway-box">
-        <div class="review-takeaway-header">✦ Part VI Quick Review • Core Academic Takeaways</div>
+        <div class="review-takeaway-header">✦ Part 6 Quick Review • Core Academic Takeaways</div>
         <ul class="review-takeaway-list">
           <li><strong>Tensor Core SIMD/SIMT Acceleration:</strong> NVIDIA H200 Streaming Multiprocessors (SMs) leverage 4th-Gen Tensor Cores executing mixed-precision FP8/FP16 matrix operations ($D = A \cdot B + C$) alongside an advanced FP8 Transformer Engine, delivering ~2,000 TFLOPs of tensor throughput.</li>
           <li><strong>141GB HBM3e Memory &amp; The ~96&times; Bandwidth Hierarchy:</strong> Equipped with 141GB of ultra-fast HBM3e memory running at 4,800 GB/s (4.8 TB/s), interconnect throughput experiences steep physical attenuation across cluster boundaries: 4,800 GB/s (on-chip HBM3e) $\to$ 900 GB/s (intra-node NVLink 4.0) $\to$ 400 GB/s (rack switch) $\to$ ~50 GB/s (inter-pod optical InfiniBand fabric) — an unprecedented ~96&times; bandwidth collapse.</li>
           <li><strong>Distributed 3D Parallelism &amp; Collectives:</strong> Training and serving multi-trillion parameter frontiers requires partitioning workloads across Data, Tensor, and Pipeline Parallelism synchronized via distributed All-Reduce collective communications.</li>
           <li><strong>Megawatt Supercluster Footprint:</strong> Aggregating 24,576 H200 GPUs across 8 SuperPODs delivers over 24 ExaFLOPs of FP8 compute, constrained by high-density power delivery, direct-to-chip liquid cooling distribution, and non-blocking optical switch fabric topologies.</li>
         </ul>
+      </div>
+
+      <!-- Section 6.1: Silicon Architecture -->
+      <div class="part-sub-header" style="margin-top: 2.5rem;">
+        <span class="sub-badge">Section 6.1 • Silicon Architecture</span>
+        <h3 class="part-sub-title">NVIDIA H200 Streaming Multiprocessor (SM) &amp; Memory Bandwidth</h3>
       </div>
 
       <!-- Figure 6.1: NVIDIA H200 SM -->
@@ -1526,6 +1593,12 @@
         <div class="figure-caption">
           <strong>Figure 6.1 • NVIDIA H200 Streaming Multiprocessor (SM) Silicon Architecture &amp; 141GB HBM3e Integration:</strong> Silicon floorplan of the NVIDIA H200 Tensor Core GPU die packaged with six 141GB HBM3e memory stacks over a CoWoS-S silicon interposer, delivering 4.8 TB/s internal memory bandwidth. Each SM features dedicated FP32 cores, 4th-Generation Tensor Cores optimized for FP8 Transformer workloads, private L1 cache, and high-speed NVLink 4.0 interfaces.
         </div>
+      </div>
+
+      <!-- Section 6.2: Compute Scale & Topology -->
+      <div class="part-sub-header" style="margin-top: 2.5rem;">
+        <span class="sub-badge">Section 6.2 • Compute Scale &amp; Topology</span>
+        <h3 class="part-sub-title">NVLink, SuperPODs &amp; Hyperscale Interconnect Hierarchies</h3>
       </div>
 
       <!-- Figure 6.2: H200 Compute Aggregation Hierarchy -->
@@ -1596,17 +1669,17 @@
         </div>
       </div>
       <div class="section-nav-footer">
-        <a href="#part5" class="section-nav-btn">← Previous: Part V (Generative AI)</a>
-        <a href="#part7" class="section-nav-btn btn-next">Continue to Part VII: Autonomous Agency →</a>
+        <a href="#part5" class="section-nav-btn">← Previous: Part 5 (Generative AI)</a>
+        <a href="#part7" class="section-nav-btn btn-next">Continue to Part 7: Autonomous Agency →</a>
       </div>
     </section>
 
     <!-- ====================================================================
-         PART VII: AGENTIC AI SYSTEMS
+         PART 7: AGENTIC AI SYSTEMS
          ==================================================================== -->
     <section class="course-part" id="part7">
       <div class="part-header">
-        <span class="part-badge badge-p7">Part VII • Autonomous Agency</span>
+        <span class="part-badge badge-p7">Part 7 • Autonomous Agency</span>
         <h2 class="part-title">Agentic AI: Autonomous Goal Pursuit</h2>
         <p class="part-lead">
           The theoretical shift from passive input → output to rational agency. An autonomous agent is not just a chatbot; it maintains state, reasons over multi-step horizons, uses external tools, and executes continuous feedback loops to achieve complex real-world objectives.
@@ -1615,7 +1688,7 @@
 
       <!-- Quick Review Takeaway Card -->
       <div class="review-takeaway-box">
-        <div class="review-takeaway-header">✦ Part VII Quick Review • Core Academic Takeaways</div>
+        <div class="review-takeaway-header">✦ Part 7 Quick Review • Core Academic Takeaways</div>
         <ul class="review-takeaway-list">
           <li><strong>From Passive Predictors to Rational Agency:</strong> While baseline LLMs operate as passive static functions ($x \to y$), autonomous agents maintain persistent state, reason across multi-step horizons, invoke external tools, and close feedback loops.</li>
           <li><strong>The 4 Pillars of Agent Architecture:</strong> Complete agentic systems integrate: 1. Core LLM Reasoning Engine $\to$ 2. Planning &amp; Reflection (ReAct / Tree of Thoughts) $\to$ 3. Dual Memory (In-Context &amp; Vector RAG) $\to$ 4. Tool Execution Sandbox (APIs / Code).</li>
@@ -1714,7 +1787,10 @@
       <!-- PEAS Framework & Technical Competencies -->
       <div class="grid-2" style="margin-top: 2rem;">
         <div class="card card-accent-top">
-          <h3 class="card-title">The PEAS Rational Agency Framework</h3>
+          <div class="card-header-row">
+            <h3 class="card-title">The PEAS Rational Agency Framework</h3>
+            <span class="sub-badge">Section 7.1 • Rational Agency Formalism</span>
+          </div>
           <p style="font-size:0.88rem;">Drawn from Russell & Norvig's canonical AI textbook, replacing passive input/output:</p>
           <ul style="padding-left: 1.25rem; font-size:0.88rem; color:#cbd5e1; display:flex; flex-direction:column; gap:0.5rem;">
             <li><strong style="color:var(--accent-cyan)">P (Performance Measure):</strong> Objective metric defining success (e.g., unit test pass rate, code latency, portfolio Sharpe ratio).</li>
@@ -1844,18 +1920,529 @@
       </div>
 
       <div class="section-nav-footer">
-        <a href="#part6" class="section-nav-btn">← Previous: Part VI (Physical Substrate)</a>
-        <a href="#part8" class="section-nav-btn btn-next">Continue to Part VIII: Physical AI →</a>
+        <a href="#part6" class="section-nav-btn">← Previous: Part 6 (Physical Substrate)</a>
+        <a href="#part8" class="section-nav-btn btn-next">Continue to Part 8: Coding Agents &amp; Tools →</a>
       </div>
     </section>
 
-    <!-- ====================================================================
-         PART VIII: PHYSICAL AI & EMBODIED SYSTEMS
+        <!-- ====================================================================
+         PART 8: CODING AGENTS AND TOOLS
          ==================================================================== -->
     <section class="course-part" id="part8">
       <div class="part-header">
-        <span class="part-badge badge-p-physical">Part VIII • Physical AI</span>
-        <h2 class="part-title">Physical AI: Embodied Systems & The Material Frontier</h2>
+        <span class="part-badge badge-p8">Part 8 • Session 6 • Developer Tooling &amp; Agentic Coding</span>
+        <h2 class="part-title">Coding Agents and Tools: Architecture, Workflows &amp; High-Leverage Engineering</h2>
+        <p class="part-lead">
+          The transformation of software engineering from manual syntax synthesis and predictive autocompletion to autonomous coding agents. Governed by tool invocation loops, layered security sandboxes, deterministic context engineering, and the Google Gemini tri-surface agentic platform.
+        </p>
+      </div>
+
+      <!-- Quick Review Takeaway Card -->
+      <div class="review-takeaway-box">
+        <div class="review-takeaway-header">✦ Part 8 Quick Review • Core Academic Takeaways</div>
+        <ul class="review-takeaway-list">
+          <li><strong>The Four Generations of AI Programming:</strong> From inline tab autocomplete (2021) and conversational chat assistants (2022) to in-editor agentic editing (2024) and autonomous, background coding agents (2025–2026) operating directly on files, terminals, and git.</li>
+          <li><strong>The Core Tool Primitive Hierarchy:</strong> Agents operate by iteratively observing environment state, executing filesystem discovery (<code>list_dir</code>, ripgrep), performing surgical line edits, executing compilers/tests via shell commands, and driving visual headless browsers.</li>
+          <li><strong>The Disciplined Engineering Protocol:</strong> High-leverage software engineering requires enforcing a deterministic four-phase lifecycle: <strong>Explore (read-only) &rarr; Plan (architectural artifact) &rarr; Implement (surgical diffs &amp; TDD) &rarr; Verify (static types, test suite &amp; browser recordings)</strong>.</li>
+          <li><strong>Layered Safety and Sandboxing:</strong> Production agentic harnesses enforce five defensive concentric rings: interactive approval gates, command allow/deny lists, filesystem path confinement, snapshot rollbacks, and pull request reviews.</li>
+          <li><strong>Parallel Scale via Git Worktrees:</strong> Overcoming serial latency and context window churn by spinning up multiple isolated agents working concurrently in separate git worktree directories on independent branches.</li>
+        </ul>
+      </div>
+
+      <!-- Section 8.1: Evolution to Autonomous Agents -->
+      <div class="card" style="margin-top: 2rem;" id="part8-evolution">
+        <div class="card-header-row">
+          <h3 class="card-title">The Paradigm Shift: Four Generations of AI Programming Assistance</h3>
+          <span class="sub-badge">Section 8.1 • Architectural Evolution</span>
+        </div>
+        <p class="reading-measure">
+          Between 2021 and 2026, artificial intelligence in software engineering underwent a profound architectural transformation. In early 2021, AI assistance was synonymous with passive code completion: language models conditioned on open editor buffers proposed the next tokens as a developer typed. By 2026, coding systems evolved into <strong>autonomous software engineers</strong> that read large codebases, plan multi-file architectures, invoke terminal commands, execute compilers, diagnose stack traces, and commit verified git patches.
+        </p>
+
+        <div style="overflow-x:auto; margin: 1.5rem 0;">
+          <table class="tools-matrix-table">
+            <thead>
+              <tr>
+                <th>Generation</th>
+                <th>Period</th>
+                <th>What the AI Does</th>
+                <th>Who Drives</th>
+                <th>Example Interaction</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td><strong>1. Code Completion</strong></td>
+                <td>2021&ndash;present</td>
+                <td>Predicts the next lines as you type based on local prefix tokens.</td>
+                <td>Developer, keystroke by keystroke.</td>
+                <td>Type a function signature; accept the suggested body with <kbd>Tab</kbd>.</td>
+              </tr>
+              <tr>
+                <td><strong>2. Chat Assistants</strong></td>
+                <td>2022&ndash;present</td>
+                <td>Answers questions and writes standalone snippets in a sidebar panel.</td>
+                <td>Developer copies, reviews, and manually pastes.</td>
+                <td><em>&ldquo;Write a regular expression that validates international phone numbers.&rdquo;</em></td>
+              </tr>
+              <tr>
+                <td><strong>3. Agentic Editing</strong></td>
+                <td>2024&ndash;present</td>
+                <td>Reads multiple project files, formulates diffs, and applies edits in-place.</td>
+                <td>Developer sets the task and approves each edit step.</td>
+                <td><em>&ldquo;Add cursor-based pagination to the orders API and update the test suite.&rdquo;</em></td>
+              </tr>
+              <tr>
+                <td><strong>4. Autonomous / Background Agents</strong></td>
+                <td>2025&ndash;present</td>
+                <td>Runs multi-step loops across files, shell, browser, and git to complete end-to-end issues.</td>
+                <td>Developer specifies high-level goal, reviews plan &amp; final PR.</td>
+                <td><em>&ldquo;Investigate issue #412, reproduce with a unit test, fix regression, and verify green build.&rdquo;</em></td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+      <!-- Section 8.2: Anatomy of a Coding Agent Session -->
+      <div class="card" style="margin-top: 2rem;" id="part8-anatomy">
+        <div class="card-header-row">
+          <h3 class="card-title">The Anatomy of a Coding Agent Session: The CSV Date Bug Case</h3>
+          <span class="sub-badge">Section 8.2 • Textbook Case Study</span>
+        </div>
+        <p class="reading-measure">
+          How does an autonomous agent solve real-world software defects? Consider the canonical benchmark session detailed in <em>The Architecture of Intelligence</em>: a customer reports that an export utility produces CSV files where timestamp columns are formatted inconsistently across client locales.
+        </p>
+
+        <div class="grid-4-col">
+          <div class="part-box accent-border-cyan">
+            <span class="part-box-tag tag-cyan">STAGE 1 • EXPLORE</span>
+            <h4 class="part-box-title">Semantic Discovery</h4>
+            <p class="part-box-desc">The agent executes <code>ripgrep</code> to locate <code>export_csv</code> handlers and reads the date-formatting helper routines without modifying any files.</p>
+          </div>
+          <div class="part-box accent-border-purple">
+            <span class="part-box-tag tag-purple">STAGE 2 • HYPOTHESIZE</span>
+            <h4 class="part-box-title">Root Cause Analysis</h4>
+            <p class="part-box-desc">It pinpoints that the helper formats timestamps using server locale rather than deterministic ISO-8601 UTC standards.</p>
+          </div>
+          <div class="part-box accent-border-rose">
+            <span class="part-box-tag tag-rose">STAGE 3 • REPRODUCE (TDD)</span>
+            <h4 class="part-box-title">Failing Test Isolation</h4>
+            <p class="part-box-desc">Before touching production logic, it constructs a failing unit test: <code>test_csv_export_utc_iso_format()</code> and asserts expected behavior.</p>
+          </div>
+          <div class="part-box accent-border-emerald">
+            <span class="part-box-tag tag-emerald">STAGE 4 • FIX &amp; VERIFY</span>
+            <h4 class="part-box-title">Continuous Verification</h4>
+            <p class="part-box-desc">It modifies the formatting utility, executes the automated test runner in the terminal, resolves collateral regressions, and commits green.</p>
+          </div>
+        </div>
+
+        <div class="figure-container" id="fig-8-1">
+          <div class="figure-image-wrap" onclick="openLightbox('assets/textbook/image52.png', 'Figure 8.1 • A typical coding-agent session for the CSV date bug: explore, hypothesize, reproduce with a failing test, fix, verify (looping until the full suite passes), and report.')" title="Click to view full resolution in Lightbox" style="cursor:zoom-in;">
+            <img src="assets/textbook/image52.png" alt="A typical coding-agent session for the CSV date bug" style="max-height: 480px; width: 100%; object-fit: contain;" loading="lazy" />
+          </div>
+          <div class="figure-caption">
+            <strong>Figure 8.1 • A typical coding-agent session for the CSV date bug:</strong> explore, hypothesize, reproduce with a failing test, fix, verify (looping until the full suite passes), and report.
+          </div>
+        </div>
+      </div>
+
+      <!-- Section 8.3: Layered Safety Controls -->
+      <div class="card" style="margin-top: 2rem;" id="part8-safety">
+        <div class="card-header-row">
+          <h3 class="card-title">Layered Safety Controls and Execution Sandboxing</h3>
+          <span class="sub-badge">Section 8.3 • Defensive Security Architecture</span>
+        </div>
+        <p class="reading-measure">
+          Because coding agents possess authority to execute shell commands and modify local files, rigorous sandboxing is essential to prevent unintended data loss or unauthorized privilege escalation. Industrial harnesses employ five concentric defensive layers:
+        </p>
+
+        <div class="grid-3-col">
+          <div class="part-box accent-border-cyan">
+            <h4 class="part-box-title">1. Interactive Approval Modes</h4>
+            <p class="part-box-desc">Demands explicit human verification before running high-blast-radius operations: modifying remote servers, executing <code>git push</code>, or executing drop commands.</p>
+          </div>
+          <div class="part-box accent-border-purple">
+            <h4 class="part-box-title">2. Command Allow &amp; Deny Lists</h4>
+            <p class="part-box-desc">Kernel-level filtering that categorically blocks destructive shell invocations: <code>rm -rf /</code>, writing to system root, or altering SSH keys.</p>
+          </div>
+          <div class="part-box accent-border-emerald">
+            <h4 class="part-box-title">3. Filesystem Path Sandboxing</h4>
+            <p class="part-box-desc">Path confinement that enforces file reads and writes strictly within the active workspace root directory, disallowing symlink escapes to host operating systems.</p>
+          </div>
+          <div class="part-box accent-border-amber">
+            <h4 class="part-box-title">4. Checkpoints &amp; Rollback</h4>
+            <p class="part-box-desc">Automated git stash checkpoints created prior to multi-file modifications, allowing instant, zero-cost rollback if the agent's plan deviates or breaks tests.</p>
+          </div>
+          <div class="part-box accent-border-rose">
+            <h4 class="part-box-title">5. Version Control as Outer Net</h4>
+            <p class="part-box-desc">Agents operate on isolated feature branches or git worktrees; commits require pull request peer review and continuous integration (CI) green badges before merging.</p>
+          </div>
+        </div>
+
+        <div class="figure-container" id="fig-8-2">
+          <div class="figure-image-wrap" onclick="openLightbox('assets/textbook/image53.png', 'Figure 8.2 • Layered safety controls around a coding agent: approval modes, allow and deny lists, sandboxing, checkpoints and undo, and version control as the outer safety net.')" title="Click to view full resolution in Lightbox" style="cursor:zoom-in;">
+            <img src="assets/textbook/image53.png" alt="Layered safety controls around a coding agent" style="max-height: 480px; width: 100%; object-fit: contain;" loading="lazy" />
+          </div>
+          <div class="figure-caption">
+            <strong>Figure 8.2 • Layered safety controls around a coding agent:</strong> approval modes, allow and deny lists, sandboxing, checkpoints and undo, and version control as the outer safety net.
+          </div>
+        </div>
+      </div>
+
+      <!-- Section 8.4: Leading Coding Tools & Form Factors -->
+      <div class="card" style="margin-top: 2rem;" id="part8-tools">
+        <div class="card-header-row">
+          <h3 class="card-title">Four Form Factors &amp; The Leading Coding Tools Taxonomy</h3>
+          <span class="sub-badge">Section 8.4 • Industry Landscape (2026)</span>
+        </div>
+        <p class="reading-measure">
+          Modern coding agents manifest in four primary form factors, each engineered for distinct developer ergonomics and trust boundaries:
+        </p>
+
+        <div class="grid-4-col">
+          <div class="part-box accent-border-cyan">
+            <span class="part-box-tag tag-cyan">Form Factor 1</span>
+            <h4 class="part-box-title">Terminal CLI Agents</h4>
+            <p class="part-box-desc"><strong>Claude Code, Gemini CLI:</strong> Native terminal utilities executing in the shell. Ultra-fast, scriptable, seamlessly integrated with git worktrees and CI/CD pipelines.</p>
+          </div>
+          <div class="part-box accent-border-purple">
+            <span class="part-box-tag tag-purple">Form Factor 2</span>
+            <h4 class="part-box-title">Agentic IDEs</h4>
+            <p class="part-box-desc"><strong>Cursor, Windsurf:</strong> Dedicated VS Code forks re-architected around agentic multi-file indexing, semantic vector code search, and integrated diff review.</p>
+          </div>
+          <div class="part-box accent-border-emerald">
+            <span class="part-box-tag tag-emerald">Form Factor 3</span>
+            <h4 class="part-box-title">In-Editor Extensions</h4>
+            <p class="part-box-desc"><strong>GitHub Copilot:</strong> Lightweight plugins embedded into standard IDEs, offering frictionless inline completions, chat sidebars, and cloud workspace agents.</p>
+          </div>
+          <div class="part-box accent-border-amber">
+            <span class="part-box-tag tag-amber">Form Factor 4</span>
+            <h4 class="part-box-title">Agent-First Platforms</h4>
+            <p class="part-box-desc"><strong>Google Antigravity, Devin:</strong> Cloud-native or desktop agent managers coordinating multiple agents across editor buffers, terminal daemons, and visual browser subagents.</p>
+          </div>
+        </div>
+
+        <div class="figure-container" id="fig-8-3">
+          <div class="figure-image-wrap" onclick="openLightbox('assets/textbook/image68.png', 'Figure 8.3 • The Claude and Modern Agentic Toolkits in 2026: model family, Claude app, Claude Code, workbenches, and developer platform.')" title="Click to view full resolution in Lightbox" style="cursor:zoom-in;">
+            <img src="assets/textbook/image68.png" alt="The Claude and Modern Agentic Toolkits in 2026" style="max-height: 480px; width: 100%; object-fit: contain;" loading="lazy" />
+          </div>
+          <div class="figure-caption">
+            <strong>Figure 8.3 • The Claude and Modern Agentic Toolkits in 2026:</strong> One family of models powers the Claude app (chat, agent mode, Projects, artifacts, memory, connectors, skills), Claude Code, Claude inside other applications, specialized workbenches and the developer platform.
+          </div>
+        </div>
+      </div>
+
+      <!-- Section 8.5: Deep-Dive Case Study: Google Gemini as an Agentic Tool Platform -->
+      <div class="card gemini-case-card" style="margin-top: 2rem;" id="part8-gemini">
+        <div class="card-header-row">
+          <h3 class="card-title">Deep-Dive Case Study: Google Gemini as an Agentic Tool Platform</h3>
+          <span class="sub-badge">Section 8.5 • Gemini 2.5 / 3 &amp; Antigravity</span>
+        </div>
+        <p class="reading-measure">
+          In <em>The Architecture of Intelligence</em>, <strong>Google Antigravity</strong> and the <strong>Gemini 2.5/3 model family</strong> represent the vanguard of <em>agent-first development environments</em>. Rather than retrofitting a language model into a classic code editor, Antigravity was architected from inception around the orchestration and supervision of autonomous agents.
+        </p>
+
+        <!-- Technical Sub-Grid: Gemini Engine Specs -->
+        <div class="grid-3-col">
+          <div class="part-box accent-border-cyan">
+            <span class="part-box-tag tag-cyan">FOUNDATION CAPABILITY</span>
+            <h4 class="part-box-title">1M+ Token Context Window</h4>
+            <p class="part-box-desc">
+              Gemini processes entire large-scale multi-package repositories in a single reasoning pass. This eliminates lossy chunking heuristics, allowing the model to grasp cross-module dependencies, type hierarchies, and build files simultaneously.
+            </p>
+          </div>
+
+          <div class="part-box accent-border-purple">
+            <span class="part-box-tag tag-purple">DETERMINISTIC INVOCATION</span>
+            <h4 class="part-box-title">Native Tool Calling &amp; Strict Schemas</h4>
+            <p class="part-box-desc">
+              Tools are declared via JSON Schema definitions. Gemini outputs strictly typed, validated tool invocation objects (e.g., <code>replace_file_content</code>, <code>run_command</code>), enforcing syntactic correctness before execution occurs.
+            </p>
+          </div>
+
+          <div class="part-box accent-border-emerald">
+            <span class="part-box-tag tag-emerald">TRI-SURFACE EXECUTION</span>
+            <h4 class="part-box-title">Editor &bull; Shell &bull; Visual Browser</h4>
+            <p class="part-box-desc">
+              Unlike text-only assistants, Gemini operates across three synchronized execution planes: surgical file editing, persistent asynchronous shell processes, and a headless Chromium browser subagent that verifies live DOM state and console telemetry.
+            </p>
+          </div>
+        </div>
+
+        <!-- Case Study Walkthrough: End-to-End Autonomous Engineering -->
+        <div class="case-study-panel">
+          <div style="display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:0.5rem; margin-bottom:1rem;">
+            <span class="part-box-tag tag-cyan" style="font-size:0.82rem; margin:0;">Enterprise Case Study Walkthrough</span>
+            <span style="font-size:0.75rem; background:rgba(56,189,248,0.15); color:var(--accent-cyan); padding:0.25rem 0.65rem; border-radius:4px; border:1px solid rgba(56,189,248,0.3); font-weight:600;">Autonomous Telemetry Service Implementation</span>
+          </div>
+
+          <h4 class="case-study-title">Scenario: Implementing a Resilient WebSocket Telemetry &amp; Auth Service</h4>
+          <p class="case-study-lead">
+            A mission-critical IoT data cluster requires an authenticated streaming telemetry service with exponential jittered reconnection backoff, heartbeat keepalives, and zero-downtime client recovery. The developer provides the high-level specification to the Gemini Agent in Antigravity:
+          </p>
+
+          <div style="display:flex; flex-direction:column; gap:1rem;">
+            <!-- Step 1 -->
+            <div class="case-step-card accent-border-cyan">
+              <h5 class="case-step-title" style="color:var(--accent-cyan);">Phase 1: Read-Only Repository Discovery &amp; Topology Mapping</h5>
+              <p class="case-step-text">
+                Gemini initiates execution by calling <code>list_dir</code> and ripgrep <code>grep_search</code> across the project. It examines existing authentication middleware (<code>auth/jwt.py</code>) and socket handlers (<code>server/stream.py</code>). It maps existing interface types and constraints <em>without modifying a single line of production code</em>.
+              </p>
+            </div>
+
+            <!-- Step 2 -->
+            <div class="case-step-card accent-border-purple">
+              <h5 class="case-step-title" style="color:#c084fc;">Phase 2: Architectural Artifact Generation</h5>
+              <p class="case-step-text">
+                Rather than dumping unformatted code into chat, Gemini writes a structured artifact: <code>implementation_plan.md</code>. The artifact specifies the exponential backoff formula <span class="math-inline">$t_k = \min(t_{\max}, t_0 \cdot 2^k) \pm \mathcal{U}(0, \delta)$</span>, the WebSocket message schema and binary heartbeat envelope, and a blast-radius risk mitigation checklist. <em>The developer inspects the plan in Antigravity's review panel and clicks &ldquo;Proceed&rdquo;.</em>
+              </p>
+            </div>
+
+            <!-- Step 3 -->
+            <div class="case-step-card accent-border-emerald">
+              <h5 class="case-step-title" style="color:#34d399;">Phase 3: Test-First Surgical Implementation</h5>
+              <p class="case-step-text">
+                Gemini invokes <code>write_to_file</code> to author comprehensive unit tests in <code>tests/test_telemetry.py</code> asserting reconnect backoff under network fault injection. It executes <code>run_command</code> (<code>pytest tests/test_telemetry.py</code>) confirming the tests fail red. Next, it executes localized <code>replace_file_content</code> diffs in <code>server/telemetry.py</code> until all unit tests pass green.
+              </p>
+            </div>
+
+            <!-- Step 4 -->
+            <div class="case-step-card accent-border-amber">
+              <h5 class="case-step-title" style="color:#fbbf24;">Phase 4: Daemon Launch &amp; Visual Browser Subagent Verification</h5>
+              <p class="case-step-text">
+                To guarantee full-stack reliability, Gemini launches the application backend as an asynchronous background daemon (<code>run_command</code> with <code>IsDaemon: true</code> on port 8080). It then spawns a <code>browser_subagent</code> that navigates to the live client UI, simulates a socket disconnect event, observes the reconnection progress bar, verifies live charts resume data ingest, captures browser console logs confirming <strong>zero unhandled exceptions</strong>, and records an animated WebP verification video artifact for developer review.
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Section 8.6: The Disciplined Engineering Protocol -->
+      <div class="card" style="margin-top: 2rem;" id="part8-workflow">
+        <div class="card-header-row">
+          <h3 class="card-title">The Disciplined Engineering Protocol: Explore &rarr; Plan &rarr; Implement &rarr; Verify</h3>
+          <span class="sub-badge">Section 8.6 • Professional Methodology</span>
+        </div>
+        <p class="reading-measure">
+          The defining difference between amateur developers and senior AI software engineers is discipline. Amateurs prompt <em>&ldquo;write me an entire application&rdquo;</em>, prompting hallucinated variables, broken imports, and sprawling regressions. Professional engineers enforce the four-stage lifecycle:
+        </p>
+
+        <div class="grid-4-col">
+          <div class="part-box accent-border-cyan">
+            <span class="part-box-tag tag-cyan">STAGE 1 • EXPLORE</span>
+            <h4 class="part-box-title">Read-Only Discovery</h4>
+            <p class="part-box-desc">Instruct the agent to inspect types, dependencies, and existing patterns without modifying files. Never guess codebase conventions.</p>
+          </div>
+          <div class="part-box accent-border-purple">
+            <span class="part-box-tag tag-purple">STAGE 2 • PLAN</span>
+            <h4 class="part-box-title">Architectural Alignment</h4>
+            <p class="part-box-desc">Require a concrete plan artifact detailing proposed file edits, schema migrations, and risk blast radius before implementation starts.</p>
+          </div>
+          <div class="part-box accent-border-emerald">
+            <span class="part-box-tag tag-emerald">STAGE 3 • IMPLEMENT</span>
+            <h4 class="part-box-title">Surgical Diffs &amp; TDD</h4>
+            <p class="part-box-desc">Enforce localized edits with zero placeholders. Write unit tests first, verify test failure, and implement minimal code until tests turn green.</p>
+          </div>
+          <div class="part-box accent-border-amber">
+            <span class="part-box-tag tag-amber">STAGE 4 • VERIFY</span>
+            <h4 class="part-box-title">Automated Quality Gates</h4>
+            <p class="part-box-desc">Execute compiler checks (<code>npm run typecheck</code>), run linters, launch test suites, and visually verify UI in the browser before commit.</p>
+          </div>
+        </div>
+
+        <p class="reading-measure" style="font-size:0.9rem; color:#cbd5e1; margin-top:1rem;">
+          Mathematically, the total expected risk of an agent-generated changeset <span class="math-inline">$\Delta C$</span> is bounded by the probability of an unhandled edge case weighted by its operational blast radius:
+        </p>
+        <div class="math-banner" style="font-size:0.92rem; margin:1rem 0;">
+          $$\text{Risk}(\Delta C) = \mathcal{P}(\text{Defect} \mid \text{Context}) \cdot \|\text{Blast Radius}(\Delta C)\|$$
+        </div>
+        <p class="reading-measure" style="font-size:0.88rem; color:#94a3b8;">
+          The explore-plan protocol systematically drives <span class="math-inline">$\mathcal{P}(\text{Defect}) \to 0$</span> by anchoring model reasoning in ground-truth repository context, while surgical implementation bounds <span class="math-inline">$\|\text{Blast Radius}\| \to \text{minimal}$</span>.
+        </p>
+
+        <div class="figure-container" id="fig-8-4">
+          <div class="figure-image-wrap" onclick="openLightbox('assets/textbook/image54.png', 'Figure 8.4 • The explore → plan → implement → verify workflow, with a typical prompt for each phase and what the developer checks before moving on.')" title="Click to view full resolution in Lightbox" style="cursor:zoom-in;">
+            <img src="assets/textbook/image54.png" alt="The explore-plan-implement-verify workflow" style="max-height: 480px; width: 100%; object-fit: contain;" loading="lazy" />
+          </div>
+          <div class="figure-caption">
+            <strong>Figure 8.4 • The explore &rarr; plan &rarr; implement &rarr; verify workflow:</strong> with a typical prompt for each phase and what the developer checks before moving on.
+          </div>
+        </div>
+      </div>
+
+      <!-- Section 8.7: Scaling Velocity: Subagents & Git Worktrees -->
+      <div class="card" style="margin-top: 2rem;" id="part8-worktrees">
+        <div class="card-header-row">
+          <h3 class="card-title">Scaling Agentic Velocity: Subagents &amp; Git Worktrees</h3>
+          <span class="sub-badge">Section 8.7 • Concurrency &amp; High Throughput</span>
+        </div>
+        <p class="reading-measure">
+          Running a single coding agent serially on a complex monolithic repository encounters two hard constraints: <strong>context window exhaustion</strong> (accumulating thousands of lines of terminal logs and failed diff attempts) and <strong>clock-time latency</strong>. To achieve enterprise velocity, modern teams scale horizontally via <strong>Subagents</strong> and <strong>Git Worktrees</strong>.
+        </p>
+
+        <div class="grid-2-col">
+          <div class="part-box accent-border-cyan">
+            <h4 class="part-box-title">Subagent Task Delegation</h4>
+            <p class="part-box-desc">
+              A primary orchestrator agent decomposes a large user request into discrete, isolated tasks. Specialized subagents are spawned with ephemeral context windows to investigate specific subsystems (e.g., database migration subagent, UI rendering subagent, security audit subagent), returning concise summary reports to the parent agent.
+            </p>
+          </div>
+          <div class="part-box accent-border-purple">
+            <h4 class="part-box-title">Git Worktrees for Zero-Collision Branching</h4>
+            <p class="part-box-desc">
+              Standard git checkouts permit only one active branch per working directory. <code>git worktree add ../feature-auth branch-auth</code> creates linked working trees on the filesystem. Multiple coding agents can run simultaneously in parallel directories without file locking conflicts or git branch collisions.
+            </p>
+          </div>
+        </div>
+
+        <div class="figure-container" id="fig-8-5">
+          <div class="figure-image-wrap" onclick="openLightbox('assets/textbook/image56.png', 'Figure 8.5 • Parallel agents in git worktrees: each agent works on its own branch in a separate directory of the same repository. Human review of the resulting changes becomes the bottleneck.')" title="Click to view full resolution in Lightbox" style="cursor:zoom-in;">
+            <img src="assets/textbook/image56.png" alt="Parallel agents in git worktrees" style="max-height: 480px; width: 100%; object-fit: contain;" loading="lazy" />
+          </div>
+          <div class="figure-caption">
+            <strong>Figure 8.5 • Parallel agents in git worktrees:</strong> each agent works on its own branch in a separate directory of the same repository. Human review of the resulting changes becomes the bottleneck.
+          </div>
+        </div>
+      </div>
+
+      <!-- Section 8.8: Context Engineering & Prompt Pattern Library -->
+      <div class="card" style="margin-top: 2rem;" id="part8-prompts">
+        <div class="card-header-row">
+          <h3 class="card-title">Context Engineering &amp; Production Prompt Pattern Library</h3>
+          <span class="sub-badge">Section 8.8 • Prompt Engineering</span>
+        </div>
+        <p class="reading-measure">
+          Persistent repository steering is governed by project instruction files (e.g., <code>AGENTS.md</code>, <code>CLAUDE.md</code>, <code>.gemini/rules/</code>). Below are production-tested prompt patterns calibrated to guide coding agents with mathematical precision:
+        </p>
+
+        <!-- Prompt Grid with copyPrompt(this) -->
+        <div class="prompt-grid">
+          <div class="prompt-card">
+            <div class="pc-header">
+              <span class="pc-tag">Pattern 1</span>
+              <h4>Explore-First Architecture</h4>
+              <button class="copy-prompt-btn" onclick="window.copyPrompt(this)">Copy Prompt</button>
+            </div>
+            <pre class="prompt-code">Explore the codebase first. Find where [FEATURE_NAME] is handled.
+Do not write or modify any code yet.
+Return:
+1. List of affected files, classes, and exported functions.
+2. Architecture design plan with data flow.
+3. Edge cases, performance considerations, and test strategy.</pre>
+          </div>
+
+          <div class="prompt-card">
+            <div class="pc-header">
+              <span class="pc-tag">Pattern 2</span>
+              <h4>Test-Driven Development (TDD)</h4>
+              <button class="copy-prompt-btn" onclick="window.copyPrompt(this)">Copy Prompt</button>
+            </div>
+            <pre class="prompt-code">Before implementing [FEATURE], write failing unit tests in [TEST_FILE].
+Cover both the happy path and edge cases: [CASE_1] and [CASE_2].
+Run the tests via the terminal and verify they fail red.
+Only then implement the minimal code in [TARGET_FILE] to turn tests green.</pre>
+          </div>
+
+          <div class="prompt-card">
+            <div class="pc-header">
+              <span class="pc-tag">Pattern 3</span>
+              <h4>Surgical Bug Reproduction &amp; Fix</h4>
+              <button class="copy-prompt-btn" onclick="window.copyPrompt(this)">Copy Prompt</button>
+            </div>
+            <pre class="prompt-code">A user reported: [ERROR_MESSAGE].
+1. Search the logs and codebase for the root cause using ripgrep.
+2. Formulate a hypothesis and write a reproduction test.
+3. Apply the minimal localized fix with zero placeholders.
+4. Verify with npm run test and npm run typecheck.</pre>
+          </div>
+
+          <div class="prompt-card">
+            <div class="pc-header">
+              <span class="pc-tag">Pattern 4</span>
+              <h4>Blast-Radius Constrained Refactor</h4>
+              <button class="copy-prompt-btn" onclick="window.copyPrompt(this)">Copy Prompt</button>
+            </div>
+            <pre class="prompt-code">Refactor [FUNCTION_NAME] in [FILE] to improve [PERFORMANCE / MODULARITY].
+Strict constraints:
+- Maintain 100% backwards compatibility with existing call sites.
+- Do NOT alter global configuration, routing tables, or public types.
+- Ensure all automated unit tests pass green before reporting.</pre>
+          </div>
+        </div>
+      </div>
+
+      <!-- INTERACTIVE LAB 13: WORKFLOW SIMULATOR -->
+      <div class="card" style="margin-top: 2.5rem;" id="lab-coding-workflow">
+        <div class="card-header-row">
+          <div style="display:flex; align-items:center; gap:0.75rem;">
+            <div class="lab-icon">⚡</div>
+            <div>
+              <h3 class="card-title">Interactive Lab 13: Disciplined 4-Stage Coding Agent Workflow Simulator</h3>
+              <p class="lab-desc" style="margin:0; font-size:0.86rem; color:#94a3b8;">
+                Step through the four phases of professional AI engineering. Inspect the optimal developer prompt, agent environment actions, and reviewer checklist.
+              </p>
+            </div>
+          </div>
+          <span class="sub-badge" style="background:rgba(56,189,248,0.15); color:#38bdf8;">Simulator 13</span>
+        </div>
+
+        <div class="stepper-controls">
+          <button class="btn btn-secondary btn-sm" id="cwPrevBtn" onclick="cwChangePhase(-1)">&larr; Previous Phase</button>
+          <span class="stepper-status">
+            Phase <strong id="cwPhaseNumber" style="color:#38bdf8;">1</strong> of 4: <span id="cwPhaseTitle" style="font-weight:600; color:#f8fafc;">1. Explore (Read-Only)</span>
+          </span>
+          <button class="btn btn-primary btn-sm" id="cwNextBtn" onclick="cwChangePhase(1)">Next Phase &rarr;</button>
+        </div>
+
+        <div class="workflow-phase-box" id="cwPhaseBox">
+          <!-- Populated dynamically by JavaScript -->
+        </div>
+      </div>
+
+      <!-- INTERACTIVE LAB 14: LEADING CODING AGENTS MATRIX -->
+      <div class="card" style="margin-top: 2.5rem;" id="lab-tools-matrix">
+        <div class="card-header-row">
+          <div style="display:flex; align-items:center; gap:0.75rem;">
+            <div class="lab-icon">📊</div>
+            <div>
+              <h3 class="card-title">Interactive Lab 14: Leading Coding Agents Comparison Matrix (2026)</h3>
+              <p class="lab-desc" style="margin:0; font-size:0.86rem; color:#94a3b8;">
+                Filter and compare the premier 2026 coding tools across form factor, model foundation, context window, and tri-surface execution capabilities.
+              </p>
+            </div>
+          </div>
+          <span class="sub-badge" style="background:rgba(168,85,247,0.15); color:#c084fc;">Simulator 14</span>
+        </div>
+
+        <div class="matrix-filter-buttons">
+          <button class="matrix-tab-btn active" onclick="switchToolsTab('all', this)">All Tools</button>
+          <button class="matrix-tab-btn" onclick="switchToolsTab('gemini', this)">Google Antigravity &amp; Gemini</button>
+          <button class="matrix-tab-btn" onclick="switchToolsTab('claude', this)">Claude Code</button>
+          <button class="matrix-tab-btn" onclick="switchToolsTab('cursor', this)">Cursor</button>
+          <button class="matrix-tab-btn" onclick="switchToolsTab('copilot', this)">GitHub Copilot</button>
+          <button class="matrix-tab-btn" onclick="switchToolsTab('codex', this)">OpenAI Codex</button>
+        </div>
+
+        <div class="tools-matrix-table-wrap" id="toolsMatrixWrap">
+          <!-- Populated dynamically by JavaScript -->
+        </div>
+      </div>
+
+      <div class="section-nav-footer">
+        <a href="#part7" class="section-nav-btn">← Previous: Part 7 (Autonomous Agency)</a>
+        <a href="#part9" class="section-nav-btn btn-next">Continue to Part 9: Physical AI →</a>
+      </div>
+    </section>
+
+
+    <!-- ====================================================================
+         PART 9: PHYSICAL AI & EMBODIED SYSTEMS
+         ==================================================================== -->
+    <section class="course-part" id="part9">
+      <div class="part-header">
+        <span class="part-badge badge-p9">Part 9 • Physical AI</span>
+        <h2 class="part-title">Physical AI: Embodied Systems &amp; The Material Frontier</h2>
         <p class="part-lead">
           Transitioning artificial intelligence from manipulating virtual text and digital pixels into embodied physical reality. Physical AI governs systems that perceive, reason, and actuate in continuous 3D environments subject to the immutable laws of classical mechanics, gravity, friction, and contact dynamics.
         </p>
@@ -1863,7 +2450,7 @@
 
       <!-- Quick Review Takeaway Card -->
       <div class="review-takeaway-box">
-        <div class="review-takeaway-header">✦ Part VIII Quick Review • Core Academic Takeaways</div>
+        <div class="review-takeaway-header">✦ Part 9 Quick Review • Core Academic Takeaways</div>
         <ul class="review-takeaway-list">
           <li><strong>The Physical Embodiment Shift:</strong> Moving from digital software sandboxes into continuous 3D reality requires reasoning under immutable physical laws — classical mechanics, gravity, friction, and non-linear contact dynamics.</li>
           <li><strong>Deterministic Low-Latency Control (&lt;10ms):</strong> Physical robotics mandates 100Hz–1000Hz deterministic closed-loop feedback, necessitating high-throughput on-robot edge silicon (e.g. NVIDIA Jetson Thor) rather than variable-latency cloud APIs.</li>
@@ -1872,19 +2459,22 @@
         </ul>
       </div>
 
-      <!-- Figure 8.1: Physical AI Architecture -->
-      <div class="figure-container">
-        <div class="figure-image-wrap">
-          <img src="assets/physical_ai_embodied_modern.jpg" alt="Figure 8.1 • Physical AI and Embodied Robotics Architecture" style="max-height: 450px;">
+      <!-- Figure 9.1: Physical AI Architecture -->
+      <div class="figure-container" id="fig-9-1">
+        <div class="figure-image-wrap" onclick="openLightbox('assets/physical_ai_embodied_modern.jpg', 'Figure 9.1 • Physical AI and Embodied Robotics Architecture')" title="Click to view full resolution in Lightbox" style="cursor:zoom-in;">
+          <img src="assets/physical_ai_embodied_modern.jpg" alt="Figure 9.1 • Physical AI and Embodied Robotics Architecture" style="max-height: 450px;">
         </div>
         <div class="figure-caption">
-          <strong>Figure 8.1 • Physical AI & Embodied Robotics Architecture:</strong> Closed-loop embodied intelligence: Multimodal sensory streams (RGB-D vision, point clouds, tactile skins, LiDAR) feed into Vision-Language-Action (VLA) foundation models, executing real-time kinematics and motor torque control validated against high-fidelity GPU physics simulators (Sim-to-Real).
+          <strong>Figure 9.1 • Physical AI &amp; Embodied Robotics Architecture:</strong> Closed-loop embodied intelligence: Multimodal sensory streams (RGB-D vision, point clouds, tactile skins, LiDAR) feed into Vision-Language-Action (VLA) foundation models, executing real-time kinematics and motor torque control validated against high-fidelity GPU physics simulators (Sim-to-Real).
         </div>
       </div>
 
       <!-- Concept & The 6 Core Conditions of Physical AI -->
       <div class="card card-accent-emerald" style="margin-top:2rem;">
-        <h3 class="card-title">The Six Core Conditions & Engineering Pillars of Physical AI</h3>
+        <div class="card-header-row">
+          <h3 class="card-title">The Six Core Conditions &amp; Engineering Pillars of Physical AI</h3>
+          <span class="sub-badge">Section 9.1 • Embodiment Fundamentals</span>
+        </div>
         <p style="font-size:0.92rem; line-height:1.7; margin-bottom:1.5rem;">
           Deploying autonomous intelligence into physical embodiment demands solving six rigorous engineering conditions that do not exist in digital software:
         </p>
@@ -1987,16 +2577,19 @@
 
           <div class="visualizer-stage">
             <canvas id="kinematicsCanvas" class="interactive-canvas" width="460" height="340"></canvas>
-            <div style="font-size: 0.75rem; color: var(--text-dim); margin-top: 0.5rem;">
-              Cyan = Link 1 ($l_1$); Purple = Link 2 ($l_2$); Green = Gripper; Yellow Box = Obstacle Safety Zone.
+            <div style="font-size: 0.8rem; color: #94a3b8; margin-top: 0.75rem; display: flex; align-items: center; justify-content: center; gap: 0.85rem; flex-wrap: wrap;">
+              <span><strong style="color: #38bdf8;">━━ Link 1 (l₁ = 130cm)</strong></span>
+              <span><strong style="color: #a78bfa;">━━ Link 2 (l₂ = 100cm)</strong></span>
+              <span><strong style="color: #34d399;">● Gripper End-Effector</strong></span>
+              <span><strong style="color: #fbbf24;">⚑ Obstacle Safety Zone</strong></span>
             </div>
           </div>
         </div>
       </div>
 
-      <!-- Section 8.2: Humanoid Robotics -->
+      <!-- Section 9.2: Humanoid Robotics -->
       <div class="part-sub-header" style="margin-top: 3.5rem;">
-        <span class="sub-badge">Section 8.2 • Frontier Physical AI</span>
+        <span class="sub-badge">Section 9.2 • Frontier Physical AI</span>
         <h3 class="part-sub-title">Humanoid Robotics: Morphological Complexity, Whole-Body Dynamics &amp; Hierarchical Control</h3>
       </div>
 
@@ -2004,13 +2597,13 @@
         The human form represents the ultimate physical AI testbed. Unlike wheeled rovers or stationary industrial arms, <strong>bipedal humanoid robots</strong> are specifically designed to navigate and manipulate an anthropogenic world — climbing stairs, clearing debris, turning valve handles, operating power tools, and walking through narrow doorways — without requiring trillion-dollar retrofits to civil infrastructure.
       </p>
 
-      <!-- Figure 8.2: Humanoid Robot Architecture -->
-      <div class="figure-container">
-        <div class="figure-image-wrap">
-          <img src="assets/humanoid_robot_architecture_modern.jpg" alt="Figure 8.2 • Full-Stack Humanoid Robotics Architecture: From Semantic VLA Planning to 1,000Hz Whole-Body Motor Torque Control" style="max-height: 480px;">
+      <!-- Figure 9.2: Humanoid Robot Architecture -->
+      <div class="figure-container" id="fig-9-2">
+        <div class="figure-image-wrap" onclick="openLightbox('assets/humanoid_robot_architecture_modern.jpg', 'Figure 9.2 • Full-Stack Humanoid Robotics Architecture: From Semantic VLA Planning to 1,000Hz Whole-Body Motor Torque Control')" title="Click to view full resolution in Lightbox" style="cursor:zoom-in;">
+          <img src="assets/humanoid_robot_architecture_modern.jpg" alt="Figure 9.2 • Full-Stack Humanoid Robotics Architecture: From Semantic VLA Planning to 1,000Hz Whole-Body Motor Torque Control" style="max-height: 480px;">
         </div>
         <div class="figure-caption">
-          <strong>Figure 8.2 • Full-Stack Humanoid Robotics Architecture:</strong> Hierarchical control decomposition bridging internet-scale semantic reasoning with millisecond motor execution. The 3-tier hierarchy operates asynchronously: (1) High-Level Semantic VLA Planning (1–5 Hz) interprets goals and environmental 3D geometry; (2) Mid-Level Whole-Body Motion Planner &amp; MPC (50–100 Hz) optimizes Center-of-Mass (CoM) trajectories, footstep placement, and Zero Moment Point (ZMP) dynamic balance; (3) Low-Level Deterministic Motor Torque Control (1,000 Hz) computes closed-loop PD torque commands on edge silicon.
+          <strong>Figure 9.2 • Full-Stack Humanoid Robotics Architecture:</strong> Hierarchical control decomposition bridging internet-scale semantic reasoning with millisecond motor execution. The 3-tier hierarchy operates asynchronously: (1) High-Level Semantic VLA Planning (1–5 Hz) interprets goals and environmental 3D geometry; (2) Mid-Level Whole-Body Motion Planner &amp; MPC (50–100 Hz) optimizes Center-of-Mass (CoM) trajectories, footstep placement, and Zero Moment Point (ZMP) dynamic balance; (3) Low-Level Deterministic Motor Torque Control (1,000 Hz) computes closed-loop PD torque commands on edge silicon.
         </div>
       </div>
 
@@ -2063,115 +2656,17 @@
       </div>
 
       <div class="section-nav-footer">
-        <a href="#part7" class="section-nav-btn">← Previous: Part VII (Autonomous Agency)</a>
-        <a href="#part9" class="section-nav-btn btn-next">Continue to Part IX: Synthesis →</a>
+        <a href="#part8" class="section-nav-btn">← Previous: Part 8 (Coding Agents &amp; Tools)</a>
+        <a href="#referencesSection" class="section-nav-btn btn-next">Continue to Part 10: Academic Archive →</a>
       </div>
     </section>
 
     <!-- ====================================================================
-         PART IX: SYNTHESIS, QUIZ & KNOWLEDGE HUB
-         ==================================================================== -->
-    <section class="course-part" id="part9">
-      <div class="part-header">
-        <span class="part-badge badge-p7">Part IX • Synthesis</span>
-        <h2 class="part-title">Synthesis: AI as High-Order Value Creation</h2>
-        <p class="part-lead">
-          The closing thesis of the curriculum: AI is not merely an accelerated search engine for one-question, one-answer interactions. Its transformative economic value lies in autonomous processes, multimodal generation, and reusable cognitive systems.
-        </p>
-      </div>
-
-      <!-- Quick Review Takeaway Card -->
-      <div class="review-takeaway-box">
-        <div class="review-takeaway-header">✦ Part IX Quick Review • Core Academic Takeaways</div>
-        <ul class="review-takeaway-list">
-          <li><strong>Beyond the Q&amp;A Search Fallacy:</strong> Treating generative AI merely as an accelerated search engine fails to harness its transformative capability; real economic leverage stems from autonomous workflows, scheduled tasks, and proactive multimodal generation.</li>
-          <li><strong>High-Order Value &amp; Compound Assets:</strong> Strategic differentiation transitions from ephemeral prompt interactions to proprietary cognitive systems that compound enterprise memory, multi-agent collaboration, and specialized tool ecosystems.</li>
-          <li><strong>The Architectural Synthesis:</strong> The entire conceptual arc — from Shannon information entropy and backpropagation to billion-parameter transformers, GPU superclusters, autonomous agents, and physical embodiment — forms a unified, multidisciplinary engineering discipline.</li>
-        </ul>
-      </div>
-
-      <!-- Figure 9.1: AI as Value Creation -->
-      <div class="figure-container">
-        <div class="figure-image-wrap">
-          <img src="assets/ai_value_creation_modern.jpg" alt="Figure 9.1 • The AI Value Creation Paradigm Shift: From Ephemeral Search to Compounding Cognitive Systems" style="max-height: 520px; width: 100%; object-fit: contain;">
-        </div>
-        <div class="figure-caption">
-          <strong>Figure 9.1 • The AI Value Creation Paradigm Shift:</strong> The capstone thesis of the curriculum. The diagram contrasts the <em>Commoditized Paradigm</em> (ephemeral 1-to-1 search lookups, static cutoffs, zero tool integration, zero enterprise moat) with the <em>Strategic Frontier of High-Order Compounding Cognitive Systems</em> across four core pillars:
-          <strong>(1) Multi-Agent Autonomous Workflows</strong> (planning, reflection, scheduled self-healing loops);
-          <strong>(2) Multimodal Synthesis &amp; Deep Research</strong> (cross-modal code, 3D perception, scientific simulation);
-          <strong>(3) Persistent Memory &amp; Proprietary Moats</strong> (domain RAG, vector knowledge graphs, compounding organizational intelligence); and
-          <strong>(4) Physical AI &amp; Real-World Embodiment</strong> (edge silicon, sensor-to-actuator closed loops, humanoid robotics).
-        </div>
-      </div>
-
-      <!-- Interactive Knowledge Check Quiz -->
-      <div class="quiz-section" id="quizSection">
-        <div class="quiz-header">
-          <span class="quiz-badge">Comprehensive Self-Assessment</span>
-          <h2>Course Checkpoint Quiz</h2>
-          <p style="color: var(--text-muted); font-size: 0.95rem;">
-            Test your understanding across all 9 parts of the companion curriculum. Questions are drawn directly from the academic discussion checkpoints.
-          </p>
-          <div id="quizScoreCounter" style="font-family: var(--font-mono); font-size: 0.9rem; color: var(--accent-cyan); margin-top: 0.5rem;">
-            Score: 0 / 20 (0 answered)
-          </div>
-        </div>
-
-        <div class="quiz-card">
-          <div id="quizQNum" class="quiz-q-num">Part I • Question 1 of 20</div>
-          <div id="quizQText" class="quiz-q-text"></div>
-          <div id="quizOptionsContainer" class="quiz-options"></div>
-          <div id="quizFeedback" class="quiz-feedback-box"></div>
-
-          <div class="quiz-nav-footer">
-            <button id="quizPrevBtn" class="btn btn-secondary btn-sm" disabled>Previous Question</button>
-            <button id="quizNextBtn" class="btn btn-primary btn-sm">Next Question</button>
-          </div>
-        </div>
-      </div>
-
-      <!-- Searchable Glossary Section -->
-      <div class="card" id="glossarySection" style="margin-top: 3rem;">
-        <div style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 1rem; margin-bottom: 1.5rem;">
-          <div>
-            <h3 class="card-title">Searchable Key Terms Glossary</h3>
-            <p style="font-size: 0.88rem; margin: 0;">Authoritative definitions drawn from Appendix A of the Companion Report</p>
-          </div>
-          <input type="text" id="glossarySearchInput" class="glossary-search-input" placeholder="Search terms (e.g. Backprop, Attention, NVLink, PEAS)...">
-        </div>
-
-        <div id="glossaryGrid" class="glossary-grid"></div>
-      </div>
-
-      <!-- Academic Citations & References -->
-      <div class="card" style="margin-top: 2rem;">
-        <h3 class="card-title">Primary References & Course Deck Sources</h3>
-        <ul style="padding-left: 1.25rem; font-size: 0.85rem; color: #cbd5e1; display: flex; flex-direction: column; gap: 0.5rem;">
-          <li><strong>Vaswani, A., et al. (2017).</strong> <em>"Attention Is All You Need."</em> Advances in Neural Information Processing Systems (NeurIPS 30).</li>
-          <li><strong>Shannon, C. E. (1948).</strong> <em>"A Mathematical Theory of Communication."</em> Bell System Technical Journal, 27(3), 379–423.</li>
-          <li><strong>Sutton, R. S., &amp; Barto, A. G. (2018).</strong> <em>"Reinforcement Learning: An Introduction"</em> (2nd ed.). MIT Press.</li>
-          <li><strong>Kaplan, J., et al. (2020).</strong> <em>"Scaling Laws for Neural Language Models."</em> arXiv:2001.08361.</li>
-          <li><strong>Hoffmann, J., et al. (2022).</strong> <em>"Training Compute-Optimal Large Language Models."</em> DeepMind (Chinchilla). arXiv:2203.15556.</li>
-          <li><strong>Russell, S., &amp; Norvig, P. (2020).</strong> <em>"Artificial Intelligence: A Modern Approach"</em> (4th ed.). Pearson.</li>
-          <li><strong>Silver, D., et al. (2016/2017).</strong> <em>"Mastering the game of Go without human knowledge"</em> (AlphaGo Zero). Nature, 550, 354–359.</li>
-          <li><strong>Schulman, J., et al. (2017).</strong> <em>"Proximal Policy Optimization Algorithms."</em> OpenAI. arXiv:1707.06347.</li>
-          <li><strong>NVIDIA Architecture Engineering (2024–2025).</strong> <em>"NVIDIA H200 Tensor Core GPU Architecture &amp; NVLink 4.0 Specifications (141GB HBM3e, 4,800 GB/s)."</em></li>
-        </ul>
-      </div>
-
-      <div class="section-nav-footer">
-        <a href="#part8" class="section-nav-btn">← Previous: Part VIII (Physical AI)</a>
-        <a href="#referencesSection" class="section-nav-btn btn-next">Continue to Academic Archive →</a>
-      </div>
-    </section>
-
-
-    <!-- ====================================================================
-         PART X: ACADEMIC BIBLIOGRAPHY & REFERENCE ARCHIVE
+         PART 10: ACADEMIC BIBLIOGRAPHY & REFERENCE ARCHIVE
          ==================================================================== -->
     <section class="course-part" id="referencesSection">
       <div class="part-header">
-        <span class="part-badge badge-p7">Part X • Academic Archive</span>
+        <span class="part-badge badge-p10">Part 10 • Academic Archive</span>
         <h2 class="part-title">Comprehensive Academic Reference Archive</h2>
         <p class="part-lead">
           A curated collection of the seminal papers, foundational mathematical treatises, industry architectural whitepapers, and landmark literature underpinning this curriculum. Curated and reviewed by <strong>Prof. Liang Li</strong>.
@@ -2180,17 +2675,47 @@
 
       <!-- Quick Review Takeaway Card -->
       <div class="review-takeaway-box">
-        <div class="review-takeaway-header">✦ Part X Quick Review • Core Academic Takeaways</div>
+        <div class="review-takeaway-header">✦ Part 10 Quick Review • Core Academic Takeaways</div>
         <ul class="review-takeaway-list">
-          <li><strong>75+ Years of Intellectual Provenance:</strong> Modern foundation models and agentic breakthroughs stand upon decades of peer-reviewed mathematical treatises — from Shannon (1948) and Minsky (1969) to Vaswani (2017) and Chinchilla (2022).</li>
-          <li><strong>Empirical &amp; Architectural Milestones:</strong> Traces the seminal inflection points of AI: Perceptron limitations, Backpropagation, Deep Residual Networks, Scaled Dot-Product Attention, and Compute-Optimal Scaling Laws.</li>
-          <li><strong>Curated Academic Pedigree:</strong> A comprehensive reference archive of 32 seminal papers and industry architectural whitepapers curated by Prof. Liang Li to bridge theoretical proofs with real-world production systems.</li>
+          <li><strong>75+ Years of Intellectual Provenance Across 9 Disciplinary Pillars:</strong> Modern foundation models, autonomous agents, and embodied robotics stand upon decades of peer-reviewed mathematical treatises — from Shannon (1948) information entropy, Bayes' theorem, and backpropagation to transformers, GPU superclusters, autonomous coding agents, and physical humanoid control.</li>
+          <li><strong>Empirical &amp; Architectural Milestones:</strong> Formally traces each pivotal inflection point of AI: Perceptron limits, Backpropagation, Convolutional spatial weight sharing, LSTM temporal gating, PRNN dynamic modeling, MDP Bellman optimality, Scaled Dot-Product Attention, Chinchilla compute-optimal scaling, Tensor Core SIMD acceleration, ReAct autonomous agency, SWE-bench coding benchmarks, and Vision-Language-Action (VLA) physical embodiment.</li>
+          <li><strong>Curated Academic Pedigree (35 Landmark References):</strong> A comprehensive reference archive of 35 seminal peer-reviewed papers and industry architectural whitepapers curated by Prof. Liang Li to bridge theoretical proofs with real-world production engineering systems across all nine curriculum parts.</li>
+        </ul>
+      </div>
+
+      <!-- Primary References & Course Deck Sources -->
+      <div class="primary-references-card">
+        <h3 class="card-title">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="color:var(--accent-cyan);"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/></svg>
+          Primary References &amp; Course Deck Sources (Parts I – IX)
+        </h3>
+        <ul class="primary-references-list">
+          <li><strong>[Part 1 • Foundations] Shannon, C. E. (1948).</strong> <em>"A Mathematical Theory of Communication."</em> Bell System Technical Journal, 27(3), 379–423.</li>
+          <li><strong>[Part 1 • Foundations] Bayes, T. (1763).</strong> <em>"An Essay towards solving a Problem in the Doctrine of Chances."</em> Philosophical Transactions of the Royal Society.</li>
+          <li><strong>[Part 2 • Deep Networks] Rumelhart, D. E., Hinton, G. E., &amp; Williams, R. J. (1986).</strong> <em>"Learning representations by back-propagating errors."</em> Nature, 323(6088), 533–536.</li>
+          <li><strong>[Part 2 • Deep Networks] Rosenblatt, F. (1958).</strong> <em>"The Perceptron: A Probabilistic Model for Information Storage and Organization in the Brain."</em> Psychological Review, 65(6), 386–408.</li>
+          <li><strong>[Part 3 • CNN &amp; RNN/LSTM] LeCun, Y., Bottou, L., Bengio, Y., &amp; Haffner, P. (1998).</strong> <em>"Gradient-based learning applied to document recognition."</em> Proceedings of the IEEE, 86(11), 2278–2324.</li>
+          <li><strong>[Part 3 • CNN &amp; RNN/LSTM] Hochreiter, S., &amp; Schmidhuber, J. (1997).</strong> <em>"Long Short-Term Memory."</em> Neural Computation, 9(8), 1735–1780.</li>
+          <li><strong>[Part 3 • CNN &amp; RNN/LSTM] Haykin, S., &amp; Li, L. (1995).</strong> <em>"Polynomial Recurrent Neural Networks (PRNN) for Non-linear Dynamic Modeling."</em> PNAS / IEEE Transactions on Neural Networks.</li>
+          <li><strong>[Part 4 • Reinforcement Learning] Sutton, R. S., &amp; Barto, A. G. (2018).</strong> <em>"Reinforcement Learning: An Introduction"</em> (2nd ed.). MIT Press.</li>
+          <li><strong>[Part 4 • Reinforcement Learning] Silver, D., et al. (2016/2017).</strong> <em>"Mastering the game of Go without human knowledge"</em> (AlphaGo Zero). Nature, 550, 354–359.</li>
+          <li><strong>[Part 4 • Reinforcement Learning] Schulman, J., et al. (2017).</strong> <em>"Proximal Policy Optimization Algorithms."</em> OpenAI. arXiv:1707.06347.</li>
+          <li><strong>[Part 5 • Generative AI &amp; Attention] Vaswani, A., et al. (2017).</strong> <em>"Attention Is All You Need."</em> Advances in Neural Information Processing Systems (NeurIPS 30).</li>
+          <li><strong>[Part 5 • Generative AI &amp; Scaling] Hoffmann, J., et al. (2022).</strong> <em>"Training Compute-Optimal Large Language Models"</em> (Chinchilla). DeepMind. arXiv:2203.15556.</li>
+          <li><strong>[Part 5 • Generative AI &amp; Scaling] Kaplan, J., et al. (2020).</strong> <em>"Scaling Laws for Neural Language Models."</em> arXiv:2001.08361.</li>
+          <li><strong>[Part 6 • Silicon &amp; Hardware] NVIDIA Architecture Engineering (2024–2025).</strong> <em>"NVIDIA H200 Tensor Core GPU Architecture &amp; NVLink 4.0 Specifications (141GB HBM3e, 4,800 GB/s)."</em></li>
+          <li><strong>[Part 7 • Autonomous Agency] Russell, S., &amp; Norvig, P. (2020).</strong> <em>"Artificial Intelligence: A Modern Approach"</em> (4th ed.). Pearson.</li>
+          <li><strong>[Part 7 • Autonomous Agency] Yao, S., et al. (2022).</strong> <em>"ReAct: Synergizing Reasoning and Acting in Language Models."</em> ICLR 2023.</li>
+          <li><strong>[Part 8 • Coding Agents &amp; Tools] Jimenez, C. E., et al. (2024).</strong> <em>"SWE-bench: Can Language Models Resolve Real-World GitHub Issues?"</em> ICLR 2024.</li>
+          <li><strong>[Part 8 • Coding Agents &amp; Tools] Google Gemini &amp; DeepMind Team (2024–2025).</strong> <em>"Gemini 2.0 &amp; Antigravity Tri-Surface Developer Harness: Native Tool Calling &amp; Sandbox Execution."</em></li>
+          <li><strong>[Part 9 • Physical AI &amp; Robotics] Brohan, A., et al. (2023).</strong> <em>"RT-2: Vision-Language-Action Models Transfer Web Knowledge to Robotic Control."</em> CoRL 2023.</li>
+          <li><strong>[Part 9 • Physical AI &amp; Robotics] Makoviychuk, V., et al. (2021/2024).</strong> <em>"Isaac Gym &amp; Isaac Sim: High-Performance GPU-Based Physics Simulation for Robot Learning."</em> NVIDIA.</li>
         </ul>
       </div>
 
       <!-- Filter Bar -->
       <div class="ref-filter-bar">
-        <button class="ref-filter-btn active" data-filter="all">All Literature (32)</button>
+        <button class="ref-filter-btn active" data-filter="all">All Literature (35)</button>
         <button class="ref-filter-btn" data-filter="foundations">Foundations &amp; Probability</button>
         <button class="ref-filter-btn" data-filter="neural">Neural Nets &amp; Optimization</button>
         <button class="ref-filter-btn" data-filter="attention">Sequence &amp; Attention</button>
@@ -2198,11 +2723,33 @@
         <button class="ref-filter-btn" data-filter="scaling">Scaling &amp; Foundation Models</button>
         <button class="ref-filter-btn" data-filter="silicon">Silicon &amp; Hardware</button>
         <button class="ref-filter-btn" data-filter="agents">Agentic AI &amp; Systems</button>
+        <button class="ref-filter-btn" data-filter="coding">Coding Agents &amp; Tools</button>
         <button class="ref-filter-btn" data-filter="physical">Physical AI &amp; Robotics</button>
       </div>
 
       <!-- Reference Grid -->
       <div class="ref-grid" id="refGridContainer">
+
+        <!-- Reference: PRNN Haykin & Li 1995 -->
+        <div class="ref-card" data-category="neural">
+          <div>
+            <div class="ref-card-header">
+              <span class="ref-tag tag-neural">Recurrent Neural Nets</span>
+              <span class="ref-year">1995</span>
+            </div>
+            <h4 class="ref-title">Polynomial Recurrent Neural Networks (PRNN) for Non-linear Dynamic Modeling</h4>
+            <div class="ref-authors">Simon Haykin &amp; Liang Li (McMaster University)</div>
+            <div class="ref-venue">Proceedings of the National Academy of Sciences (PNAS) / IEEE Transactions on Neural Networks</div>
+            <div class="ref-key-insight">
+              Pioneered the Polynomial Recurrent Neural Network (PRNN) integrating non-linear polynomial Kronecker feedback with recursive state updates, demonstrated on industrial Ontario Hydro electricity demand forecasting.
+            </div>
+          </div>
+          <div>
+            <a href="https://doi.org/10.1109/72.392248" target="_blank" rel="noopener" class="ref-link-btn">
+              <span>View IEEE Source / DOI →</span>
+            </a>
+          </div>
+        </div>
 
         <!-- Reference 1 -->
         <div class="ref-card" data-category="foundations">
@@ -2792,6 +3339,47 @@
           </div>
         </div>
 
+        <!-- Reference 25: Coding Agents SWE-bench -->
+        <div class="ref-card" data-category="coding agents">
+          <div>
+            <div class="ref-card-header">
+              <span class="ref-tag tag-coding">Coding Benchmark</span>
+              <span class="ref-year">2024</span>
+            </div>
+            <h4 class="ref-title">SWE-bench: Can Language Models Resolve Real-World GitHub Issues?</h4>
+            <div class="ref-authors">Carlos E. Jimenez, John Yang, Alexander Wettig, Shunyu Yao, Kexin Pei, Ofir Press, Karthik Narasimhan (Princeton University)</div>
+            <div class="ref-venue">International Conference on Learning Representations (ICLR 2024)</div>
+            <div class="ref-key-insight">
+              Established the premier benchmark for autonomous software engineering, assessing whether language agents can resolve end-to-end pull requests, edit multi-file codebases, and pass hidden unit test suites on 2,294 real-world GitHub issues.
+            </div>
+          </div>
+          <div>
+            <a href="https://arxiv.org/abs/2310.06770" target="_blank" rel="noopener" class="ref-link-btn">
+              <span>ICLR 2024 / arXiv:2310.06770 →</span>
+            </a>
+          </div>
+        </div>
+
+        <!-- Reference 26: Toolformer / Tool Use -->
+        <div class="ref-card" data-category="coding agents">
+          <div>
+            <div class="ref-card-header">
+              <span class="ref-tag tag-coding">Tool Integration</span>
+              <span class="ref-year">2023</span>
+            </div>
+            <h4 class="ref-title">Toolformer: Language Models Can Teach Themselves to Use Tools &amp; APIs</h4>
+            <div class="ref-authors">Timo Schick, Jane Dwivedi-Yu, Roberto Dessì, Roberta Raileanu, Maria Lomeli, Luke Zettlemoyer, Nicola Cancedda, Thomas Scialom (Meta AI)</div>
+            <div class="ref-venue">Advances in Neural Information Processing Systems (NeurIPS 36)</div>
+            <div class="ref-key-insight">
+              Pioneered self-supervised tool calling in neural networks, training models to decide which external tools to invoke, when to call them, what arguments to pass, and how to seamlessly integrate execution results into reasoning chains.
+            </div>
+          </div>
+          <div>
+            <a href="https://arxiv.org/abs/2302.04761" target="_blank" rel="noopener" class="ref-link-btn">
+              <span>NeurIPS Paper / arXiv:2302.04761 →</span>
+            </a>
+          </div>
+        </div>
 
         <!-- Reference 29: Physical AI Brooks -->
         <div class="ref-card" data-category="physical">
@@ -2878,6 +3466,24 @@
         </div>
 
       </div>
+
+      <!-- Searchable Glossary Section -->
+      <div class="card" id="glossarySection" style="margin-top: 3.5rem;">
+        <div style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 1rem; margin-bottom: 1.5rem;">
+          <div>
+            <h3 class="card-title">Searchable Key Terms Glossary</h3>
+            <p style="font-size: 0.88rem; margin: 0; color: var(--text-secondary);">Authoritative definitions drawn from Appendix A of the Companion Report</p>
+          </div>
+          <input type="text" id="glossarySearchInput" class="glossary-search-input" placeholder="Search terms (e.g. Backprop, Attention, NVLink, PEAS)...">
+        </div>
+
+        <div id="glossaryGrid" class="glossary-grid"></div>
+      </div>
+
+      <div class="section-nav-footer">
+        <a href="#part9" class="section-nav-btn">← Previous: Part 9 (Physical AI)</a>
+        <a href="#overview" class="section-nav-btn btn-next">Back to Top / Overview ↑</a>
+      </div>
     </section>
 
   </main>
@@ -2907,15 +3513,15 @@
           <ul class="footer-links">
             <li><a href="#part6">VI. Silicon &amp; Systems</a></li>
             <li><a href="#part7">VII. Autonomous Agency</a></li>
-            <li><a href="#part8">VIII. Physical AI</a></li>
-            <li><a href="#part9">IX. Synthesis</a></li>
+            <li><a href="#part8">VIII. Coding Agents</a></li>
+            <li><a href="#part9">IX. Physical AI</a></li>
             <li><a href="#referencesSection">X. Academic Archive</a></li>
           </ul>
         </div>
         <div class="footer-col">
           <h5>Resources</h5>
           <ul class="footer-links">
-            <li><a href="#quizSection">Checkpoint Quiz</a></li>
+            <li><a href="https://github.com/liangli99/ai-education-platform/blob/main/textbook/Architecture_of_Intelligence.pdf" target="_blank" rel="noopener noreferrer">Textbook</a></li>
             <li><a href="#glossarySection">Glossary</a></li>
             <li><a href="#bayesCalculatorLab">Bayes Calculator</a></li>
             <li><a href="#part5-attention">Attention Heatmap</a></li>
@@ -2933,20 +3539,6 @@
       </div>
     </div>
   </footer>
-
-
-  <!-- FLOATING QUICK-REVIEW DOCK -->
-  <div class="floating-review-dock" id="floatingReviewDock">
-    <button class="dock-btn dock-btn-highlight" id="dockJumpBtn" title="Jump to Curriculum Part">
-      <span>📚 Review Parts</span>
-    </button>
-    <a href="#quizSection" class="dock-btn" title="Self-Assessment Quiz">
-      <span>🎯 Quiz</span>
-    </a>
-    <button class="dock-btn dock-scroll-top" id="dockScrollTopBtn" title="Scroll to Top">
-      <span>↑</span>
-    </button>
-  </div>
 
   <!-- SPOTLIGHT QUICK SEARCH MODAL -->
   <div class="spotlight-backdrop" id="spotlightModal">
@@ -2967,7 +3559,7 @@
     <div class="lightbox-content">
       <button class="lightbox-close-btn" id="lightboxCloseBtn" title="Close Lightbox">✕</button>
       <div class="lightbox-img-wrap">
-        <img id="lightboxImg" src="" alt="Enlarged Architectural Diagram">
+        <img id="lightboxImg" src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg'/%3E" alt="Enlarged Architectural Diagram">
       </div>
       <div class="lightbox-desc-bar">
         <div id="lightboxCaption" style="font-size:0.92rem; color:#e2e8f0; line-height:1.5;"></div>
@@ -2979,6 +3571,6 @@
   <!-- KaTeX Math Engine and Auto-render Extension -->
   <script src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/contrib/auto-render.min.js"></script>
-  <script src="app.js"></script>
+  <script src="app.js?v=20261027c"></script>
 </body>
 </html>
